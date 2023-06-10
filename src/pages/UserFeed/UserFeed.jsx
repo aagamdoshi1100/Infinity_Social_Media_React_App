@@ -2,12 +2,15 @@ import useUserFeedContext from "../../contexts/UserFeedContext"
 import {FaFilter} from "react-icons/fa"
 import {AiOutlineLike} from "react-icons/ai"
 import "./UserFeed.css"
+import useAuthContext from "../../contexts/AuthContext"
+import {NavLink} from "react-router-dom"
 
 export default function UserFeed(){
     const {userFeed,userFeedDispacher} = useUserFeedContext()
+    const {loginHandler,user} = useAuthContext();
      
     return(<div className="container">
-        <h3>User Feed page</h3>
+        <h3>User Feed page<NavLink onClick={()=>loginHandler("AD","AD123")}>{localStorage.getItem("encodedToken") ? `Welcome, ${user.name}` : "Guest Login"}</NavLink></h3>
         <textarea className="myText"></textarea>
          <div onClick={()=>userFeedDispacher({type: "SHOW_FILTERS",payload: userFeed.showFiltersUserFeed})}><FaFilter /></div> 
         {userFeed.showFiltersUserFeed ? 
