@@ -1,4 +1,22 @@
-
-.FeedBox{
-    border:1px solid rgb(184, 179, 179)
+@media only screen and (max-width: 768px) {
+    body{
+        background-color: black;
+        color: white;
+    }
+    .FeedBox{
+        border:1px solid rgb(184, 179, 179);
+        box-sizing :border-box;
+        width: 100%;
+    }
+    img{
+        width: 100%;
+    }
+    .myText{
+        box-sizing: border-box;
+        width: 100%;
+    }
+    .post-heading{
+        display: flex;
+        place-items: center;
+    }
 }

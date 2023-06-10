@@ -6,8 +6,9 @@ import "./UserFeed.css"
 export default function UserFeed(){
     const {userFeed,userFeedDispacher} = useUserFeedContext()
      
-    return(<div>
+    return(<div className="container">
         <h3>User Feed page</h3>
+        <textarea className="myText"></textarea>
          <div onClick={()=>userFeedDispacher({type: "SHOW_FILTERS",payload: userFeed.showFiltersUserFeed})}><FaFilter /></div> 
         {userFeed.showFiltersUserFeed ? 
             <div>
@@ -23,10 +24,12 @@ export default function UserFeed(){
                 const {_id,username,content,image,createdAt,likes
                 } = details;
                 return(<div key={_id} className="FeedBox">
+                    <div className="post-heading">
                     <h3>{username}</h3>
-                    <p>{createdAt}</p>
+                    <p style={{paddingLeft:"10px",color:"rgb(184, 179, 179)"}}>{createdAt}</p>
+                    </div>
                     <p>{content}</p>
-                    <img src={`${image}`} width="100%" height="400px" />
+                    <img src={`${image}`} height="400px" />
                     <p><AiOutlineLike />{likes.likeCount}</p>
                     </div>)
             })
