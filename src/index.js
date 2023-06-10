@@ -4,6 +4,8 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { makeServer } from "./server";
+import { BrowserRouter } from 'react-router-dom';
+import { UserFeedContextProvider } from './contexts/UserFeedContext';
 
 // Call make Server
 makeServer();
@@ -12,7 +14,11 @@ makeServer();
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
+    <BrowserRouter>
+    <UserFeedContextProvider>
     <App />
+    </UserFeedContextProvider>
+    </BrowserRouter>
   </React.StrictMode>
 );
 
