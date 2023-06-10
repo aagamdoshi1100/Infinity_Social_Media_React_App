@@ -10,27 +10,29 @@ export const posts = [
   {
     _id: uuid(),
     content:
-      "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.",
+      "Trump told his guests that the plan of attack was prepared for him by the Department of Defense and a senior military official, adding that as president he could have declassified the document he was showing.",
+    image : "https://c.ndtvimg.com/2021-01/2fdj66ts_donald-trump-bloomberg_625x300_14_January_21.jpg",
     likes: {
-      likeCount: 0,
+      likeCount: 3,
       likedBy: [],
       dislikedBy: [],
     },
     username: "adarshbalika",
-    createdAt: formatDate(),
+    createdAt: "2023-06-15",
     updatedAt: formatDate(),
   },
   {
     _id: uuid(),
     content:
-      "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.",
+      "The India Meteorological Department (IMD) said on Saturday that ‘very severe’ cyclonic storm Biparjoy is expected to intensify further in the next twenty-four hours and will move north-northeastwards.",
+    image :"https://assets.telegraphindia.com/telegraph/2023/May/1684153138_cyclonenew.jpg",
     likes: {
-      likeCount: 0,
+      likeCount: 5,
       likedBy: [],
       dislikedBy: [],
     },
     username: "shubhamsoni",
-    createdAt: formatDate(),
+    createdAt: "2022-12-25",
     updatedAt: formatDate(),
   },
 ];
