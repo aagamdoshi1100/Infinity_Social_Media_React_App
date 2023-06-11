@@ -17,12 +17,12 @@ export default function UserFeed(){
 
     <div className="create-post">
         <textarea className="myText" onChange={(e)=>userFeedDispacher({type:"CREATE_POST_CONTENT",payload:e.target.value})} placeholder="Write something..." ></textarea>
-        {!userFeed.createPostImage ? null : <img src={userFeed.createPostImage} width="100px" height="100px"/>}
+        {/* {!userFeed.createPostImage ? null : <img src={userFeed.createPostImage} width="100px" height="100px"/>} */}
         <label htmlFor="image">
                 <MdInsertPhoto />
         </label>
-        <input type="file" name="image" id="image" style={{display:"none",visibility:"none"}} onChange={(e)=>userFeedDispacher({type:"CREATE_POST_IMAGE",payload:e.target.files[0]})}/>
-        <button>Post</button>
+        <input type="file" id="image" style={{display:"none",visibility:"none"}} onChange={(e)=>userFeedDispacher({type:"CREATE_POST_IMAGE",payload:e.target.files[0]})}/>
+        <button onClick={createPost}>Post</button>
     </div>
 
          <div onClick={()=>userFeedDispacher({type: "SHOW_FILTERS",payload: userFeed.showFiltersUserFeed})}><FaFilter /></div> 

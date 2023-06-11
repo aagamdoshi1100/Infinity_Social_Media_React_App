@@ -24,10 +24,12 @@ export const UserFeedContextProvider=({children})=>{
             console.log("🚀 ~ file: UserFeedContext.js:20 ~ likePost ~ e:", e)
         }
      }
-    const createPost =async(postText)=>{
-        const post={
-            content:postText
+    const createPost =async()=>{
+            const post={
+            content:userFeed.createPostContent,
+            image: URL.createObjectURL(userFeed.createPostImage)
         }
+        console.log(post,"post")
         try{
             const response = await fetch("/api/posts",{
                 method:"POST",
