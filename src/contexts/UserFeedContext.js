@@ -7,15 +7,24 @@ export const UserFeedContextProvider=({children})=>{
     const [userFeed,userFeedDispacher] = useReducer(UserFeedReducer,{postsData:[],
     showFiltersUserFeed: false,
     createPostContent :null,
-    createPostImage:null
-})
-
-    // const createPostWithImg =(e)=>{
-    //     const selectedImage =   
-    // }
-    console.log(userFeed,"createpost")
+    createPostImage:null,
+    likeStatus: false
+})  
+    const token = localStorage.getItem("encodedToken")
+    const postLikeHandler =async(postId)=>{
+        const URL = userFeed.likeStatus ? `/api/posts/dislike/${postId}` : `/api/posts/like/${postId}`
+        try{
+            const response = await fetch(URL,{
+                method: "POST",
+                headers: {authorization:token}
+            }) 
+            const responseData = await response.json()
+            userFeedDispacher({type : "LIKE_STATUS",payload : {data: responseData.posts , status: userFeed.likeStatus}})
+        }catch(e){
+            console.log("🚀 ~ file: UserFeedContext.js:20 ~ likePost ~ e:", e)
+        }
+     }
     const createPost =async(postText)=>{
-        const token = localStorage.getItem("encodedToken")
         const post={
             content:postText
         }
@@ -46,7 +55,7 @@ export const UserFeedContextProvider=({children})=>{
     useEffect(()=>{
         fetchAllPosts()
     },[])
-    return(<UserFeedContext.Provider value={{userFeed,userFeedDispacher,createPost}}>{children}</UserFeedContext.Provider>)
+    return(<UserFeedContext.Provider value={{userFeed,userFeedDispacher,createPost,postLikeHandler}}>{children}</UserFeedContext.Provider>)
 }
 
 const useUserFeedContext =()=> useContext(UserFeedContext);

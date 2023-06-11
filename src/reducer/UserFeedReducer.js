@@ -2,6 +2,8 @@ export default function UserFeedReducer(state,action){
     switch(action.type){
         case "ALL_POSTS":
             return {...state, postsData: action.payload }
+        case "LIKE_STATUS":
+            return {...state, postsData: action.payload.data, likeStatus: !action.payload.status }
         case "SHOW_FILTERS":
             return {...state, showFiltersUserFeed: !action.payload}
         case "SORT_BY_LATEST": 

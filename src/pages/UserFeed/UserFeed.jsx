@@ -8,7 +8,7 @@ import {MdInsertPhoto} from "react-icons/md"
  
 
 export default function UserFeed(){
-    const {userFeed,userFeedDispacher,createPost,createPostWithImg} = useUserFeedContext()
+    const {userFeed,userFeedDispacher,createPost,createPostWithImg,postLikeHandler} = useUserFeedContext()
     const {loginHandler,user} = useAuthContext();
  
      
@@ -46,7 +46,7 @@ export default function UserFeed(){
                     </div>
                     <p>{content}</p>
                     {!image ? null :<img src={`${image}`} height="400px" />}
-                    <p><AiOutlineLike />{likes.likeCount}</p>
+                    <p onClick={()=>postLikeHandler(_id)}><AiOutlineLike />{likes.likeCount}</p>
                     </div>)
             })
         }
