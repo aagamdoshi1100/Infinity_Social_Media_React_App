@@ -1,17 +1,30 @@
 import useUserFeedContext from "../../contexts/UserFeedContext"
+import {NavLink} from "react-router-dom"
+import useAuthContext from "../../contexts/AuthContext"
+import "./UserFeed.css"
 import {FaFilter} from "react-icons/fa"
 import {AiOutlineLike} from "react-icons/ai"
-import "./UserFeed.css"
-import useAuthContext from "../../contexts/AuthContext"
-import {NavLink} from "react-router-dom"
+import {MdInsertPhoto} from "react-icons/md"
+ 
 
 export default function UserFeed(){
-    const {userFeed,userFeedDispacher} = useUserFeedContext()
+    const {userFeed,userFeedDispacher,createPost,createPostWithImg} = useUserFeedContext()
     const {loginHandler,user} = useAuthContext();
+ 
      
     return(<div className="container">
         <h3>User Feed page<NavLink onClick={()=>loginHandler("AD","AD123")}>{localStorage.getItem("encodedToken") ? `Welcome, ${user.name}` : "Guest Login"}</NavLink></h3>
-        <textarea className="myText"></textarea>
+
+    <div className="create-post">
+        <textarea className="myText" onChange={(e)=>userFeedDispacher({type:"CREATE_POST_CONTENT",payload:e.target.value})} placeholder="Write something..." ></textarea>
+        {!userFeed.createPostImage ? null : <img src={userFeed.createPostImage} width="100px" height="100px"/>}
+        <label htmlFor="image">
+                <MdInsertPhoto />
+        </label>
+        <input type="file" name="image" id="image" style={{display:"none",visibility:"none"}} onChange={(e)=>userFeedDispacher({type:"CREATE_POST_IMAGE",payload:e.target.files[0]})}/>
+        <button>Post</button>
+    </div>
+
          <div onClick={()=>userFeedDispacher({type: "SHOW_FILTERS",payload: userFeed.showFiltersUserFeed})}><FaFilter /></div> 
         {userFeed.showFiltersUserFeed ? 
             <div>
@@ -32,7 +45,7 @@ export default function UserFeed(){
                     <p style={{paddingLeft:"10px",color:"rgb(184, 179, 179)"}}>{createdAt}</p>
                     </div>
                     <p>{content}</p>
-                    <img src={`${image}`} height="400px" />
+                    {!image ? null :<img src={`${image}`} height="400px" />}
                     <p><AiOutlineLike />{likes.likeCount}</p>
                     </div>)
             })

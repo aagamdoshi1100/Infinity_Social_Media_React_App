@@ -10,6 +10,10 @@ export default function UserFeedReducer(state,action){
             return {...state, postsData: action.payload.sort((a,b)=>new Date(a.createdAt) - new Date(b.createdAt))}
         case "SORT_BY_TRENDING": 
             return {...state, postsData: action.payload.sort((a,b)=>b.likes.likeCount - a.likes.likeCount)}
+        case "CREATE_POST_IMAGE":
+            return {...state, createPostImage: action.payload}        
+        case "CREATE_POST_CONTENT":
+            return {...state, createPostContent: action.payload}
     }
        
 }
