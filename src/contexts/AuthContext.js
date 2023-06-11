@@ -5,7 +5,6 @@ const AuthContext = createContext();
 export const AuthContextProvider =({children})=>{
     const [user,setUser] = useState({name:""})
     const loginHandler = async(username,password)=>{
-        console.log("cred",username,password)
         try{
             const response = await fetch("/api/auth/login",{
                 method:"POST",
