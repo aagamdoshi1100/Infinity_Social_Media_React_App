@@ -8,8 +8,10 @@ export const UserFeedContextProvider=({children})=>{
     showFiltersUserFeed: false,
     createPostContent :null,
     createPostImage:null,
-    likeStatus: false
+    likeStatus: false,
+    filterBy: null
 })  
+console.log(userFeed)
     const token = localStorage.getItem("encodedToken")
     const postLikeHandler =async(postId)=>{
         const URL = userFeed.likeStatus ? `/api/posts/dislike/${postId}` : `/api/posts/like/${postId}`
