@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useReducer } from "react";
 import UserFeedReducer from "../reducer/UserFeedReducer";
+import useAuthContext from "./AuthContext";
 
 const UserFeedContext = createContext()
 
@@ -8,23 +9,43 @@ export const UserFeedContextProvider=({children})=>{
     showFiltersUserFeed: false,
     createPostContent :null,
     createPostImage:null,
-    likeStatus: false,
     filterBy: null
 })  
-console.log(userFeed)
-    const token = localStorage.getItem("encodedToken")
-    const postLikeHandler =async(postId)=>{
-        const URL = userFeed.likeStatus ? `/api/posts/dislike/${postId}` : `/api/posts/like/${postId}`
+console.log(userFeed,"aaa")
+const token = localStorage.getItem("encodedToken")
+const postLikeHandler =async(postId,user)=>{
+
+    // const st=userFeed.postsData.find(({_id})=>postId === _id)
+    // if(st.likes.likedBy.length>0){
+    // const likest = st.likes.likedBy.find(({username})=>username == user)
+    // console.log(likest,"likest")
+    // }
+    if(!userFeed.postData){
         try{
-            const response = await fetch(URL,{
+            const response = await fetch(`/api/posts/like/${postId}`,{
                 method: "POST",
                 headers: {authorization:token}
             }) 
             const responseData = await response.json()
-            userFeedDispacher({type : "LIKE_STATUS",payload : {data: responseData.posts , status: userFeed.likeStatus}})
+            console.log("🚀 ~ file: UserFeedContext.js:30 ~ postLikeHandler ~ responseData:", response)
+                if(response.status === 201){
+                    userFeedDispacher({type : "LIKE_STATUS",payload : {data: responseData.posts
+                    }})
+                 }else{
+                    try{
+                        const responsedislike = await fetch(`/api/posts/dislike/${postId}`,{
+                            method: "POST",
+                            headers: {authorization:token}}) 
+                            const responseDisData = await responsedislike.json()
+                            userFeedDispacher({type : "LIKE_STATUS",payload : {data: responseDisData.posts}})
+                    }catch(e){
+                        console.log("400 erro code", e)
+                    }
+                }
         }catch(e){
             console.log("🚀 ~ file: UserFeedContext.js:20 ~ likePost ~ e:", e)
         }
+    }
      }
     const createPost =async()=>{
             const post={

@@ -3,7 +3,7 @@ export default function UserFeedReducer(state,action){
         case "ALL_POSTS":
             return {...state, postsData: action.payload }
         case "LIKE_STATUS":
-            return {...state, postsData: action.payload.data, likeStatus: !action.payload.status }
+            return {...state, postsData: action.payload.data }
         case "SHOW_FILTERS":
             return {...state, showFiltersUserFeed: !action.payload}
         case "SORT_BY_LATEST": 
