@@ -6,6 +6,12 @@ export default function UserFeedReducer(state,action){
             return {...state, postsData: action.payload.data }
         case "SHOW_FILTERS":
             return {...state, showFiltersUserFeed: !action.payload}
+        case "THREE_DOT_CONTROLLER":
+            return {...state, showToggleUserFeed: !action.payload.data,indexOfPost:action.payload.indexOfPost}
+        case "EDIT_CONTROLLER":
+                return {...state, showEditUserFeed: !action.payload}        
+        case "EDIT_POST_HANDLER":
+                return {...state,postsData: action.payload.data, showEditUserFeed: !action.payload.showEditUserFeed}
         case "SORT_BY_LATEST": 
             return {...state, postsData: action.payload.sort((a,b)=>new Date(b.createdAt) - new Date(a.createdAt)),filterBy:"Latest Posts"}
         case "SORT_BY_OLDEST": 

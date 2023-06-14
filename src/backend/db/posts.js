@@ -10,6 +10,20 @@ export const posts = [
   {
     _id: uuid(),
     content:
+      "Cyclone Biparjoy: IMD warns of flood, power disruption; trains cancelled",
+    image: "https://www.hindustantimes.com/ht-img/img/2023/06/13/550x309/biparjoy_cyclone_1686700668660_1686700713616.PNG",
+    likes: {
+      likeCount: 8,
+      likedBy: [],
+      dislikedBy: [],
+    },
+    username: "AD",
+    createdAt: "2023-06-14",
+    updatedAt: formatDate(),
+  },
+  {
+    _id: uuid(),
+    content:
       "Trump told his guests that the plan of attack was prepared for him by the Department of Defense and a senior military official, adding that as president he could have declassified the document he was showing.",
     image : "https://c.ndtvimg.com/2021-01/2fdj66ts_donald-trump-bloomberg_625x300_14_January_21.jpg",
     likes: {

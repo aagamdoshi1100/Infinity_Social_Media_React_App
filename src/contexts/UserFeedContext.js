@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useReducer } from "react";
 import UserFeedReducer from "../reducer/UserFeedReducer";
 import useAuthContext from "./AuthContext";
+import { json } from "react-router-dom";
 
 const UserFeedContext = createContext()
 
@@ -9,10 +10,33 @@ export const UserFeedContextProvider=({children})=>{
     showFiltersUserFeed: false,
     createPostContent :null,
     createPostImage:null,
-    filterBy: null
+    filterBy: "",
+    showToggleUserFeed:false,
+    showEditUserFeed:false,
+    indexOfPost:""
 })  
 console.log(userFeed,"aaa")
 const token = localStorage.getItem("encodedToken")
+
+const editHandler = async(postId)=>{
+    const post={
+        content:userFeed.createPostContent,
+        image:userFeed.createPostImage === null ||userFeed.createPostImage === undefined  ? "": URL.createObjectURL(userFeed.createPostImage)
+    }
+    try{
+        const response = await fetch(`/api/posts/edit/${postId}`,{
+            method:"POST",
+            headers:{authorization:token},
+            body: JSON.stringify({postData:post})
+        })
+        const responseData = await response.json()
+        console.log("🚀 ~ file: UserFeedContext.js:33 ~ editHandler ~ responseData:", responseData)
+        userFeedDispacher({type : "EDIT_POST_HANDLER",payload :{data: responseData.posts,showEditUserFeed : userFeed.showEditUserFeed}})
+    }catch(e){
+    console.log("🚀 ~ file: UserFeedContext.js:32 ~ editHandler ~ e:", e)
+    }
+}
+
 const postLikeHandler =async(postId,user)=>{
 
     // const st=userFeed.postsData.find(({_id})=>postId === _id)
@@ -50,7 +74,7 @@ const postLikeHandler =async(postId,user)=>{
     const createPost =async()=>{
             const post={
             content:userFeed.createPostContent,
-            image: URL.createObjectURL(userFeed.createPostImage)
+            image: userFeed.createPostImage === null ||userFeed.createPostImage === undefined  ? "": URL.createObjectURL(userFeed.createPostImage)
         }
         console.log(post,"post")
         try{
@@ -80,7 +104,7 @@ const postLikeHandler =async(postId,user)=>{
     useEffect(()=>{
         fetchAllPosts()
     },[])
-    return(<UserFeedContext.Provider value={{userFeed,userFeedDispacher,createPost,postLikeHandler}}>{children}</UserFeedContext.Provider>)
+    return(<UserFeedContext.Provider value={{userFeed,userFeedDispacher,createPost,postLikeHandler,editHandler}}>{children}</UserFeedContext.Provider>)
 }
 
 const useUserFeedContext =()=> useContext(UserFeedContext);
