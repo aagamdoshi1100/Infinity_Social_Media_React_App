@@ -9,7 +9,7 @@ import {BiDotsVertical} from "react-icons/bi"
  
 
 export default function UserFeed(){
-    const {userFeed,userFeedDispacher,createPost,editHandler,postLikeHandler} = useUserFeedContext()
+    const {userFeed,userFeedDispacher,createPost,editHandler,postLikeHandler,deletePostHandler} = useUserFeedContext()
     const {loginHandler,user} = useAuthContext();
  
      
@@ -56,7 +56,7 @@ export default function UserFeed(){
                 {userFeed.showToggleUserFeed ? details.username === user.name && userFeed.indexOfPost===_id ?
                 <div>
                 <li onClick={()=>userFeedDispacher({type:"EDIT_CONTROLLER",payload:userFeed.showEditUserFeed})}>Edit</li>
-                <li>Delete</li>
+                <li onClick={()=>deletePostHandler(_id)}>Delete</li>
             </div>  : 
                 <div>
                 </div>

@@ -17,7 +17,19 @@ export const UserFeedContextProvider=({children})=>{
 })  
 console.log(userFeed,"aaa")
 const token = localStorage.getItem("encodedToken")
-
+ const deletePostHandler =async(postId)=>{
+    try{
+        const response = await fetch(`/api/posts/${postId}`,{
+            method:"DELETE",
+            headers:{authorization:token},
+        })
+        const responseData = await response.json()
+        console.log("🚀 ~ file: UserFeedContext.js:33 ~ editHandler ~ responseData:", responseData)
+        userFeedDispacher({type : "ALL_POSTS",payload : responseData.posts})
+    }catch(e){
+    console.log("🚀 ~ file: UserFeedContext.js:32 ~ editHandler ~ e:", e)
+    }
+ }
 const editHandler = async(postId)=>{
     const post={
         content:userFeed.createPostContent,
@@ -104,7 +116,7 @@ const postLikeHandler =async(postId,user)=>{
     useEffect(()=>{
         fetchAllPosts()
     },[])
-    return(<UserFeedContext.Provider value={{userFeed,userFeedDispacher,createPost,postLikeHandler,editHandler}}>{children}</UserFeedContext.Provider>)
+    return(<UserFeedContext.Provider value={{userFeed,userFeedDispacher,createPost,postLikeHandler,editHandler,deletePostHandler}}>{children}</UserFeedContext.Provider>)
 }
 
 const useUserFeedContext =()=> useContext(UserFeedContext);
