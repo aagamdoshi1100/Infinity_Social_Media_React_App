@@ -17,6 +17,15 @@
     .post-heading{
         display: flex;
         place-items: center;
+        justify-content: space-between;
+        padding:0px 10px 0px 10px;
+    }
+    .heading-menu{
+
+    }
+    .heading-menu-item{
+        list-style-type: none;
+        border: 1px solid rgb(184, 179, 179) ;
     }
     .create-post{
         border:1px solid rgb(184, 179, 179);

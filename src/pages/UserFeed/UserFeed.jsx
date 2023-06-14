@@ -46,17 +46,16 @@ export default function UserFeed(){
     const {_id,username,content,image,createdAt,likes} = details;
     return(<div key={_id} className="FeedBox">
         <div className="post-heading">
-            <div className="post-username-date">
-                <h3>{username}</h3>
-                <p style={{paddingLeft:"10px",color:"rgb(184, 179, 179)"}}>{createdAt}</p>
-            </div>
+            {/* <div className="post-username-date"> */}
+                <h3>{username}<span style={{paddingLeft:"10px",color:"rgb(184, 179, 179)",fontWeight:"normal"}}>{createdAt}</span></h3>
+                
             <div className="post-edit-btn">
-                <BiDotsVertical size="1.8em" onClick={()=>userFeedDispacher({type:"THREE_DOT_CONTROLLER",payload:{data:userFeed.showToggleUserFeed, indexOfPost :_id}})}/>
-            </div>
+                <BiDotsVertical size="1.8em" onClick={()=>userFeedDispacher({type:"THREE_DOT_CONTROLLER",payload:{data:userFeed.showToggleUserFeed, indexOfPost :_id}})} className="heading-menu-item"/>
+            
                 {userFeed.showToggleUserFeed ? details.username === user.name && userFeed.indexOfPost===_id ?
                 <div>
-                <li onClick={()=>userFeedDispacher({type:"EDIT_CONTROLLER",payload:userFeed.showEditUserFeed})}>Edit</li>
-                <li onClick={()=>deletePostHandler(_id)}>Delete</li>
+                <li onClick={()=>userFeedDispacher({type:"EDIT_CONTROLLER",payload:userFeed.showEditUserFeed})} className="heading-menu-item">Edit</li>
+                <li className="heading-menu-item" onClick={()=>deletePostHandler(_id)}>Delete</li>
             </div>  : 
                 <div>
                 </div>
@@ -64,13 +63,14 @@ export default function UserFeed(){
                 null}
                 {userFeed.showToggleUserFeed ? details.username !== user.name && userFeed.indexOfPost===_id ?
                 <div>
-                <li onClick={()=>userFeedDispacher({type:"UNFOLLOW_CONTROLLER",payload:userFeed.showEditUserFeed})}>Unfollow</li>
-                <li>Report</li>
+                <li className="heading-menu-item" onClick={()=>userFeedDispacher({type:"UNFOLLOW_CONTROLLER",payload:userFeed.showEditUserFeed})}>Unfollow</li>
+                <li className="heading-menu-item">Report</li>
             </div>  : 
                 <div>
                 </div>
                 : 
                 null}
+                </div>
         </div>
         <div contentEditable={userFeed.showEditUserFeed ? userFeed.indexOfPost===_id : false} >
             {userFeed.showEditUserFeed && userFeed.indexOfPost===_id ?
