@@ -6,12 +6,13 @@ import {FaFilter} from "react-icons/fa"
 import {AiOutlineLike} from "react-icons/ai"
 import {MdInsertPhoto} from "react-icons/md"
 import {BiDotsVertical} from "react-icons/bi"
+import useFollowContext from "../../contexts/FollowContext"
  
 
 export default function UserFeed(){
     const {userFeed,userFeedDispacher,createPost,editHandler,postLikeHandler,deletePostHandler} = useUserFeedContext()
     const {loginHandler,user} = useAuthContext();
- 
+    const {infinityUsers,followUser} = useFollowContext()
      
     return(<div className="container">
         <h3>User Feed page<NavLink onClick={()=>loginHandler("AD","AD123")}>{localStorage.getItem("encodedToken") ? `Welcome, ${user.name}` : "Guest Login"}</NavLink></h3>
@@ -26,6 +27,19 @@ export default function UserFeed(){
             <input type="file" id="image" style={{display:"none",visibility:"none"}} onChange={(e)=>userFeedDispacher({type:"CREATE_POST_IMAGE",payload:e.target.files[0]})}/>
             <button className="btn" onClick={createPost}>Create Post</button>
         </div>
+    </div>
+
+    <div className="show-users">
+        {infinityUsers?.allUsers.filter(({username})=>username !== user.name).map((details,index)=>{
+            const {_id,firstName,lastName,username} = details;
+            return(<div className="userbox" key={_id}>
+                <h4>{`${firstName} ${lastName}`}</h4>
+                <p>{`@${username}`}</p>
+            {
+                infinityUsers?.followDetailsOfLoggedInUser.find((item)=>item.username ===username) ? <button onClick={()=>followUser(_id)}>UnFollow</button>  : <button onClick={()=>followUser(_id)}>Follow</button> 
+            }
+            </div>)
+        })}
     </div>
 
          <div className="filterBox">

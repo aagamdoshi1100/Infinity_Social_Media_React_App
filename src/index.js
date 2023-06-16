@@ -7,6 +7,7 @@ import { makeServer } from "./server";
 import { BrowserRouter } from 'react-router-dom';
 import { UserFeedContextProvider } from './contexts/UserFeedContext';
 import { AuthContextProvider } from './contexts/AuthContext';
+import { FollowContextProvider } from './contexts/FollowContext';
 
 // Call make Server
 makeServer();
@@ -16,11 +17,13 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-    <UserFeedContextProvider>
-      <AuthContextProvider>
-    <App />
-    </AuthContextProvider>
-    </UserFeedContextProvider>
+      <UserFeedContextProvider>
+        <AuthContextProvider>
+          <FollowContextProvider>
+            <App />
+          </FollowContextProvider>
+        </AuthContextProvider>
+      </UserFeedContextProvider>
     </BrowserRouter>
   </React.StrictMode>
 );
