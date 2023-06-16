@@ -7,9 +7,7 @@
         width: 100%;
     }
     .FeedBox{
-        border:1px solid rgb(184, 179, 179);
         box-sizing :border-box;
-        width: 100%;
     }
     img{
         width: 100%;
@@ -20,17 +18,11 @@
         justify-content: space-between;
         padding:0px 10px 0px 10px;
     }
-    .heading-menu{
-
+    .show-user{
+        flex-shrink: 0;
     }
     .heading-menu-item{
         list-style-type: none;
-        border: 1px solid rgb(184, 179, 179) ;
-    }
-    .create-post{
-        border:1px solid rgb(184, 179, 179);
-        display: flex;
-        flex-direction: column;
     }
     .btn-imagePicker-filterBox {
         display: flex;
@@ -51,7 +43,6 @@
 
 .btn{
     background-color: rgba(70, 133, 250, 0.959);
-    border-radius: 5px;
     color: white;
 }
 body{

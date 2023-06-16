@@ -2,6 +2,7 @@ import useUserFeedContext from "../../contexts/UserFeedContext"
 import {NavLink} from "react-router-dom"
 import useAuthContext from "../../contexts/AuthContext"
 import "./UserFeed.css"
+import "../../App.css"
 import {FaFilter} from "react-icons/fa"
 import {AiOutlineLike} from "react-icons/ai"
 import {MdInsertPhoto} from "react-icons/md"
@@ -25,18 +26,18 @@ export default function UserFeed(){
                     <MdInsertPhoto size="1.4em" />
             </label>
             <input type="file" id="image" style={{display:"none",visibility:"none"}} onChange={(e)=>userFeedDispacher({type:"CREATE_POST_IMAGE",payload:e.target.files[0]})}/>
-            <button className="btn" onClick={createPost}>Create Post</button>
+            <button className="btn br" onClick={createPost}>Create Post</button>
         </div>
     </div>
 
-    <div className="show-users">
+    <div className="df mt-1 ox ">
         {infinityUsers?.allUsers.filter(({username})=>username !== user.name).map((details,index)=>{
             const {_id,firstName,lastName,username} = details;
-            return(<div className="userbox" key={_id}>
+            return(<div className="b ml-1 br wd-1 h show-user df fd-col jc-sa" key={_id}>
                 <h4>{`${firstName} ${lastName}`}</h4>
                 <p>{`@${username}`}</p>
             {
-                infinityUsers?.followDetailsOfLoggedInUser.find((item)=>item.username ===username) ? <button onClick={()=>followUser(_id)}>UnFollow</button>  : <button onClick={()=>followUser(_id)}>Follow</button> 
+                infinityUsers?.followDetailsOfLoggedInUser.find((item)=>item.username ===username) ? <button className="btn br" onClick={()=>followUser(_id)}>UnFollow</button>  : <button className="btn br" onClick={()=>followUser(_id)}>Follow</button> 
             }
             </div>)
         })}
@@ -58,18 +59,18 @@ export default function UserFeed(){
 {
     userFeed?.postsData.map((details,index)=>{
     const {_id,username,content,image,createdAt,likes} = details;
-    return(<div key={_id} className="FeedBox">
+    return(<div key={_id} className="FeedBox wd b">
         <div className="post-heading">
             {/* <div className="post-username-date"> */}
                 <h3>{username}<span style={{paddingLeft:"10px",color:"rgb(184, 179, 179)",fontWeight:"normal"}}>{createdAt}</span></h3>
                 
             <div className="post-edit-btn">
-                <BiDotsVertical size="1.8em" onClick={()=>userFeedDispacher({type:"THREE_DOT_CONTROLLER",payload:{data:userFeed.showToggleUserFeed, indexOfPost :_id}})} className="heading-menu-item"/>
+                <BiDotsVertical size="1.8em" onClick={()=>userFeedDispacher({type:"THREE_DOT_CONTROLLER",payload:{data:userFeed.showToggleUserFeed, indexOfPost :_id}})} className="heading-menu-item b"/>
             
                 {userFeed.showToggleUserFeed ? details.username === user.name && userFeed.indexOfPost===_id ?
                 <div>
-                <li onClick={()=>userFeedDispacher({type:"EDIT_CONTROLLER",payload:userFeed.showEditUserFeed})} className="heading-menu-item">Edit</li>
-                <li className="heading-menu-item" onClick={()=>deletePostHandler(_id)}>Delete</li>
+                <li onClick={()=>userFeedDispacher({type:"EDIT_CONTROLLER",payload:userFeed.showEditUserFeed})} className="heading-menu-item b">Edit</li>
+                <li className="heading-menu-item b" onClick={()=>deletePostHandler(_id)}>Delete</li>
             </div>  : 
                 <div>
                 </div>
@@ -77,8 +78,8 @@ export default function UserFeed(){
                 null}
                 {userFeed.showToggleUserFeed ? details.username !== user.name && userFeed.indexOfPost===_id ?
                 <div>
-                <li className="heading-menu-item" onClick={()=>userFeedDispacher({type:"UNFOLLOW_CONTROLLER",payload:userFeed.showEditUserFeed})}>Unfollow</li>
-                <li className="heading-menu-item">Report</li>
+                <li className="heading-menu-item b" onClick={()=>userFeedDispacher({type:"UNFOLLOW_CONTROLLER",payload:userFeed.showEditUserFeed})}>Unfollow</li>
+                <li className="heading-menu-item b">Report</li>
             </div>  : 
                 <div>
                 </div>
@@ -99,9 +100,8 @@ export default function UserFeed(){
             <button onClick={()=>editHandler(_id)} className="btn">Save</button>
         </div> : ""}
         </div>         
-                <p onClick={()=>postLikeHandler(_id,username)}>
-                    <AiOutlineLike size="1.8em" />{likes.likeCount}
-                </p>
+                <p className="pi-c" style={{fontSize:"24px"}} onClick={()=>postLikeHandler(_id,username)}>
+                    <AiOutlineLike /> {likes.likeCount} </p>
     </div>)
             })
         }
