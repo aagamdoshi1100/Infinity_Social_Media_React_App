@@ -15,7 +15,6 @@ export const UserFeedContextProvider=({children})=>{
     showEditUserFeed:false,
     indexOfPost:""
 })  
-console.log(userFeed,"aaa")
 const token = localStorage.getItem("encodedToken")
  const deletePostHandler =async(postId)=>{
     try{
@@ -106,9 +105,7 @@ const postLikeHandler =async(postId,user)=>{
         try{
             const response = await fetch("/api/posts");
             const responseData = await response.json()
-            console.log("🚀 ~ file: UserFeedContext.js:11 ~ fetchAllPosts ~ responseData:", responseData)
             userFeedDispacher({type : "ALL_POSTS",payload : responseData.posts})
-
         }catch(e){
             console.log("🚀 ~ file: UserFeedContext.js:12 ~ fetchAllPosts ~ e:", e)     
         }
