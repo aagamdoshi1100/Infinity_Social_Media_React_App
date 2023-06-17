@@ -1,21 +1,23 @@
 import { createContext, useContext, useEffect, useReducer } from "react";
-import UserFeedReducer from "../reducer/UserFeedReducer";
-import useAuthContext from "./AuthContext";
-import { json } from "react-router-dom";
-
+import UserFeedReducer,{InitialValueFeedContext} from "../reducer/UserFeedReducer";
+import { useNavigate } from "react-router-dom";
 const UserFeedContext = createContext()
 
 export const UserFeedContextProvider=({children})=>{
-    const [userFeed,userFeedDispacher] = useReducer(UserFeedReducer,{postsData:[],
-    showFiltersUserFeed: false,
-    createPostContent :null,
-    createPostImage:null,
-    filterBy: "",
-    showToggleUserFeed:false,
-    showEditUserFeed:false,
-    indexOfPost:""
-})  
+    const [userFeed,userFeedDispacher] = useReducer(UserFeedReducer,InitialValueFeedContext)  
+    console.log(userFeed,"userfeed")
 const token = localStorage.getItem("encodedToken")
+const navigate = useNavigate()
+const getSelectedPost= async(postId)=>{
+    try{
+        const response = await fetch(`/api/posts/${postId}`)
+        const responseData = await response.json();
+        userFeedDispacher({type:"SELECTED_POST",payload:{data:responseData.post,value:"selectedPostData"}})
+        navigate("/pages/SinglePostView/")
+    }catch(e){
+        console.log("🚀 ~ file: UserFeedContext.js:25 ~ getSelectedPost ~ e:", e)
+    }
+}
  const deletePostHandler =async(postId)=>{
     try{
         const response = await fetch(`/api/posts/${postId}`,{
@@ -24,7 +26,7 @@ const token = localStorage.getItem("encodedToken")
         })
         const responseData = await response.json()
         console.log("🚀 ~ file: UserFeedContext.js:33 ~ editHandler ~ responseData:", responseData)
-        userFeedDispacher({type : "ALL_POSTS",payload : responseData.posts})
+        userFeedDispacher({type : "ALL_POSTS",payload : {data:responseData.posts,value:"postsData"}})
     }catch(e){
     console.log("🚀 ~ file: UserFeedContext.js:32 ~ editHandler ~ e:", e)
     }
@@ -42,19 +44,13 @@ const editHandler = async(postId)=>{
         })
         const responseData = await response.json()
         console.log("🚀 ~ file: UserFeedContext.js:33 ~ editHandler ~ responseData:", responseData)
-        userFeedDispacher({type : "EDIT_POST_HANDLER",payload :{data: responseData.posts,showEditUserFeed : userFeed.showEditUserFeed}})
+        userFeedDispacher({type : "EDIT_POST_HANDLER",payload :{data: responseData.posts,showEditUserFeed : userFeed.showEditUserFeed,value:"postsData"}})
     }catch(e){
     console.log("🚀 ~ file: UserFeedContext.js:32 ~ editHandler ~ e:", e)
     }
 }
 
 const postLikeHandler =async(postId,user)=>{
-
-    // const st=userFeed.postsData.find(({_id})=>postId === _id)
-    // if(st.likes.likedBy.length>0){
-    // const likest = st.likes.likedBy.find(({username})=>username == user)
-    // console.log(likest,"likest")
-    // }
     if(!userFeed.postData){
         try{
             const response = await fetch(`/api/posts/like/${postId}`,{
@@ -105,7 +101,7 @@ const postLikeHandler =async(postId,user)=>{
         try{
             const response = await fetch("/api/posts");
             const responseData = await response.json()
-            userFeedDispacher({type : "ALL_POSTS",payload : responseData.posts})
+            userFeedDispacher({type : "ALL_POSTS",payload :{data: responseData.posts,value:"postsData"}})
         }catch(e){
             console.log("🚀 ~ file: UserFeedContext.js:12 ~ fetchAllPosts ~ e:", e)     
         }
@@ -113,7 +109,7 @@ const postLikeHandler =async(postId,user)=>{
     useEffect(()=>{
         fetchAllPosts()
     },[])
-    return(<UserFeedContext.Provider value={{userFeed,userFeedDispacher,createPost,postLikeHandler,editHandler,deletePostHandler}}>{children}</UserFeedContext.Provider>)
+    return(<UserFeedContext.Provider value={{userFeed,userFeedDispacher,createPost,postLikeHandler,editHandler,deletePostHandler,getSelectedPost,navigate}}>{children}</UserFeedContext.Provider>)
 }
 
 const useUserFeedContext =()=> useContext(UserFeedContext);

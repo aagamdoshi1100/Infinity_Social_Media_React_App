@@ -1,7 +1,7 @@
-import logo from './logo.svg';
 import './App.css';
 import { Routes,Route } from 'react-router-dom';
 import UserFeed from './pages/UserFeed/UserFeed';
+import SinglePostView from './pages/SinglePostView/SinglePostView';
 
 function App() {
   return (
@@ -10,6 +10,7 @@ function App() {
       </header>
       <Routes>
         <Route path="/" element={<UserFeed />}/>
+        <Route path="/pages/SinglePostView/" element={<SinglePostView />}/>
       </Routes>
     </div>
   );

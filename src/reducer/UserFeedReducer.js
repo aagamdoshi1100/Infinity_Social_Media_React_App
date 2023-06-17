@@ -1,7 +1,22 @@
+export const InitialValueFeedContext ={
+    postsData:[],
+    selectedPostData :[],
+    fetchValue:"",
+    showFiltersUserFeed: false,
+    createPostContent :null,
+    createPostImage:null,
+    filterBy: "",
+    showToggleUserFeed:false,
+    showEditUserFeed:false,
+    indexOfPost:""
+}
+
 export default function UserFeedReducer(state,action){
     switch(action.type){
         case "ALL_POSTS":
-            return {...state, postsData: action.payload }
+            return {...state, postsData: action.payload.data, fetchValue:action.payload.value }
+        case "SELECTED_POST":
+            return {...state, selectedPostData: [action.payload.data], fetchValue:action.payload.value}
         case "LIKE_STATUS":
             return {...state, postsData: action.payload.data }
         case "SHOW_FILTERS":
@@ -11,7 +26,7 @@ export default function UserFeedReducer(state,action){
         case "EDIT_CONTROLLER":
                 return {...state, showEditUserFeed: !action.payload}        
         case "EDIT_POST_HANDLER":
-                return {...state,postsData: action.payload.data, showEditUserFeed: !action.payload.showEditUserFeed}
+                return {...state,postsData: action.payload.data, showEditUserFeed: !action.payload.showEditUserFeed, fetchValue:action.payload.value}
         case "SORT_BY_LATEST": 
             return {...state, postsData: action.payload.sort((a,b)=>new Date(b.createdAt) - new Date(a.createdAt)),filterBy:"Latest Posts"}
         case "SORT_BY_OLDEST": 
