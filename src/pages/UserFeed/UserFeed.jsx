@@ -29,9 +29,10 @@ export default function UserFeed(){
     </div>
 
     <div className="df mt-1 ox ">
-        {infinityUsers?.allUsers.filter(({username})=>username !== user.name).map((details,index)=>{
-            const {_id,firstName,lastName,username} = details;
+        {infinityUsers?.allUsers.filter(({username})=>username !== user.name).map((details)=>{
+            const {_id,profileIcon,firstName,lastName,username} = details;
             return(<div className="b ml-1 br wd-1 h show-user df fd-col jc-sa" key={_id}>
+                <span className="circle"><img src={profileIcon} width="100%" height="100%"/></span>
                 <h4>{`${firstName} ${lastName}`}</h4>
                 <p>{`@${username}`}</p>
             {
