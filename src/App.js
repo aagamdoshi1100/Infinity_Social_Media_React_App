@@ -2,6 +2,7 @@ import './App.css';
 import { Routes,Route } from 'react-router-dom';
 import UserFeed from './pages/UserFeed/UserFeed';
 import SinglePostView from './pages/SinglePostView/SinglePostView';
+import UserProfile from './pages/profile/UserProfile';
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
       <Routes>
         <Route path="/" element={<UserFeed />}/>
         <Route path="/pages/SinglePostView/" element={<SinglePostView />}/>
+        <Route path="/pages/profile/UserProfile" element={<UserProfile />} />
       </Routes>
     </div>
   );
