@@ -18,6 +18,21 @@ const getSelectedPost= async(postId)=>{
         console.log("🚀 ~ file: UserFeedContext.js:25 ~ getSelectedPost ~ e:", e)
     }
 }
+const getUserProfile =async(userId,username)=>{
+    console.log(userId,username)
+    try{
+        const response = await fetch(`/api/users/${userId}`)
+        const responseData = await response.json();
+        console.log("🚀 ~ file: AuthContext.js:25 ~ getUserProfile ~ responseData:", responseData)
+        const filtered = userFeed.postsData.filter((posts)=>posts.username === username)
+        console.log("🚀 ~ file: UserFeedContext.js:29 ~ getUserProfile ~ filtered:", filtered)
+        userFeedDispacher({type:"USER_PROFILE",payload:{userData:responseData.user, data:filtered, value:"userProfileView"}})
+        navigate(`/pages/profile/UserProfile`)
+    }catch(e){
+    console.log("🚀 ~ file: AuthContext.js:27 ~ getUserProfile ~ e:", e)
+
+    }
+}
  const deletePostHandler =async(postId)=>{
     try{
         const response = await fetch(`/api/posts/${postId}`,{
@@ -109,7 +124,7 @@ const postLikeHandler =async(postId,user)=>{
     useEffect(()=>{
         fetchAllPosts()
     },[])
-    return(<UserFeedContext.Provider value={{userFeed,userFeedDispacher,createPost,postLikeHandler,editHandler,deletePostHandler,getSelectedPost,navigate}}>{children}</UserFeedContext.Provider>)
+    return(<UserFeedContext.Provider value={{userFeed,userFeedDispacher,createPost,postLikeHandler,editHandler,deletePostHandler,getSelectedPost,navigate,getUserProfile}}>{children}</UserFeedContext.Provider>)
 }
 
 const useUserFeedContext =()=> useContext(UserFeedContext);

@@ -3,41 +3,49 @@ import useAuthContext from "../contexts/AuthContext"
 import {AiOutlineLike} from "react-icons/ai"
 import {MdInsertPhoto} from "react-icons/md"
 import {BiDotsVertical} from "react-icons/bi"
+import "../App.css"
+import useFollowContext from "../contexts/FollowContext"
 export default function FetchData(){
-    const {userFeed,userFeedDispacher,editHandler,postLikeHandler,deletePostHandler,getSelectedPost} = useUserFeedContext()
+    const {userFeed,userFeedDispacher,editHandler,postLikeHandler,deletePostHandler,getSelectedPost,getUserProfile} = useUserFeedContext()
     const {user} = useAuthContext();
+    const {infinityUsers} =useFollowContext()
     const fetchValue = userFeed?.fetchValue;
-    return(<div>
-        {
-            userFeed?.[fetchValue]?.map((details)=>{
-                const {_id,username,content,image,createdAt,likes} = details;
-                return(<div key={_id} className="FeedBox wd b">
-                    <div className="post-heading">
-                            <h3>{username}<span style={{paddingLeft:"10px",color:"rgb(184, 179, 179)",fontWeight:"normal"}}>{createdAt}</span></h3>
-                            
-                        <div className="post-edit-btn">
-                            <BiDotsVertical size="1.8em" onClick={()=>userFeedDispacher({type:"THREE_DOT_CONTROLLER",payload:{data:userFeed.showToggleUserFeed, indexOfPost :_id}})} className="heading-menu-item b"/>
-                        
-                            {userFeed.showToggleUserFeed ? details.username === user.name && userFeed.indexOfPost===_id ?
-                            <div>
-                            <li onClick={()=>userFeedDispacher({type:"EDIT_CONTROLLER",payload:userFeed.showEditUserFeed})} className="heading-menu-item b">Edit</li>
-                            <li className="heading-menu-item b" onClick={()=>deletePostHandler(_id)}>Delete</li>
-                        </div>  : 
-                            <div>
-                            </div>
+return(<div>
+    {
+    userFeed?.[fetchValue]?.map((details)=>{
+    const {_id,username,content,image,createdAt,likes} = details;
+    return(<div key={_id} className="FeedBox wd b">
+        <div className="post-header">
+            <span className="circle" onClick={()=>getUserProfile(infinityUsers?.allUsers?.find((item)=>item.username === username)._id,username)}>
+            <img src={infinityUsers?.allUsers?.find((item)=>item.username === username).profileIcon} width="100%" height="100%"/></span>
+            <div className="fullName">
+                <span>{`${infinityUsers?.allUsers?.find((item)=>item.username === username).firstName} ${infinityUsers?.allUsers?.find((item)=>item.username === username).lastName}`}</span>
+                <span style={{color:"grey"}}>@{username}</span>
+            </div>
+            <span style={{color:"rgb(184, 179, 179)"}}>{createdAt}</span>
+            <div className="post-edit-btn">
+                <BiDotsVertical size="1.8em" onClick={()=>userFeedDispacher({type:"THREE_DOT_CONTROLLER",payload:{data:userFeed.showToggleUserFeed, indexOfPost :_id}})} className="heading-menu-item b"/>
+                       
+                {userFeed.showToggleUserFeed ? details.username === user.name && userFeed.indexOfPost===_id ?
+                    <div>
+                        <li onClick={()=>userFeedDispacher({type:"EDIT_CONTROLLER",payload:userFeed.showEditUserFeed})} className="heading-menu-item b">Edit</li>
+                        <li className="heading-menu-item b" onClick={()=>deletePostHandler(_id)}>Delete</li>
+                    </div>  : 
+                        <div>
+                        </div>
                             : 
                             null}
                             {userFeed.showToggleUserFeed ? details.username !== user.name && userFeed.indexOfPost===_id ?
-                            <div>
+                        <div>
                             <li className="heading-menu-item b" onClick={()=>userFeedDispacher({type:"UNFOLLOW_CONTROLLER",payload:userFeed.showEditUserFeed})}>Unfollow</li>
                             <li className="heading-menu-item b">Report</li>
                         </div>  : 
-                            <div>
-                            </div>
+                        <div>
+                        </div>
                             : 
                             null}
-                            </div>
-                    </div>
+                        </div>
+        </div>
                     <div contentEditable={userFeed.showEditUserFeed ? userFeed.indexOfPost===_id : false}  onClick={()=>getSelectedPost(_id)}>
                         {userFeed.showEditUserFeed && userFeed.indexOfPost===_id ?
                         <input onChange={(e)=>userFeedDispacher({type:"CREATE_POST_CONTENT",payload:e.target.value})}/> : <p>{content}</p>}
@@ -52,7 +60,7 @@ export default function FetchData(){
                     </div> : ""}
                     </div>         
                             <p className="pi-c" style={{fontSize:"24px"}} onClick={()=>postLikeHandler(_id,username)}>
-                                <AiOutlineLike /> {likes.likeCount} </p>
+                                <AiOutlineLike /> {likes?.likeCount} </p>
                 </div>)
                         })
                     }
