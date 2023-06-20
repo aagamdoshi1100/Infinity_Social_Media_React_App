@@ -1,5 +1,4 @@
 import useUserFeedContext from "../../contexts/UserFeedContext"
-import {NavLink} from "react-router-dom"
 import useAuthContext from "../../contexts/AuthContext"
 import "./UserFeed.css"
 import "../../App.css"
@@ -7,16 +6,18 @@ import {FaFilter} from "react-icons/fa"
 import {MdInsertPhoto} from "react-icons/md"
 import useFollowContext from "../../contexts/FollowContext"
 import FetchData from "../../components/FetchData"
- 
+import Footer from "../../components/Footer/Footer"
+import Heading from "../../components/Header/Heading"
 
+ 
 export default function UserFeed(){
     const {userFeed,userFeedDispacher,createPost} = useUserFeedContext()
-    const {loginHandler,user} = useAuthContext();
+    const {user} = useAuthContext();
     const {infinityUsers,followUser} = useFollowContext()
      
     return(<div className="container">
-        <h3>User Feed page<NavLink onClick={()=>loginHandler("AD","AD123")}>{localStorage.getItem("encodedToken") ? `Welcome, ${user.name}` : "Guest Login"}</NavLink></h3>
-
+    <Heading />
+    <div className="container-body">
     <div className="create-post">
         <textarea className="myText" onChange={(e)=>userFeedDispacher({type:"CREATE_POST_CONTENT",payload:e.target.value})} placeholder="Write something..." ></textarea>
         <div className="btn-imagePicker-filterBox">
@@ -56,5 +57,7 @@ export default function UserFeed(){
             </div> : null
         }
         <FetchData />
+        </div>
+        <Footer />
     </div>)
 }

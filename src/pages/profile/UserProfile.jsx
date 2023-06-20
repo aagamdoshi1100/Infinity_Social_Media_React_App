@@ -1,9 +1,13 @@
 import FetchData from "../../components/FetchData";
+import useAuthContext from "../../contexts/AuthContext";
+import useFollowContext from "../../contexts/FollowContext";
 import useUserFeedContext from "../../contexts/UserFeedContext";
 import {BiArrowBack} from "react-icons/bi"
 
 export default function UserProfile(){
     const {userFeed,userFeedDispacher,navigate} = useUserFeedContext()
+    const {infinityUsers,followUser} = useFollowContext()
+    const {user} = useAuthContext()
     const goToHome =()=>{
         userFeedDispacher({type:"ALL_POSTS",payload :{data:userFeed.postsData, value: "postsData" }})
         navigate("/")
@@ -21,6 +25,9 @@ export default function UserProfile(){
                 <span style={{color:"grey"}}>@{username}</span>
                 <span>Following: {following.length}</span>
                 <span>Followers: {followers.length}</span>
+                {user.name === username ? null : 
+                infinityUsers?.followDetailsOfLoggedInUser.find((item)=>item.username ===username) ? <button className="btn br" onClick={()=>followUser(_id)}>UnFollow</button>  : <button className="btn br" onClick={()=>followUser(_id)}>Follow</button> 
+            }
             </div>
             <FetchData /> 
             
