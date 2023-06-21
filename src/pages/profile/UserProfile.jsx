@@ -1,4 +1,5 @@
 import FetchData from "../../components/FetchData";
+import Footer from "../../components/Footer/Footer";
 import useAuthContext from "../../contexts/AuthContext";
 import useFollowContext from "../../contexts/FollowContext";
 import useUserFeedContext from "../../contexts/UserFeedContext";
@@ -30,7 +31,7 @@ export default function UserProfile(){
             }
             </div>
             <FetchData /> 
-            
+            <Footer />
         </div>)
     })
 
