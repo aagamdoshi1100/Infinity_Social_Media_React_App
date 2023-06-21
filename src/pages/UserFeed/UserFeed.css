@@ -51,6 +51,9 @@
       .heading-filterbox{
         margin: 0%;
       }
+      .post-footer{
+        display: flex;
+       }
 }
 
 .btn{

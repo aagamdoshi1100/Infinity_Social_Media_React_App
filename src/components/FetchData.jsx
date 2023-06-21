@@ -3,6 +3,8 @@ import useAuthContext from "../contexts/AuthContext"
 import {AiOutlineLike} from "react-icons/ai"
 import {MdInsertPhoto} from "react-icons/md"
 import {BiDotsVertical} from "react-icons/bi"
+import {FiBookmark} from "react-icons/fi"
+import {GoComment} from "react-icons/go"
 import "../App.css"
 import useFollowContext from "../contexts/FollowContext"
 export default function FetchData(){
@@ -58,9 +60,17 @@ return(<div>
                         <input type="file" id="image" style={{display:"none",visibility:"none"}} onChange={(e)=>userFeedDispacher({type:"CREATE_POST_IMAGE",payload:e.target.files[0]})}/>
                         <button onClick={()=>editHandler(_id)} className="btn">Save</button>
                     </div> : ""}
-                    </div>         
-                            <p className="pi-c" style={{fontSize:"24px"}} onClick={()=>postLikeHandler(_id,username)}>
-                                <AiOutlineLike /> {likes?.likeCount} </p>
+                    </div>    
+                            <div className="post-footer b jc-sb p">
+                            <span>
+                            <AiOutlineLike size="1.8em" />{likes?.likeCount}</span>
+                            <span>
+                            <GoComment size="1.8em" />
+                            </span>
+                            <span>
+                            <FiBookmark size="1.8em"/>
+                            </span>
+                            </div>
                 </div>)
                         })
                     }
