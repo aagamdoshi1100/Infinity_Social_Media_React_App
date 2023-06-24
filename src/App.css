@@ -1,5 +1,5 @@
 .b{
-    border:1px solid rgb(184, 179, 179);
+    border:1px solid rgb(44, 43, 43);
   }
   .wd-100{
     width: 100%;
@@ -19,6 +19,12 @@
   .pl-2{
     padding-left: 10px;
   }
+  .m-1{
+    margin: 5px;
+  }
+  .mb-12{
+    margin-bottom: 60px;
+  }
   .mr-1{
     margin-right: 5px;
   }
@@ -35,7 +41,10 @@
     margin-top: 5px;
   }
   .mt-2{
-    margin-top: 10px;
+    margin-top: 40px;
+  }
+  .mt-12{
+    margin-top:60px;
   }
   .br{
     border-radius: 5px;
