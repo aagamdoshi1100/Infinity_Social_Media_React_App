@@ -8,6 +8,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { UserFeedContextProvider } from './contexts/UserFeedContext';
 import { AuthContextProvider } from './contexts/AuthContext';
 import { FollowContextProvider } from './contexts/FollowContext';
+import IconContextProvider from './contexts/IconContext';
 
 // Call make Server
 makeServer();
@@ -20,7 +21,9 @@ root.render(
       <UserFeedContextProvider>
         <AuthContextProvider>
           <FollowContextProvider>
+            <IconContextProvider>
             <App />
+            </IconContextProvider>
           </FollowContextProvider>
         </AuthContextProvider>
       </UserFeedContextProvider>
