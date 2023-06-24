@@ -1,14 +1,12 @@
-import {BiLogOut,BiBookBookmark} from "react-icons/bi"
-import {MdOutlineExplore} from "react-icons/md"
-import {AiOutlineHome} from "react-icons/ai"
 import "./Footer.css"
-import useUserFeedContext from "../../contexts/UserFeedContext"
+import { useIconContext } from "../../contexts/IconContext"
 export default function Footer(){
-    const {navigate} = useUserFeedContext()
+    const {goToBookMark,goToHome,goToExplore,BiLogOut,BiBookBookmark,MdOutlineExplore,AiOutlineHome} = useIconContext();
+
     return(<div className="footer">
-        <AiOutlineHome size= "1.8em" onClick={()=>navigate("/")} />
-        <MdOutlineExplore size= "1.8em" onClick={()=>navigate('/pages/explore/Explore')}/>
-        <BiBookBookmark size= "1.8em"/>
+        <AiOutlineHome size= "1.8em" onClick={goToHome} />
+        <MdOutlineExplore size= "1.8em" onClick={goToExplore}/>
+        <BiBookBookmark size= "1.8em" onClick={goToBookMark}/>
         <BiLogOut size= "1.8em" onClick={()=>localStorage.removeItem("encodedToken")}/>
     </div>)
 }
