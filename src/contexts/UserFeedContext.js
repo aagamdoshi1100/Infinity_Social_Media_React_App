@@ -8,6 +8,23 @@ export const UserFeedContextProvider=({children})=>{
     console.log(userFeed,"userfeed")
 const token = localStorage.getItem("encodedToken")
 const navigate = useNavigate()
+const postBookMarkHandler =async(postId)=>{
+    try{
+        const response = await fetch(`/api/users/bookmark/${postId}`,{
+            method:"POST",
+            headers:{authorization: token}
+        })
+        const responseData =await response.json();
+        console.log(response,"response")
+        console.log("🚀 ~ file: UserFeedContext.js:18 ~ postBookMarkHandler ~ responseData:", responseData)
+        if(response.status === 200){
+            userFeedDispacher({type:"BOOKMARK_POST",payload:{data:responseData.bookmarks}})
+        }
+    }catch(e){
+        console.log("🚀 ~ file: UserFeedContext.js:17 ~ postBookMarkHandler ~ e:", e)
+        
+    }
+}
 const getSelectedPost= async(postId)=>{
     try{
         const response = await fetch(`/api/posts/${postId}`)
@@ -106,7 +123,7 @@ const postLikeHandler =async(postId,user)=>{
                 body: JSON.stringify({postData:post})
             })
             const responseData = await response.json()
-            userFeedDispacher({type : "ALL_POSTS",payload : responseData.posts})
+            userFeedDispacher({type : "ALL_POSTS",payload : {data: responseData.posts,value:"postsData"}})
         }catch(e){
             console.log("🚀 ~ file: UserFeedContext.js:17 ~ createPost ~ e:", e)
         }
@@ -124,7 +141,7 @@ const postLikeHandler =async(postId,user)=>{
     useEffect(()=>{
         fetchAllPosts()
     },[])
-    return(<UserFeedContext.Provider value={{userFeed,userFeedDispacher,createPost,postLikeHandler,editHandler,deletePostHandler,getSelectedPost,navigate,getUserProfile}}>{children}</UserFeedContext.Provider>)
+    return(<UserFeedContext.Provider value={{userFeed,userFeedDispacher,createPost,postLikeHandler,editHandler,deletePostHandler,getSelectedPost,navigate,getUserProfile,postBookMarkHandler}}>{children}</UserFeedContext.Provider>)
 }
 
 const useUserFeedContext =()=> useContext(UserFeedContext);

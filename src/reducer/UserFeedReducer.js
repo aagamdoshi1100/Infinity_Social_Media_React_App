@@ -3,6 +3,7 @@ export const InitialValueFeedContext ={
     selectedPostData :[],
     userProfileData :[],
     userProfileView:[],
+    bookMarkView:[],
     fetchValue:"",
     showFiltersUserFeed: false,
     createPostContent :null,
@@ -18,7 +19,13 @@ export default function UserFeedReducer(state,action){
         case "ALL_POSTS":
             return {...state, postsData: action.payload.data, fetchValue:action.payload.value }
         case "SELECTED_POST":
-            return {...state, selectedPostData: [action.payload.data], fetchValue:action.payload.value}
+            return {...state, selectedPostData: [action.payload.data], fetchValue:action.payload.value}        
+        case "BOOKMARK_POST":
+            return {...state, bookMarkView: [...action.payload.data]}
+        case "BOOKMARK_PAGE":
+        case "HOME_PAGE":
+        case "EXPLORE_PAGE":
+            return {...state, fetchValue: action.payload}        
         case "USER_PROFILE":
             return {...state,userProfileData:[action.payload.userData],userProfileView:action.payload.data, fetchValue:action.payload.value}
         case "LIKE_STATUS":

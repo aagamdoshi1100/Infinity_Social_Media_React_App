@@ -8,11 +8,11 @@ import {GoComment} from "react-icons/go"
 import "../App.css"
 import useFollowContext from "../contexts/FollowContext"
 export default function FetchData(){
-    const {userFeed,userFeedDispacher,editHandler,postLikeHandler,deletePostHandler,getSelectedPost,getUserProfile} = useUserFeedContext()
+    const {userFeed,userFeedDispacher,editHandler,postLikeHandler,deletePostHandler,getSelectedPost,getUserProfile,postBookMarkHandler} = useUserFeedContext()
     const {user} = useAuthContext();
     const {infinityUsers} =useFollowContext()
     const fetchValue = userFeed?.fetchValue;
-return(<div>
+return(<div className="mb-12">
     {
     userFeed?.[fetchValue]?.map((details)=>{
     const {_id,username,content,image,createdAt,likes} = details;
@@ -63,12 +63,12 @@ return(<div>
                     </div>    
                             <div className="post-footer b jc-sb p">
                             <span>
-                            <AiOutlineLike size="1.8em" />{likes?.likeCount}</span>
+                            <AiOutlineLike size="1.8em" onClick={()=>postLikeHandler(_id)}/>{likes?.likeCount}</span>
                             <span>
                             <GoComment size="1.8em" />
                             </span>
                             <span>
-                            <FiBookmark size="1.8em"/>
+                            <FiBookmark size="1.8em" onClick={()=>postBookMarkHandler(_id)}/>
                             </span>
                             </div>
                 </div>)
