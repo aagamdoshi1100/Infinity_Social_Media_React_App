@@ -12,7 +12,7 @@ export default function SinglePostView(){
         navigate("/")
     }
     return( <div>
-        <BiArrowBack size="1.7em" onClick={goToHome}/>
+        <BiArrowBack size="1.8em" className="m-1" onClick={goToHome}/>
        <FetchData />
        <Footer />
     </div>)
