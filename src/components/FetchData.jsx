@@ -14,6 +14,7 @@ export default function FetchData(){
     const {infinityUsers} =useFollowContext();
     
     const {getUserProfile,editHandler,profile} = useUserProfileContext();
+    console.log("🚀 ~ file: FetchData.jsx:17 ~ FetchData ~ profile:", profile)
    
     const fetchValue = userFeed?.fetchValue;
 return(<div className="mb-12">
@@ -23,7 +24,7 @@ return(<div className="mb-12">
     return(<div key={_id} className="FeedBox wd b">
         <div className="post-header">
             <span className="circle" onClick={()=>getUserProfile(infinityUsers?.allUsers?.find((item)=>item.username === username)._id,username)}>
-            <img src={username === user.name ? profile.userProfileData[0].profileIcon :
+            <img src={username === user.name && profile.userProfileData >1 ? profile.userProfileData[0].profileIcon :
                 infinityUsers?.allUsers?.find((item)=>item.username === username).profileIcon} width="100%" height="100%"/></span>
             <div className="fullName">
                 <span>{`${infinityUsers?.allUsers?.find((item)=>item.username === username).firstName} ${infinityUsers?.allUsers?.find((item)=>item.username === username).lastName}`}</span>
