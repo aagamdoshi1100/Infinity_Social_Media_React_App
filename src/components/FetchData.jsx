@@ -12,7 +12,7 @@ export default function FetchData(){
     const {userFeed,userFeedDispacher,postLikeHandler,deletePostHandler,getSelectedPost,postBookMarkHandler} = useUserFeedContext()
     const {user} = useAuthContext();
     const {infinityUsers} =useFollowContext();
-    console.log("🚀 ~ file: FetchData.jsx:15 ~ FetchData ~ infinityUsers:", infinityUsers)
+    
     const {getUserProfile,editHandler,profile} = useUserProfileContext();
    
     const fetchValue = userFeed?.fetchValue;
