@@ -29,13 +29,13 @@ export default function UserFeed(){
         </div>
     </div>
 
-    <div className="df mt-1 ox ">
+    <div className="allUsers">
         {infinityUsers?.allUsers.filter(({username})=>username !== user.name).map((details)=>{
             const {_id,profileIcon,firstName,lastName,username} = details;
-            return(<div className="b ml-1 br wd-1 h show-user df fd-col jc-sa" key={_id}>
+            return(<div className="userBox" key={_id}>
                 <span className="circle"><img src={profileIcon} width="100%" height="100%"/></span>
                 <h4>{`${firstName} ${lastName}`}</h4>
-                <p>{`@${username}`}</p>
+                <p className="username">{`@${username}`}</p>
             {
                 infinityUsers?.followDetailsOfLoggedInUser.find((item)=>item.username ===username) ? <button className="btn br" onClick={()=>followUser(_id)}>UnFollow</button>  : <button className="btn br" onClick={()=>followUser(_id)}>Follow</button> 
             }
