@@ -1,20 +1,15 @@
 import useUserFeedContext from "../../contexts/UserFeedContext"
 import useAuthContext from "../../contexts/AuthContext"
-import {AiOutlineLike} from "react-icons/ai"
-import {MdInsertPhoto} from "react-icons/md"
-import {BiDotsVertical} from "react-icons/bi"
-import {FiBookmark} from "react-icons/fi"
-import {GoComment} from "react-icons/go"
 import "../../App.css"
 import useFollowContext from "../../contexts/FollowContext"
 import { useUserProfileContext } from "../../contexts/UserProfileContext"
+import { useIconContext } from "../../contexts/IconContext"
 export default function FetchData(){
     const {userFeed,userFeedDispacher,postLikeHandler,deletePostHandler,getSelectedPost,postBookMarkHandler} = useUserFeedContext()
     const {user} = useAuthContext();
     const {infinityUsers} =useFollowContext();
-    
+    const {GoComment,FiBookmark,BiDotsVertical,MdInsertPhoto,AiOutlineLike} = useIconContext();
     const {getUserProfile,editHandler,profile} = useUserProfileContext();
-    console.log("🚀 ~ file: FetchData.jsx:17 ~ FetchData ~ profile:", profile)
    
     const fetchValue = userFeed?.fetchValue;
 return(<div className="mb-12">
