@@ -3,14 +3,15 @@ import Footer from "../../components/Footer/Footer";
 import useAuthContext from "../../contexts/AuthContext";
 import useFollowContext from "../../contexts/FollowContext";
 import useUserFeedContext from "../../contexts/UserFeedContext";
-import {BiArrowBack} from "react-icons/bi"
 import "./UserProfile.css"
 import { useUserProfileContext } from "../../contexts/UserProfileContext";
+import { useIconContext } from "../../contexts/IconContext";
 
 export default function UserProfile(){
     const {userFeed,userFeedDispacher,navigate} = useUserFeedContext();
     const {infinityUsers,followUser} = useFollowContext();
     const {profile,editUserProfile,profileDispacher}= useUserProfileContext();
+    const {BiArrowBack,BiLink,BiGlobe} = useIconContext();
     console.log("🚀 ~ file: UserProfile.jsx:14 ~ UserProfile ~ profile:", profile)
     const {user} = useAuthContext()
     const goToHome =()=>{
@@ -18,27 +19,43 @@ export default function UserProfile(){
         navigate("/")
     }
     return(<div>
-             <h3><BiArrowBack size="1.7em" onClick={goToHome}/>User Profile Page</h3>
+             <h3 class="profile-arrow"><span><BiArrowBack size="1.7em" onClick={goToHome}/></span>User Profile Page</h3>
 {   
     profile?.userProfileData?.map((details)=>{
         const {following,followers,username,profileIcon,lastName,firstName,_id,bio,portfolio} = details;
-        return(<div key={_id}>
-            <span className="profile-circle" >
-            <img src={`${profileIcon}`} width="100%" height="100%"/></span>
-            <div className="fullName">
-                <span>{`${firstName} ${lastName}`}</span>
-                <span style={{color:"grey"}}>@{username}</span>
-                <span>{bio === "" ? `Hey there, ${firstName} ${lastName}`: bio}</span>
-                <span>{portfolio === "" ? `https://github.com/${firstName}${lastName}`: portfolio}</span>
-                <span>Following: {following.length}</span>
-                <span>Followers: {followers.length}</span>
+        return(<div key={_id} className="container">
+        <div className="profile-header">
+            <div className="profile-circle" >
+                    <img src={`${profileIcon}`}  />
+            </div>
+            <div className="following">
+                <p>{following.length}</p>
+                <p>Following </p>
+            </div>
+            <div className="followers">
+                <p>{followers.length}</p>
+                <p>Followers </p>
+            </div>
+        </div>
+        <div className="profile-header-icon-username">
+            <span>{`${firstName} ${lastName}`}</span>
+        </div>
+            <div className="bio-portfolio">
+                <p><span><BiGlobe /></span>{bio === "" ? `Hey there, ${firstName} ${lastName}`: bio}</p>
+                <p><span><BiLink /></span>{portfolio === "" ? `https://github.com/${firstName}${lastName}`: 
+                <a className ="url-link" href={portfolio}>{portfolio}</a> }</p >
+            </div>
+            <div>
                 {user.name === username ? 
-                    <button onClick={()=>profileDispacher({type:"EDIT_PROFILE",payload: profile.isEditProfile})}>Edit</button> : null 
+                    <div className="Btn-div">
+                    <button className="Btn" onClick={()=>profileDispacher({type:"EDIT_PROFILE",payload: profile.isEditProfile})}>Edit</button>
+                    </div> : null 
                 }
-                {profile.isEditProfile ? 
-                    <div className="edit-profile b">
-                        <input type="text" placeholder="Enter your bio" onChange={(e)=>profileDispacher({type:"BIO_VALUE",payload:e.target.value})} />
-                        <input type="text" placeholder="Enter your portfolio URL" onChange={(e)=>profileDispacher({type:"PORTFOLIO_VALUE",payload:e.target.value})}/>
+        {profile.isEditProfile ? 
+            <div className="edit-profile-div b">
+                <input className="edit-profile-inputs" type="text" placeholder="Enter your bio" onChange={(e)=>profileDispacher({type:"BIO_VALUE",payload:e.target.value})} />
+                <input className="edit-profile-inputs" type="text" placeholder="Enter your portfolio URL" onChange={(e)=>profileDispacher({type:"PORTFOLIO_VALUE",payload:e.target.value})}/>
+                    <div className="avtars">
                         <img className="selectAvtar" src="https://shorturl.at/ctGQZ" onClick={(e)=>profileDispacher({type:"AVTAR_VALUE",payload:e.target.src})}/>
                         <img className="selectAvtar" src="https://shorturl.at/dkyER" onClick={(e)=>profileDispacher({type:"AVTAR_VALUE",payload:e.target.src})}/>
                         <img className="selectAvtar" src="https://shorturl.at/hpsuR" onClick={(e)=>profileDispacher({type:"AVTAR_VALUE",payload:e.target.src})}/>
@@ -46,15 +63,18 @@ export default function UserProfile(){
                         <img className="selectAvtar" src="https://shorturl.at/jpX57" onClick={(e)=>profileDispacher({type:"AVTAR_VALUE",payload:e.target.src})}/>
                         <img className="selectAvtar" src="https://shorturl.at/qENP1" onClick={(e)=>profileDispacher({type:"AVTAR_VALUE",payload:e.target.src})}/>
                         <img className="selectAvtar" src="https://shorturl.at/hjGK4" onClick={(e)=>profileDispacher({type:"AVTAR_VALUE",payload:e.target.src})}/>
-                        <button onClick={editUserProfile}>Save</button>
-                        <button onClick={()=>profileDispacher({type:"EDIT_PROFILE",payload: profile.isEditProfile})}>Cancel</button>
+                    </div>
+                        <button className="edit-profile-btn" onClick={editUserProfile}>Save</button>
+                        <button className="edit-profile-btn" onClick={()=>profileDispacher({type:"EDIT_PROFILE",payload: profile.isEditProfile})}>Cancel</button>
                     </div> :null
                 }
+                <div className="Btn-div">
                 {user.name === username ? null : 
                 infinityUsers?.followDetailsOfLoggedInUser.find((item)=>item.username ===username) ? 
-                    <button className="btn br" onClick={()=>followUser(_id)}>UnFollow</button>  : 
-                    <button className="btn br" onClick={()=>followUser(_id)}>Follow</button> 
+                    <button className="Btn" onClick={()=>followUser(_id)}>UnFollow</button>  : 
+                    <button className="Btn" onClick={()=>followUser(_id)}>Follow</button> 
                 }
+                </div>
             </div>
             <FetchData /> 
             <Footer />
