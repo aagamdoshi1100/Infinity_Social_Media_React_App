@@ -1,8 +1,7 @@
-import FetchData from "../../components/FetchData";
+import FetchData from "../../components/FetchData/FetchData";
 import {BiArrowBack} from "react-icons/bi"
 import useUserFeedContext from "../../contexts/UserFeedContext";
 import Footer from "../../components/Footer/Footer";
-import Heading from "../../components/Header/Heading";
 
 export default function SinglePostView(){
     

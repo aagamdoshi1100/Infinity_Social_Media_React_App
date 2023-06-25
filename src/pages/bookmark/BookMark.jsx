@@ -1,4 +1,4 @@
-import FetchData from "../../components/FetchData";
+import FetchData from "../../components/FetchData/FetchData";
 import Footer from "../../components/Footer/Footer";
 import { useIconContext } from "../../contexts/IconContext";
 import {BiArrowBack} from "react-icons/bi"

@@ -5,7 +5,7 @@ import "../../App.css"
 import {FaFilter} from "react-icons/fa"
 import {MdInsertPhoto} from "react-icons/md"
 import useFollowContext from "../../contexts/FollowContext"
-import FetchData from "../../components/FetchData"
+import FetchData from "../../components/FetchData/FetchData"
 import Footer from "../../components/Footer/Footer"
 import Heading from "../../components/Header/Heading"
 

@@ -1,13 +1,13 @@
-import useUserFeedContext from "../contexts/UserFeedContext"
-import useAuthContext from "../contexts/AuthContext"
+import useUserFeedContext from "../../contexts/UserFeedContext"
+import useAuthContext from "../../contexts/AuthContext"
 import {AiOutlineLike} from "react-icons/ai"
 import {MdInsertPhoto} from "react-icons/md"
 import {BiDotsVertical} from "react-icons/bi"
 import {FiBookmark} from "react-icons/fi"
 import {GoComment} from "react-icons/go"
-import "../App.css"
-import useFollowContext from "../contexts/FollowContext"
-import { useUserProfileContext } from "../contexts/UserProfileContext"
+import "../../App.css"
+import useFollowContext from "../../contexts/FollowContext"
+import { useUserProfileContext } from "../../contexts/UserProfileContext"
 export default function FetchData(){
     const {userFeed,userFeedDispacher,postLikeHandler,deletePostHandler,getSelectedPost,postBookMarkHandler} = useUserFeedContext()
     const {user} = useAuthContext();

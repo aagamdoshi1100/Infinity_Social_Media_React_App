@@ -1,4 +1,4 @@
-import FetchData from "../../components/FetchData";
+import FetchData from "../../components/FetchData/FetchData";
 import Footer from "../../components/Footer/Footer";
 import useAuthContext from "../../contexts/AuthContext";
 import useFollowContext from "../../contexts/FollowContext";
