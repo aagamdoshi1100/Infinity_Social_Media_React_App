@@ -1,6 +1,7 @@
 import useUserFeedContext from "../../contexts/UserFeedContext"
 import useAuthContext from "../../contexts/AuthContext"
 import "../../App.css"
+import "./FetchData.css"
 import useFollowContext from "../../contexts/FollowContext"
 import { useUserProfileContext } from "../../contexts/UserProfileContext"
 import { useIconContext } from "../../contexts/IconContext"
@@ -27,21 +28,20 @@ return(<div className="mb-12">
             </div>
             <span style={{color:"rgb(184, 179, 179)"}}>{createdAt}</span>
             <div className="post-edit-btn">
-                <BiDotsVertical size="1.8em" onClick={()=>userFeedDispacher({type:"THREE_DOT_CONTROLLER",payload:{data:userFeed.showToggleUserFeed, indexOfPost :_id}})} className="heading-menu-item b"/>
+                <BiDotsVertical size="1.8em"  onClick={()=>userFeedDispacher({type:"THREE_DOT_CONTROLLER",payload:{data:userFeed.showToggleUserFeed, indexOfPost :_id}})} className="three-dots b"/>
                        
                 {userFeed.showToggleUserFeed ? details.username === user.name && userFeed.indexOfPost===_id ?
-                    <div>
-                        <li onClick={()=>userFeedDispacher({type:"EDIT_CONTROLLER",payload:userFeed.showEditUserFeed})} className="heading-menu-item b">Edit</li>
-                        <li className="heading-menu-item b" onClick={()=>deletePostHandler(_id)}>Delete</li>
+                    <div className="heading-menu-item">
+                        <li onClick={()=>userFeedDispacher({type:"EDIT_CONTROLLER",payload:userFeed.showEditUserFeed})} >Edit</li>
+                        <li onClick={()=>deletePostHandler(_id)}>Delete</li>
                     </div>  : 
                         <div>
                         </div>
                             : 
                             null}
                             {userFeed.showToggleUserFeed ? details.username !== user.name && userFeed.indexOfPost===_id ?
-                        <div>
-                            <li className="heading-menu-item b" onClick={()=>userFeedDispacher({type:"UNFOLLOW_CONTROLLER",payload:userFeed.showEditUserFeed})}>Unfollow</li>
-                            <li className="heading-menu-item b">Report</li>
+                        <div className="heading-menu-item">
+                            <li onClick={()=>userFeedDispacher({type:"UNFOLLOW_CONTROLLER",payload:userFeed.showEditUserFeed})}>Unfollow</li>
                         </div>  : 
                         <div>
                         </div>

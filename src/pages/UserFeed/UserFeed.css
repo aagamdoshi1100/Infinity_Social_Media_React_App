@@ -70,9 +70,6 @@
     .show-user{
         flex-shrink: 0;
     }
-    .heading-menu-item{
-        list-style-type: none;
-    }
     .btn-imagePicker-filterBox {
         display: flex;
         padding: 5px;
