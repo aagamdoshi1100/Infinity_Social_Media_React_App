@@ -11,7 +11,11 @@ export const InitialValueFeedContext ={
     filterBy: "",
     showToggleUserFeed:false,
     showEditUserFeed:false,
-    indexOfPost:""
+    indexOfPost:"",
+    isEditProfile:false,
+    bioValue:"",
+    portfolioURL:"",
+    avatarValue:""
 }
 
 export default function UserFeedReducer(state,action){
@@ -48,6 +52,16 @@ export default function UserFeedReducer(state,action){
             return {...state, createPostImage: action.payload}        
         case "CREATE_POST_CONTENT":
             return {...state, createPostContent: action.payload}
+        case "EDIT_PROFILE":
+            return {...state, isEditProfile: !action.payload}
+        case "BIO_VALUE":
+            return {...state, bioValue: action.payload}
+        case "PORTFOLIO_VALUE":
+            return {...state, portfolioURL:action.payload}     
+        case "AVTAR_VALUE":
+            return {...state, avatarValue : action.payload}
+        case "UPDATE_USER_PROFILE":
+            return {...state, userProfileData:[action.payload.userData], isEditProfile:!action.payload.status}
     }
        
 }
