@@ -22,7 +22,7 @@ export default function UserFeed(){
         <textarea className="myText" onChange={(e)=>userFeedDispacher({type:"CREATE_POST_CONTENT",payload:e.target.value})} placeholder="Write something..." ></textarea>
         <div className="btn-imagePicker-filterBox">
             <label htmlFor="image">
-                    <MdInsertPhoto size="1.4em" />
+                    <MdInsertPhoto size="1.9em" />
             </label>
             <input type="file" id="image" style={{display:"none",visibility:"none"}} onChange={(e)=>userFeedDispacher({type:"CREATE_POST_IMAGE",payload:e.target.files[0]})}/>
             <button className="btn br" onClick={createPost}>Create Post</button>

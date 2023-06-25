@@ -1,9 +1,21 @@
 @media only screen and (max-width: 768px) {
+    /* Create post */
+    .create-post{
+        border: 1px solid rgb(44, 43, 43);
+        margin: 10px;
+    }
+    .myText{        
+        background-color: black;
+        color: white;
+        outline: 3px solid black;
+        box-sizing: border-box;
+        width: 100%;
+        font-size: 16px;
+    }
     /* Users */
     .allUsers {
         display: flex;
         overflow-x: auto;
-  
       }
       .userBox {
         border: 1px solid rgb(44, 43, 43);
@@ -18,7 +30,7 @@
        .userBox > * {
         margin: 5px;
        }
-       .userBox > button {
+       button {
         color: white;
         background-color: blueviolet;
         padding: 5px 14px;
@@ -48,13 +60,6 @@
     .fullName{
         display: flex;
         flex-direction: column;
-    }
-    .myText{        
-        background-color: black;
-        color: white;
-        outline: 3px solid black;
-        box-sizing: border-box;
-        width: 100%;
     }
     .FeedBox{
         box-sizing :border-box;
@@ -106,10 +111,7 @@
     }
 }
 
-.btn{
-    background-color: rgba(70, 133, 250, 0.959);
-    color: white;
-}
+
 body{
     background-color: black;
     color: white;
