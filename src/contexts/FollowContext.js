@@ -4,7 +4,7 @@ const FollowContext = createContext();
 
 export const FollowContextProvider =({children})=>{
     const [infinityUsers,infinityUsersDispacher] = useReducer(UserFollowReducer, InitialValueFollowContext)
-    console.log(infinityUsers,"aaaa")
+     
     const token = localStorage.getItem("encodedToken")
     const followUser =async(followUserId)=>{
         try{

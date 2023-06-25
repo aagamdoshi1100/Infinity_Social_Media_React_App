@@ -5,10 +5,13 @@ import useFollowContext from "../../contexts/FollowContext";
 import useUserFeedContext from "../../contexts/UserFeedContext";
 import {BiArrowBack} from "react-icons/bi"
 import "./UserProfile.css"
+import { useUserProfileContext } from "../../contexts/UserProfileContext";
 
 export default function UserProfile(){
-    const {userFeed,userFeedDispacher,navigate,editUserProfile} = useUserFeedContext()
-    const {infinityUsers,followUser} = useFollowContext()
+    const {userFeed,userFeedDispacher,navigate} = useUserFeedContext();
+    const {infinityUsers,followUser} = useFollowContext();
+    const {profile,editUserProfile,profileDispacher}= useUserProfileContext();
+    console.log("🚀 ~ file: UserProfile.jsx:14 ~ UserProfile ~ profile:", profile)
     const {user} = useAuthContext()
     const goToHome =()=>{
         userFeedDispacher({type:"ALL_POSTS",payload :{data:userFeed.postsData, value: "postsData" }})
@@ -17,7 +20,7 @@ export default function UserProfile(){
     return(<div>
              <h3><BiArrowBack size="1.7em" onClick={goToHome}/>User Profile Page</h3>
 {   
-    userFeed?.userProfileData?.map((details)=>{
+    profile?.userProfileData?.map((details)=>{
         const {following,followers,username,profileIcon,lastName,firstName,_id,bio,portfolio} = details;
         return(<div key={_id}>
             <span className="profile-circle" >
@@ -30,21 +33,21 @@ export default function UserProfile(){
                 <span>Following: {following.length}</span>
                 <span>Followers: {followers.length}</span>
                 {user.name === username ? 
-                    <button onClick={()=>userFeedDispacher({type:"EDIT_PROFILE",payload: userFeed.isEditProfile})}>Edit</button> : null 
+                    <button onClick={()=>profileDispacher({type:"EDIT_PROFILE",payload: profile.isEditProfile})}>Edit</button> : null 
                 }
-                {userFeed.isEditProfile ? 
+                {profile.isEditProfile ? 
                     <div className="edit-profile b">
-                        <input type="text" placeholder="Enter your bio" onChange={(e)=>userFeedDispacher({type:"BIO_VALUE",payload:e.target.value})} />
-                        <input type="text" placeholder="Enter your portfolio URL" onChange={(e)=>userFeedDispacher({type:"PORTFOLIO_VALUE",payload:e.target.value})}/>
-                        <img className="selectAvtar" src="https://shorturl.at/ctGQZ" onClick={(e)=>userFeedDispacher({type:"AVTAR_VALUE",payload:e.target.src})}/>
-                        <img className="selectAvtar" src="https://shorturl.at/dkyER" onClick={(e)=>userFeedDispacher({type:"AVTAR_VALUE",payload:e.target.src})}/>
-                        <img className="selectAvtar" src="https://shorturl.at/hpsuR" onClick={(e)=>userFeedDispacher({type:"AVTAR_VALUE",payload:e.target.src})}/>
-                        <img className="selectAvtar" src="https://shorturl.at/bpvC9" onClick={(e)=>userFeedDispacher({type:"AVTAR_VALUE",payload:e.target.src})}/>
-                        <img className="selectAvtar" src="https://shorturl.at/jpX57" onClick={(e)=>userFeedDispacher({type:"AVTAR_VALUE",payload:e.target.src})}/>
-                        <img className="selectAvtar" src="https://shorturl.at/qENP1" onClick={(e)=>userFeedDispacher({type:"AVTAR_VALUE",payload:e.target.src})}/>
-                        <img className="selectAvtar" src="https://shorturl.at/hjGK4" onClick={(e)=>userFeedDispacher({type:"AVTAR_VALUE",payload:e.target.src})}/>
+                        <input type="text" placeholder="Enter your bio" onChange={(e)=>profileDispacher({type:"BIO_VALUE",payload:e.target.value})} />
+                        <input type="text" placeholder="Enter your portfolio URL" onChange={(e)=>profileDispacher({type:"PORTFOLIO_VALUE",payload:e.target.value})}/>
+                        <img className="selectAvtar" src="https://shorturl.at/ctGQZ" onClick={(e)=>profileDispacher({type:"AVTAR_VALUE",payload:e.target.src})}/>
+                        <img className="selectAvtar" src="https://shorturl.at/dkyER" onClick={(e)=>profileDispacher({type:"AVTAR_VALUE",payload:e.target.src})}/>
+                        <img className="selectAvtar" src="https://shorturl.at/hpsuR" onClick={(e)=>profileDispacher({type:"AVTAR_VALUE",payload:e.target.src})}/>
+                        <img className="selectAvtar" src="https://shorturl.at/bpvC9" onClick={(e)=>profileDispacher({type:"AVTAR_VALUE",payload:e.target.src})}/>
+                        <img className="selectAvtar" src="https://shorturl.at/jpX57" onClick={(e)=>profileDispacher({type:"AVTAR_VALUE",payload:e.target.src})}/>
+                        <img className="selectAvtar" src="https://shorturl.at/qENP1" onClick={(e)=>profileDispacher({type:"AVTAR_VALUE",payload:e.target.src})}/>
+                        <img className="selectAvtar" src="https://shorturl.at/hjGK4" onClick={(e)=>profileDispacher({type:"AVTAR_VALUE",payload:e.target.src})}/>
                         <button onClick={editUserProfile}>Save</button>
-                        <button onClick={()=>userFeedDispacher({type:"EDIT_PROFILE",payload: userFeed.isEditProfile})}>Cancel</button>
+                        <button onClick={()=>profileDispacher({type:"EDIT_PROFILE",payload: profile.isEditProfile})}>Cancel</button>
                     </div> :null
                 }
                 {user.name === username ? null : 

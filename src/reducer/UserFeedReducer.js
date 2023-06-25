@@ -1,7 +1,6 @@
 export const InitialValueFeedContext ={
     postsData:[],
     selectedPostData :[],
-    userProfileData :[],
     userProfileView:[],
     bookMarkView:[],
     fetchValue:"",
@@ -12,10 +11,7 @@ export const InitialValueFeedContext ={
     showToggleUserFeed:false,
     showEditUserFeed:false,
     indexOfPost:"",
-    isEditProfile:false,
-    bioValue:"",
-    portfolioURL:"",
-    avatarValue:""
+
 }
 
 export default function UserFeedReducer(state,action){
@@ -30,8 +26,6 @@ export default function UserFeedReducer(state,action){
         case "HOME_PAGE":
         case "EXPLORE_PAGE":
             return {...state, fetchValue: action.payload}        
-        case "USER_PROFILE":
-            return {...state,userProfileData:[action.payload.userData],userProfileView:action.payload.data, fetchValue:action.payload.value}
         case "LIKE_STATUS":
             return {...state, postsData: action.payload.data }
         case "SHOW_FILTERS":
@@ -52,16 +46,8 @@ export default function UserFeedReducer(state,action){
             return {...state, createPostImage: action.payload}        
         case "CREATE_POST_CONTENT":
             return {...state, createPostContent: action.payload}
-        case "EDIT_PROFILE":
-            return {...state, isEditProfile: !action.payload}
-        case "BIO_VALUE":
-            return {...state, bioValue: action.payload}
-        case "PORTFOLIO_VALUE":
-            return {...state, portfolioURL:action.payload}     
-        case "AVTAR_VALUE":
-            return {...state, avatarValue : action.payload}
-        case "UPDATE_USER_PROFILE":
-            return {...state, userProfileData:[action.payload.userData], isEditProfile:!action.payload.status}
+        case "USER_PROFILE":
+            return {...state, userProfileView:action.payload.data, fetchValue:action.payload.value}
     }
        
 }

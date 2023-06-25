@@ -9,6 +9,7 @@ import { UserFeedContextProvider } from './contexts/UserFeedContext';
 import { AuthContextProvider } from './contexts/AuthContext';
 import { FollowContextProvider } from './contexts/FollowContext';
 import IconContextProvider from './contexts/IconContext';
+import UserProfileContextProvider from './contexts/UserProfileContext';
 
 // Call make Server
 makeServer();
@@ -22,7 +23,9 @@ root.render(
         <AuthContextProvider>
           <FollowContextProvider>
             <IconContextProvider>
-            <App />
+              <UserProfileContextProvider>
+                <App />
+              </UserProfileContextProvider>
             </IconContextProvider>
           </FollowContextProvider>
         </AuthContextProvider>
