@@ -44,10 +44,25 @@
       .filterBox {
         display: flex;
         justify-content: space-between;
-        place-items: center;
         padding: 8px;
-        font-size: 20px;
+        font-size: 18px;
+    }
+    .filterBox-icon{
+          position: relative;
+          display: inline-block;
       }
+      .filterBox-types{
+        position: absolute;
+        left: 100%;
+        transform: translateX(-120px);
+        background-color: black;
+        border: 1px solid violet;
+        padding: 10px;
+      }
+    .filterBox-types >*{
+        font-size: 16px;
+       
+    }
       .heading-filterbox{
         margin: 0%;
       }

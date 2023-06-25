@@ -45,17 +45,16 @@ export default function UserFeed(){
 
          <div className="filterBox">
             <p className="heading-filterbox">{userFeed.filterBy}</p>
-            <FaFilter  onClick={()=>userFeedDispacher({type: "SHOW_FILTERS",payload: userFeed.showFiltersUserFeed})}/>
-        </div> 
+            <FaFilter className="filterBox-icon" onClick={()=>userFeedDispacher({type: "SHOW_FILTERS",payload: userFeed.showFiltersUserFeed})}/>
+          
         {userFeed.showFiltersUserFeed ? 
-            <div>
-                <ul>
-                    <li onClick={()=>userFeedDispacher({type : "SORT_BY_TRENDING", payload: [...userFeed.postsData] })}>Trending</li>
-                    <li onClick={()=>userFeedDispacher({type : "SORT_BY_LATEST", payload: [...userFeed.postsData] })}>Latest</li>
-                    <li onClick={()=>userFeedDispacher({type : "SORT_BY_OLDEST", payload: [...userFeed.postsData]})}>Oldest</li>
-                </ul>
+            <div className="filterBox-types">
+                    <span onClick={()=>userFeedDispacher({type : "SORT_BY_TRENDING", payload: [...userFeed.postsData] })}>Trending</span>
+                    <p onClick={()=>userFeedDispacher({type : "SORT_BY_LATEST", payload: [...userFeed.postsData] })}>Latest</p>
+                    <span onClick={()=>userFeedDispacher({type : "SORT_BY_OLDEST", payload: [...userFeed.postsData]})}>Oldest</span>
+                
             </div> : null
-        }
+        }</div>
         <FetchData />
         </div>
         <Footer />
