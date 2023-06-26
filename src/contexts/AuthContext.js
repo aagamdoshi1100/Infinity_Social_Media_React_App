@@ -18,7 +18,11 @@ export const AuthContextProvider =({children})=>{
             
         }
     }
-    return(<AuthContext.Provider value={{loginHandler,user}}>{children}</AuthContext.Provider>)
+    const logOutHandler =()=>{
+         localStorage.removeItem("encodedToken")
+         setUser({...user,name:""})
+    }
+    return(<AuthContext.Provider value={{loginHandler,user,logOutHandler}}>{children}</AuthContext.Provider>)
 }
 
 const useAuthContext =()=> useContext(AuthContext);
