@@ -11,13 +11,14 @@ export const InitialValueFeedContext ={
     showToggleUserFeed:false,
     showEditUserFeed:false,
     indexOfPost:"",
-
+    previewUploadedImage:false
 }
 
 export default function UserFeedReducer(state,action){
     switch(action.type){
         case "ALL_POSTS":
-            return {...state, postsData: action.payload.data, fetchValue:action.payload.value }
+            return {...state, postsData: action.payload.data, fetchValue:action.payload.value,previewUploadedImage:false,    createPostContent :null,
+                createPostImage:null, }
         case "SELECTED_POST":
             return {...state, selectedPostData: [action.payload.data], fetchValue:action.payload.value}        
         case "BOOKMARK_POST":
@@ -46,6 +47,8 @@ export default function UserFeedReducer(state,action){
             return {...state, createPostImage: action.payload}        
         case "CREATE_POST_CONTENT":
             return {...state, createPostContent: action.payload}
+        case "PREVIEW":
+            return {...state, previewUploadedImage: !action.payload}
         case "USER_PROFILE":
             return {...state, userProfileView:action.payload.data, fetchValue:action.payload.value}
     }
