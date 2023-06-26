@@ -1,7 +1,6 @@
 @media only screen and (max-width: 768px) {
     /* Create post */
     .create-post{
-        border: 1px solid rgb(44, 43, 43);
         margin: 10px;
     }
     .myText{        
@@ -12,6 +11,37 @@
         width: 100%;
         font-size: 16px;
     }
+    .image-box{
+        height: 30px;
+        width: 40px;
+    }
+    .preview-post{
+        width : 70%;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        background-color: black;
+        padding: 5px;
+    }
+    .create-post-controls{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .btn-post{
+        padding: 10px;
+    }
+    .btn-imgpicker {
+        padding-top: 10px;
+      }
+    .preview-post button {
+        color: white;
+        background-color: blueviolet;
+        padding: 5px 14px;
+        border-radius: 5px;
+        margin: 5px;
+       }
     /* Users */
     .allUsers {
         display: flex;
@@ -70,11 +100,6 @@
     .show-user{
         flex-shrink: 0;
     }
-    .btn-imagePicker-filterBox {
-        display: flex;
-        padding: 5px;
-        justify-content: flex-end;
-      } 
 
     /* Filter */
     .filterBox {
