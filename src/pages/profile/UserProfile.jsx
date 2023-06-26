@@ -70,7 +70,7 @@ export default function UserProfile(){
                 }
                 <div className="Btn-div">
                 {user.name === username ? null : 
-                infinityUsers?.followDetailsOfLoggedInUser.find((item)=>item.username ===username) ? 
+                infinityUsers?.followedByLoggedInUser.find((item)=>item.username ===username) ? 
                     <button className="Btn" onClick={()=>followUser(_id)}>UnFollow</button>  : 
                     <button className="Btn" onClick={()=>followUser(_id)}>Follow</button> 
                 }

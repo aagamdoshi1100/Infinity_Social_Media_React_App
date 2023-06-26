@@ -15,6 +15,7 @@ export default function UserFeed(){
     console.log("🚀 ~ file: UserFeed.jsx:15 ~ UserFeed ~ userFeed:", userFeed)
     const {user} = useAuthContext();
     const {infinityUsers,followUser} = useFollowContext()
+     console.log(" infinityUsers:", infinityUsers)
      
     return(<div className="container">
     <Heading />
@@ -52,7 +53,7 @@ export default function UserFeed(){
                 <h4>{`${firstName} ${lastName}`}</h4>
                 <p className="username">{`@${username}`}</p>
             {
-                infinityUsers?.followDetailsOfLoggedInUser.find((item)=>item.username ===username) ? <button className="btn br" onClick={()=>followUser(_id)}>UnFollow</button>  : <button className="btn br" onClick={()=>followUser(_id)}>Follow</button> 
+                infinityUsers?.followedByLoggedInUser.find((item)=>item.username ===username) ? <button className="btn br" onClick={()=>followUser(_id)}>UnFollow</button>  : <button className="btn br" onClick={()=>followUser(_id)}>Follow</button> 
             }
             </div>)
         })}
