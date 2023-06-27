@@ -1,6 +1,7 @@
 export const InitialValueFollowContext={
     allUsers :[],
     followedByLoggedInUser:[],
+    followUsers:[]
 }
 
 export const UserFollowReducer =(state,action)=>{
@@ -8,6 +9,6 @@ export const UserFollowReducer =(state,action)=>{
         case "ALL_USERS":
             return {...state, allUsers:action.payload}         
         case "FOLLOW_USER":
-            return {...state, followedByLoggedInUser : action.payload }
+            return {...state, followedByLoggedInUser : action.payload.userData , followUsers :[...action.payload.usernames] }
     }
 }

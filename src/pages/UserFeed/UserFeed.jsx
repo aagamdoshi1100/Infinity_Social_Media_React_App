@@ -2,20 +2,21 @@ import useUserFeedContext from "../../contexts/UserFeedContext"
 import useAuthContext from "../../contexts/AuthContext"
 import "./UserFeed.css"
 import "../../App.css"
-import {FaFilter} from "react-icons/fa"
-import {MdInsertPhoto} from "react-icons/md"
 import useFollowContext from "../../contexts/FollowContext"
 import FetchData from "../../components/FetchData/FetchData"
 import Footer from "../../components/Footer/Footer"
 import Heading from "../../components/Header/Heading"
+import Filters from "../../components/Filters/Filters"
+import { useIconContext } from "../../contexts/IconContext"
 
  
 export default function UserFeed(){
     const {userFeed,userFeedDispacher,createPost} = useUserFeedContext()
-    console.log("🚀 ~ file: UserFeed.jsx:15 ~ UserFeed ~ userFeed:", userFeed)
+    console.log("UserFeed.jsx:15   UserFeed  userFeed:", userFeed)
     const {user} = useAuthContext();
-    const {infinityUsers,followUser} = useFollowContext()
-     console.log(" infinityUsers:", infinityUsers)
+    const {infinityUsers,followUser} = useFollowContext();
+    const {MdInsertPhoto,SlUserFollow} = useIconContext();
+   // console.log(" infinityUsers:", infinityUsers)
      
     return(<div className="container">
     <Heading />
@@ -58,20 +59,13 @@ export default function UserFeed(){
             </div>)
         })}
     </div>
-
-         <div className="filterBox">
-            <p className="heading-filterbox">{userFeed.filterBy}</p>
-            <FaFilter className="filterBox-icon" onClick={()=>userFeedDispacher({type: "SHOW_FILTERS",payload: userFeed.showFiltersUserFeed})}/>
-          
-        {userFeed.showFiltersUserFeed ? 
-            <div className="filterBox-types">
-                    <span onClick={()=>userFeedDispacher({type : "SORT_BY_TRENDING", payload: [...userFeed.postsData] })}>Trending</span>
-                    <p onClick={()=>userFeedDispacher({type : "SORT_BY_LATEST", payload: [...userFeed.postsData] })}>Latest</p>
-                    <span onClick={()=>userFeedDispacher({type : "SORT_BY_OLDEST", payload: [...userFeed.postsData]})}>Oldest</span>
-                
-            </div> : null
-        }</div>
-        <FetchData />
+        
+        {infinityUsers.followUsers.length > 0 ? 
+        <div>
+        <Filters />
+        <FetchData /> 
+        </div>
+        : <p style={{fontSize:"20px"}}><span><SlUserFollow /></span>Please follow users to see posts</p>}    
         </div>
         <Footer />
     </div>)

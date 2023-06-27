@@ -120,7 +120,7 @@ const postLikeHandler =async(postId,user)=>{
         try{
             const response = await fetch("/api/posts");
             const responseData = await response.json()
-            userFeedDispacher({type : "ALL_POSTS",payload :{data: responseData.posts,value:"postsData"}})
+            userFeedDispacher({type : "ALL_POSTS",payload :{data: responseData.posts,value:"followedUserPosts"}})
         }catch(e){
             console.log("🚀 ~ file: UserFeedContext.js:12 ~ fetchAllPosts ~ e:", e)     
         }

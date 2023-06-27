@@ -3,6 +3,8 @@ export const InitialValueFeedContext ={
     selectedPostData :[],
     userProfileView:[],
     bookMarkView:[],
+
+    followedUserPosts : [],
     fetchValue:"",
     showFiltersUserFeed: false,
     createPostContent :null,
@@ -51,6 +53,9 @@ export default function UserFeedReducer(state,action){
             return {...state, previewUploadedImage: !action.payload}
         case "USER_PROFILE":
             return {...state, userProfileView:action.payload.data, fetchValue:action.payload.value}
+        case "FOLLOW_USER":
+            const userFollowedDetails = state.postsData.filter((item)=>  [...action.payload.allFollowingUsers].includes(item.username))
+            return {...state ,followedUserPosts : userFollowedDetails,fetchValue:action.payload.value}
     }
        
 }
