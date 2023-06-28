@@ -9,6 +9,7 @@ export default function FetchData(){
     const {userFeed,userFeedDispacher,postLikeHandler,deletePostHandler,getSelectedPost,postBookMarkHandler} = useUserFeedContext()
     const {user} = useAuthContext();
     const {infinityUsers,followUser} =useFollowContext();
+    console.log("infinityUsers:", infinityUsers)
     const {GoComment,FiBookmark,BiDotsVertical,MdInsertPhoto,AiOutlineLike} = useIconContext();
     const {getUserProfile,editHandler,profile} = useUserProfileContext();
    
@@ -41,7 +42,14 @@ return(<div className="mb-12">
                             null}
                             {userFeed.showToggleUserFeed ? details.username !== user.name && userFeed.indexOfPost===_id ?
                         <div className="heading-menu-item">
-                            <li onClick={()=>followUser(infinityUsers?.allUsers?.find((item)=>item.username === username)._id)}>Unfollow</li>
+                            {infinityUsers?.followUsers?.includes(details.username) ? 
+                            
+                            <li onClick={()=>followUser(infinityUsers?.allUsers?.find((item)=>item.username === username)._id)}>Unfollow</li> :
+
+
+                            <li onClick={()=>followUser(infinityUsers?.allUsers?.find((item)=>item.username === username)._id)}>Follow</li>
+                            
+                            }
                         </div>  : 
                         <div>
                         </div>
