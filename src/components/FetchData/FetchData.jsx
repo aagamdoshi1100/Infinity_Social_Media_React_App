@@ -8,7 +8,7 @@ import { useIconContext } from "../../contexts/IconContext"
 export default function FetchData(){
     const {userFeed,userFeedDispacher,postLikeHandler,deletePostHandler,getSelectedPost,postBookMarkHandler} = useUserFeedContext()
     const {user} = useAuthContext();
-    const {infinityUsers} =useFollowContext();
+    const {infinityUsers,followUser} =useFollowContext();
     const {GoComment,FiBookmark,BiDotsVertical,MdInsertPhoto,AiOutlineLike} = useIconContext();
     const {getUserProfile,editHandler,profile} = useUserProfileContext();
    
@@ -41,7 +41,7 @@ return(<div className="mb-12">
                             null}
                             {userFeed.showToggleUserFeed ? details.username !== user.name && userFeed.indexOfPost===_id ?
                         <div className="heading-menu-item">
-                            <li onClick={()=>userFeedDispacher({type:"UNFOLLOW_CONTROLLER",payload:userFeed.showEditUserFeed})}>Unfollow</li>
+                            <li onClick={()=>followUser(infinityUsers?.allUsers?.find((item)=>item.username === username)._id)}>Unfollow</li>
                         </div>  : 
                         <div>
                         </div>
