@@ -20,15 +20,15 @@ root.render(
   <React.StrictMode>
     <BrowserRouter>
       <UserFeedContextProvider>
-        <AuthContextProvider>
-          <FollowContextProvider>
+        <FollowContextProvider>
+          <AuthContextProvider>
             <IconContextProvider>
               <UserProfileContextProvider>
                 <App />
               </UserProfileContextProvider>
             </IconContextProvider>
-          </FollowContextProvider>
-        </AuthContextProvider>
+          </AuthContextProvider>
+        </FollowContextProvider>
       </UserFeedContextProvider>
     </BrowserRouter>
   </React.StrictMode>

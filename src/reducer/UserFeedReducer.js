@@ -56,6 +56,8 @@ export default function UserFeedReducer(state,action){
         case "FOLLOW_USER":
             const userFollowedDetails = state.postsData.filter((item)=>  [...action.payload.allFollowingUsers].includes(item.username))
             return {...state ,followedUserPosts : userFollowedDetails,fetchValue:action.payload.value}
+        case "AUTO_LOGGED_IN_USER":
+            return { ...state, followedUserPosts: [...state.postsData.filter(item=>item.username === action.payload)]}
     }
        
 }

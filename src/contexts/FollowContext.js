@@ -54,7 +54,7 @@ export const FollowContextProvider =({children})=>{
 useEffect(()=>{
     fetchInfinityUsers()
 },[])
-    return(<FollowContext.Provider value={{infinityUsers,followUser}}>{children}</FollowContext.Provider>)
+    return(<FollowContext.Provider value={{infinityUsers,followUser,infinityUsersDispacher}}>{children}</FollowContext.Provider>)
 }
 
 const useFollowContext =()=> useContext(FollowContext)
