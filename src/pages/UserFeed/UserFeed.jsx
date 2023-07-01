@@ -1,5 +1,4 @@
 import useUserFeedContext from "../../contexts/UserFeedContext"
-import useAuthContext from "../../contexts/AuthContext"
 import "./UserFeed.css"
 import "../../App.css"
 import useFollowContext from "../../contexts/FollowContext"
@@ -13,11 +12,10 @@ import NewPost from "../../components/NewPost/NewPost"
 
  
 export default function UserFeed(){
-    const {userFeed,userFeedDispacher,createPost} = useUserFeedContext()
+    const {userFeed} = useUserFeedContext()
     console.log("UserFeed.jsx:15   UserFeed  userFeed:", userFeed)
-    const {user} = useAuthContext();
-    const {infinityUsers,followUser} = useFollowContext();
-    const {MdInsertPhoto,SlUserFollow} = useIconContext();
+    const {infinityUsers} = useFollowContext();
+    const {SlUserFollow} = useIconContext();
    // console.log(" infinityUsers:", infinityUsers)
      
     return(<div className="container">
