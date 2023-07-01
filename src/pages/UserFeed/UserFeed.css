@@ -1,74 +1,20 @@
 @media only screen and (max-width: 768px) {
     /* Create post */
-    .create-post{
-        margin: 10px;
-    }
-    .myText{        
-        background-color: black;
-        color: white;
-        outline: 3px solid black;
-        box-sizing: border-box;
-        width: 100%;
-        font-size: 16px;
-    }
-    .image-box{
-        height: 30px;
-        width: 40px;
-    }
-    .preview-post{
-        width : 70%;
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%,-50%);
-        background-color: black;
-        padding: 5px;
-    }
-    .create-post-controls{
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-    .btn-post{
-        padding: 10px;
-    }
-    .btn-imgpicker {
-        padding-top: 10px;
-      }
-    .preview-post button {
-        color: white;
-        background-color: blueviolet;
-        padding: 5px 14px;
-        border-radius: 5px;
-        margin: 5px;
-       }
+
+
+
+
     /* Users */
-    .allUsers {
-        display: flex;
-        overflow-x: auto;
-      }
-      .userBox {
-        border: 1px solid rgb(44, 43, 43);
-        margin: 5px;
-        border-radius: 5px;
-        flex: 0 0 130px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-       }
-       .userBox > * {
-        margin: 5px;
-       }
+
+
+
        button {
         color: white;
         background-color: blueviolet;
         padding: 5px 14px;
         border-radius: 5px;
        }
-       .userBox >p{
-        color: rgb(109, 105, 105);;
-       }
+
       
     /* Post header*/
     .post-header{
@@ -131,6 +77,9 @@
     .post-footer{
         display: flex;
     }
+    .container-body{
+        margin-top: 65px;
+    }
 }
 
 
@@ -138,6 +87,39 @@ body{
     background-color: black;
     color: white;
 }
-.container-body{
-    margin-top: 65px;
+
+
+@media screen and (min-width:1024px){
+    .container{
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-rows: auto auto;
+    }
+    .create-post{
+        grid-row: 1;
+        grid-column: 1;
+    }
+    .create-post {
+        grid-row: 1;
+        grid-column: 1;
+      }
+      
+      .allUsers {
+        grid-row: 2;
+        grid-column: 1 / span 2; /* Span two columns */
+      }
+      
+      .posts {
+        grid-row: 2;
+        grid-column: 2 / span 2; /* Span two columns */
+      }
+      
+      .div4 {
+        grid-row: 2;
+        grid-column: 3;
+      }
+    body{
+
+        background-color: green;
+    }
 }
