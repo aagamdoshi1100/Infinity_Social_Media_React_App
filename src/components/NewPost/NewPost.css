@@ -1,0 +1,45 @@
+@media only screen and (max-width: 768px) {
+    /* Create post */
+    .create-post{
+        margin: 10px;
+    }
+    .myText{        
+        background-color: black;
+        color: white;
+        outline: 3px solid black;
+        box-sizing: border-box;
+        width: 100%;
+        font-size: 16px;
+    }
+    .create-post-controls{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .image-box{
+        height: 30px;
+        width: 40px;
+    }
+    .btn-imgpicker {
+        padding-top: 10px;
+      }
+    .preview-post button {
+        color: white;
+        background-color: blueviolet;
+        padding: 5px 14px;
+        border-radius: 5px;
+        margin: 5px;
+    }
+    .preview-post{
+        width : 70%;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        background-color: black;
+        padding: 5px;
+    }
+    .btn-post{
+        padding: 10px;
+    }
+}
