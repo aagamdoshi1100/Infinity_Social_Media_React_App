@@ -30,7 +30,15 @@ export default function UserFeedReducer(state,action){
         case "EXPLORE_PAGE":
             return {...state, fetchValue: action.payload}        
         case "LIKE_STATUS":
-            return {...state, postsData: action.payload.data }
+            console.log([...action.payload.data],"[...action.payload.data]")
+            const postLiked = [...action.payload.data]?.map((item,index)=>{
+                if(item._id ==action.payload.postId){
+                    return {...item, isLiked : !state.postsData[index].isLiked}
+                }
+                return item
+            })
+            console.log(postLiked,"postLiked")
+            return {...state, postsData: postLiked }
         case "SHOW_FILTERS":
             return {...state, showFiltersUserFeed: !action.payload}
         case "THREE_DOT_CONTROLLER":

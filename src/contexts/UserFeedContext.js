@@ -70,24 +70,25 @@ const editHandler = async(postId)=>{
 }
 
 const postLikeHandler =async(postId,user)=>{
-    if(!userFeed.postData){
         try{
             const response = await fetch(`/api/posts/like/${postId}`,{
                 method: "POST",
                 headers: {authorization:token}
             }) 
             const responseData = await response.json()
-            console.log("🚀 ~ file: UserFeedContext.js:30 ~ postLikeHandler ~ responseData:", response)
+            console.log(" postLikeHandler :",responseData.posts, response)
                 if(response.status === 201){
-                    userFeedDispacher({type : "LIKE_STATUS",payload : {data: responseData.posts
+                    userFeedDispacher({type : "LIKE_STATUS",payload : {data: responseData.posts,postId:postId
                     }})
+                    userFeedDispacher({type: "AUTO_LOGGED_IN_USER",payload:localStorage.getItem("Username")})
                  }else{
                     try{
                         const responsedislike = await fetch(`/api/posts/dislike/${postId}`,{
                             method: "POST",
                             headers: {authorization:token}}) 
                             const responseDisData = await responsedislike.json()
-                            userFeedDispacher({type : "LIKE_STATUS",payload : {data: responseDisData.posts}})
+                            userFeedDispacher({type : "LIKE_STATUS",payload : {data: responseDisData.posts,postId:postId}})
+                            userFeedDispacher({type: "AUTO_LOGGED_IN_USER",payload:localStorage.getItem("Username")})
                     }catch(e){
                         console.log("400 erro code", e)
                     }
@@ -95,7 +96,7 @@ const postLikeHandler =async(postId,user)=>{
         }catch(e){
             console.log("🚀 ~ file: UserFeedContext.js:20 ~ likePost ~ e:", e)
         }
-    }
+    
      }
     const createPost =async()=>{
             const post={

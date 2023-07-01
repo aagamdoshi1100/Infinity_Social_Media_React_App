@@ -17,7 +17,7 @@ export default function FetchData(){
 return(<div className="mb-12">
     {
     userFeed?.[fetchValue]?.map((details)=>{
-    const {_id,username,content,image,createdAt,likes} = details;
+    const {_id,username,content,image,createdAt,likes,isLiked} = details;
     return(<div key={_id} className="FeedBox wd b">
         <div className="post-header">
             <span className="circle" onClick={()=>getUserProfile(infinityUsers?.allUsers?.find((item)=>item.username === username)._id,username)}>
@@ -72,7 +72,7 @@ return(<div className="mb-12">
                     </div>    
                             <div className="post-footer b jc-sb p">
                             <span>
-                            <AiOutlineLike size="1.8em" onClick={()=>postLikeHandler(_id)}/>{likes?.likeCount}</span>
+                            <AiOutlineLike size="1.8em" color={isLiked ? "red" :"green"} onClick={()=>postLikeHandler(_id)}/>{likes?.likeCount}</span>
                             <span>
                             <GoComment size="1.8em" />
                             </span>
