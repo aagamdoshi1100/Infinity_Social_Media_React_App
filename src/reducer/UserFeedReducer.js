@@ -22,7 +22,7 @@ export default function UserFeedReducer(state,action){
                 createPostImage:null, }
         case "SELECTED_POST":
             return {...state, selectedPostData: [action.payload.data], fetchValue:action.payload.value}        
-        case "BOOKMARK_POST":
+        case "BOOKMARK_POST_HANDLER":
             return {...state, bookMarkView: [...action.payload.data]}
         case "BOOKMARK_PAGE":
         case "HOME_PAGE":

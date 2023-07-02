@@ -73,12 +73,12 @@ return(<div className="mb-12">
                             <div className="post-footer b jc-sb p">
                             <span>
                             <AiOutlineLike size="1.8em" color={details.likes.likedBy.some((likedBy)=>likedBy.username
- === user.name) ? "red" :"green"} onClick={()=>postLikeHandler(_id)}/>{likes?.likeCount}</span>
+ === user.name) ? "red" :"white"} onClick={()=>postLikeHandler(_id)}/>{likes?.likeCount}</span>
                             <span>
                             <GoComment size="1.8em" />
                             </span>
                             <span>
-                            <FiBookmark size="1.8em" onClick={()=>postBookMarkHandler(_id)}/>
+                            <FiBookmark size="1.8em" color={userFeed.bookMarkView.some((item)=>item.username === username) ? "blueviolet":"white"} onClick={()=>postBookMarkHandler(_id)}/>
                             </span>
                             </div>
                 </div>)

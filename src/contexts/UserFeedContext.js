@@ -16,10 +16,23 @@ const postBookMarkHandler =async(postId)=>{
             headers:{authorization: token}
         })
         const responseData =await response.json();
-        console.log(response,"response")
-        console.log("🚀 ~ file: UserFeedContext.js:18 ~ postBookMarkHandler ~ responseData:", responseData)
+        console.log(response,responseData,"response")
+        
         if(response.status === 200){
-            userFeedDispacher({type:"BOOKMARK_POST",payload:{data:responseData.bookmarks}})
+            userFeedDispacher({type:"BOOKMARK_POST_HANDLER",payload:{data:responseData.bookmarks}})
+        }
+        if(response.status === 400){
+            try{
+            const responseError = await fetch(`/api/users/remove-bookmark/${postId}`,{
+                method:"POST",
+                headers:{authorization: token}
+            })
+            const responseErrorData = await responseError.json();
+            console.log("🚀 ~ file: UserFeedContext.js:31 ~ postBookMarkHandler ~ responseErrorData:", responseErrorData)
+            userFeedDispacher({type:"BOOKMARK_POST_HANDLER",payload:{data:responseErrorData.bookmarks}})
+            }catch(e){
+                console.log("🚀 ~ file: UserFeedContext.js:32 ~ postBookMarkHandler ~ e:", e)
+            }
         }
     }catch(e){
         console.log("🚀 ~ file: UserFeedContext.js:17 ~ postBookMarkHandler ~ e:", e)
