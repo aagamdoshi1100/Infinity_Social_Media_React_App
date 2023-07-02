@@ -19,23 +19,25 @@ export default function UserFeed(){
    // console.log(" infinityUsers:", infinityUsers)
      
     return(<div className="container">
-    <Heading />
+    <div className="header-div">
+        <Heading />
+    </div>
     <div className="container-body">
-    <div className="create-post-div">
-     <NewPost />
-    </div>
-
-    <div className="allUsers-div">
-     <AllUsers />       
-    </div>
-        
-        {infinityUsers.followUsers.length > 0 ? 
-        <div className="posts-div"> 
-        <Filters />
-        <FetchData /> 
+        <div className="create-post-div">
+            <NewPost />
         </div>
-        : <p style={{fontSize:"20px"}}><span><SlUserFollow /></span>Please follow users to see posts</p>}    
+        <div className="allUsers-div">
+            <AllUsers />       
         </div>
+        {infinityUsers.followUsers.length > 0 ?  
+        <div className="all-posts-div"> 
+            <Filters />
+            <FetchData /> 
+        </div>
+         : <p style={{fontSize:"20px"}}><span><SlUserFollow /></span>Please follow users to see posts</p>}    
+        </div>
+    <div className="footer-div">
         <Footer />
+    </div>
     </div>)
 }
