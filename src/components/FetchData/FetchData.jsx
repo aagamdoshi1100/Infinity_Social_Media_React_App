@@ -72,7 +72,8 @@ return(<div className="mb-12">
                     </div>    
                             <div className="post-footer b jc-sb p">
                             <span>
-                            <AiOutlineLike size="1.8em" color={isLiked ? "red" :"green"} onClick={()=>postLikeHandler(_id)}/>{likes?.likeCount}</span>
+                            <AiOutlineLike size="1.8em" color={details.likes.likedBy.some((likedBy)=>likedBy.username
+ === user.name) ? "red" :"green"} onClick={()=>postLikeHandler(_id)}/>{likes?.likeCount}</span>
                             <span>
                             <GoComment size="1.8em" />
                             </span>
