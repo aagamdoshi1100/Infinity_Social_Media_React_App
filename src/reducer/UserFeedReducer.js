@@ -3,7 +3,6 @@ export const InitialValueFeedContext ={
     selectedPostData :[],
     userProfileView:[],
     bookMarkView:[],
-
     followedUserPosts : [],
     fetchValue:"",
     showFiltersUserFeed: false,
@@ -30,15 +29,7 @@ export default function UserFeedReducer(state,action){
         case "EXPLORE_PAGE":
             return {...state, fetchValue: action.payload}        
         case "LIKE_STATUS":
-            console.log([...action.payload.data],"[...action.payload.data]")
-            const postLiked = [...action.payload.data]?.map((item,index)=>{
-                if(item._id ==action.payload.postId){
-                    return {...item, isLiked : !state.postsData[index].isLiked}
-                }
-                return item
-            })
-            console.log(postLiked,"postLiked")
-            return {...state, postsData: postLiked }
+            return { ...state, postsData: [...action.payload.data], followedUserPosts: [...action.payload.data].filter(item=> localStorage.getItem("Followings").split(",").includes(item.username)) };
         case "SHOW_FILTERS":
             return {...state, showFiltersUserFeed: !action.payload}
         case "THREE_DOT_CONTROLLER":
@@ -64,8 +55,8 @@ export default function UserFeedReducer(state,action){
         case "FOLLOW_USER":
             const userFollowedDetails = state.postsData.filter((item)=>  [...action.payload.allFollowingUsers].includes(item.username))
             return {...state ,followedUserPosts : userFollowedDetails,fetchValue:action.payload.value}
-        case "AUTO_LOGGED_IN_USER":
-            return { ...state, followedUserPosts: [...state.postsData.filter(item=>item.username === action.payload)]}
+        // case "LOGGED_IN_USER_POST":
+        //     return {...state, followedUserPosts: state.postsData.filter(item=>item.username===action.payload)}
     }
        
 }

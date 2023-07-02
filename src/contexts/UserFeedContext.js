@@ -1,12 +1,13 @@
 import { createContext, useContext, useEffect, useReducer } from "react";
 import UserFeedReducer,{InitialValueFeedContext} from "../reducer/UserFeedReducer";
 import { useNavigate } from "react-router-dom";
-import useAuthContext from "./AuthContext";
 const UserFeedContext = createContext()
 
 export const UserFeedContextProvider=({children})=>{
     const [userFeed,userFeedDispacher] = useReducer(UserFeedReducer,InitialValueFeedContext)  
+     
 const token = localStorage.getItem("encodedToken")
+
 const navigate = useNavigate()
 const postBookMarkHandler =async(postId)=>{
     try{
@@ -43,8 +44,7 @@ const getSelectedPost= async(postId)=>{
             method:"DELETE",
             headers:{authorization:token},
         })
-        const responseData = await response.json()
-        console.log("🚀 ~ file: UserFeedContext.js:33 ~ editHandler ~ responseData:", responseData)
+        const responseData = await response.json();
         userFeedDispacher({type : "ALL_POSTS",payload : {data:responseData.posts,value:"postsData"}})
     }catch(e){
     console.log("🚀 ~ file: UserFeedContext.js:32 ~ editHandler ~ e:", e)
@@ -61,34 +61,30 @@ const editHandler = async(postId)=>{
             headers:{authorization:token},
             body: JSON.stringify({postData:post})
         })
-        const responseData = await response.json()
-        console.log("🚀 ~ file: UserFeedContext.js:33 ~ editHandler ~ responseData:", responseData)
+        const responseData = await response.json();
         userFeedDispacher({type : "EDIT_POST_HANDLER",payload :{data: responseData.posts,showEditUserFeed : userFeed.showEditUserFeed,value:"postsData"}})
     }catch(e){
     console.log("🚀 ~ file: UserFeedContext.js:32 ~ editHandler ~ e:", e)
     }
 }
 
-const postLikeHandler =async(postId,user)=>{
+const postLikeHandler =async(postId)=>{
         try{
             const response = await fetch(`/api/posts/like/${postId}`,{
                 method: "POST",
                 headers: {authorization:token}
             }) 
             const responseData = await response.json()
-            console.log(" postLikeHandler :",responseData.posts, response)
                 if(response.status === 201){
                     userFeedDispacher({type : "LIKE_STATUS",payload : {data: responseData.posts,postId:postId
                     }})
-                    userFeedDispacher({type: "AUTO_LOGGED_IN_USER",payload:localStorage.getItem("Username")})
                  }else{
                     try{
                         const responsedislike = await fetch(`/api/posts/dislike/${postId}`,{
                             method: "POST",
                             headers: {authorization:token}}) 
                             const responseDisData = await responsedislike.json()
-                            userFeedDispacher({type : "LIKE_STATUS",payload : {data: responseDisData.posts,postId:postId}})
-                            userFeedDispacher({type: "AUTO_LOGGED_IN_USER",payload:localStorage.getItem("Username")})
+                            userFeedDispacher({type : "LIKE_STATUS",payload : {data: responseDisData.posts}})
                     }catch(e){
                         console.log("400 erro code", e)
                     }

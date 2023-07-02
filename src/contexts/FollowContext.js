@@ -19,6 +19,7 @@ export const FollowContextProvider =({children})=>{
  
             if(response.status===200){
                 const followingUsers = [...infinityUsers.followUsers,responseData.followUser.username]
+                localStorage.setItem("Followings",followingUsers)
                 infinityUsersDispacher({type:"FOLLOW_USER",payload:{userData: responseData.user.following, usernames:followingUsers}})
                 userFeedDispacher({type:"FOLLOW_USER",payload:{allFollowingUsers:followingUsers,value :userFeed.fetchValue === "postsData"?"postsData":"followedUserPosts"}})
             }
