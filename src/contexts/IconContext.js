@@ -2,7 +2,7 @@ import { createContext, useContext } from "react";
 import useUserFeedContext from "./UserFeedContext";
 import {BiArrowBack,BiLogOut,BiBookBookmark,BiLogIn,BiLink,BiGlobe,BiDotsVertical} from "react-icons/bi"
 import {MdOutlineExplore,MdInsertPhoto} from "react-icons/md"
-import {AiOutlineHome,AiOutlineLike} from "react-icons/ai"
+import {AiOutlineHome,AiOutlineLike,AiOutlineDelete} from "react-icons/ai"
 import {FiBookmark} from "react-icons/fi"
 import {GoComment} from "react-icons/go"
 import {FaFilter} from "react-icons/fa"
@@ -24,7 +24,7 @@ export default function IconContextProvider({children}){
         userFeedDispacher({type:"EXPLORE_PAGE",payload:"postsData"})
         navigate('/pages/explore/Explore')
         }
-    return(<IconContext.Provider value={{goToBookMark,goToHome,goToExplore,BiArrowBack,BiLogOut,BiBookBookmark,MdOutlineExplore,AiOutlineHome,BiLogIn,BiLink,BiGlobe,BiDotsVertical,MdInsertPhoto,AiOutlineLike,FiBookmark,GoComment,FaFilter,SlUserFollow}}>{children}</IconContext.Provider>)
+    return(<IconContext.Provider value={{goToBookMark,goToHome,goToExplore,BiArrowBack,BiLogOut,BiBookBookmark,MdOutlineExplore,AiOutlineHome,BiLogIn,BiLink,BiGlobe,BiDotsVertical,MdInsertPhoto,AiOutlineLike,FiBookmark,GoComment,FaFilter,SlUserFollow,AiOutlineDelete}}>{children}</IconContext.Provider>)
 }
 
 export const useIconContext =()=>useContext(IconContext)

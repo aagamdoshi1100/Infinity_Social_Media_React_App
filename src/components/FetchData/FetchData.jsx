@@ -8,13 +8,13 @@ import { useIconContext } from "../../contexts/IconContext"
 export default function FetchData(){
     const {userFeed,userFeedDispacher,postLikeHandler,deletePostHandler,getSelectedPost,postBookMarkHandler} = useUserFeedContext()
     const {user} = useAuthContext();
-    const {infinityUsers,followUser} =useFollowContext();
+    const {infinityUsers,followUser,infinityUsersDispacher} =useFollowContext();
     console.log("infinityUsers:", infinityUsers)
     const {GoComment,FiBookmark,BiDotsVertical,MdInsertPhoto,AiOutlineLike} = useIconContext();
     const {getUserProfile,editHandler,profile} = useUserProfileContext();
    
     const fetchValue = userFeed?.fetchValue;
-return(<div className="mb-12">
+return(<div className="container-fetchData">
     {
     userFeed?.[fetchValue]?.map((details)=>{
     const {_id,username,content,image,createdAt,likes,isLiked} = details;
@@ -72,11 +72,20 @@ return(<div className="mb-12">
                     </div>    
                             <div className="post-footer b jc-sb p">
                             <span>
-                            <AiOutlineLike size="1.8em" color={details.likes.likedBy.some((likedBy)=>likedBy.username
+                            <AiOutlineLike size="1.8em" color={likes.likedBy.some((likedBy)=>likedBy.username
  === user.name) ? "red" :"white"} onClick={()=>postLikeHandler(_id)}/>{likes?.likeCount}</span>
                             <span>
-                            <GoComment size="1.8em" />
+                            <GoComment size="1.8em" onClick={()=>infinityUsersDispacher({type:"ENABLE_COMMENT",payload : infinityUsers.isCommentEnabled})}/>{infinityUsers.comments.filter(({postId})=>_id === postId).length}
                             </span>
+                            {
+                                infinityUsers.isCommentEnabled ? 
+                                    <div className="comment-box">
+                                        <textarea className="myText" onChange={(e)=>infinityUsersDispacher({type:"CREATE_COMMENT",payload:{comment:e.target.value,Id:_id,username:user.name}})} placeholder="Write something..." ></textarea>
+                                        <button onClick={()=>infinityUsersDispacher({type:"DISCARD_COMMENT"})}>Discard</button>
+                                        <button onClick={()=>infinityUsersDispacher({type:"SAVE_COMMENT"})}>Post</button>
+                                    </div>
+                                : null
+                            }
                             <span>
                             <FiBookmark size="1.8em" color={userFeed.bookMarkView.some((item)=>item.username === username) ? "blueviolet":"white"} onClick={()=>postBookMarkHandler(_id)}/>
                             </span>

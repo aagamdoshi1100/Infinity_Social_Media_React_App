@@ -7,6 +7,9 @@ export const FollowContextProvider =({children})=>{
     const [infinityUsers,infinityUsersDispacher] = useReducer(UserFollowReducer, InitialValueFollowContext)
     const {userFeed,userFeedDispacher} = useUserFeedContext();
     const token = localStorage.getItem("encodedToken")
+    // const postCommentHandler =()=>{
+    //     infinityUsersDispacher({type:"COMMENT",payload : isCommentEnabled})
+    // }
     const followUser =async(followUserId)=>{
         console.log("foolooowow",followUserId)
         try{
