@@ -17,7 +17,7 @@ export const posts = [
       dislikedBy: [],
     },
     isBookMarked:false,
-    isLiked: false,
+
     username: "Ak",
     createdAt: "2023-06-25",
     updatedAt: formatDate(),
@@ -33,7 +33,7 @@ export const posts = [
       dislikedBy: [],
     },
     isBookMarked:false,
-    isLiked: false,
+
     username: "AD",
     createdAt: "2023-06-14",
     updatedAt: formatDate(),
@@ -49,7 +49,7 @@ export const posts = [
       dislikedBy: [],
     },
     isBookMarked:false,
-    isLiked: false,
+
     username: "ParthThakkar",
     createdAt: "2023-05-25",
     updatedAt: formatDate(),
@@ -65,7 +65,7 @@ export const posts = [
       dislikedBy: [],
     },
     isBookMarked:false,
-    isLiked: false,
+
     username: "adarshbalika",
     createdAt: "2023-06-10",
     updatedAt: formatDate(),
@@ -81,7 +81,7 @@ export const posts = [
       dislikedBy: [],
     },
     isBookMarked:false,
-    isLiked: false,
+
     username: "shubhamsoni",
     createdAt: "2022-12-25",
     updatedAt: formatDate(),
@@ -96,7 +96,7 @@ export const posts = [
       dislikedBy: [],
     },
     isBookMarked:false,
-    isLiked: false,
+
     username: "ParthShah",
     createdAt: "2022-12-25",
     updatedAt: formatDate(),
@@ -111,7 +111,7 @@ export const posts = [
       dislikedBy: [],
     },
     isBookMarked:false,
-    isLiked: false,
+
     username: "GaneshPardhe",
     createdAt: "2023-06-25",
     updatedAt: formatDate(),
