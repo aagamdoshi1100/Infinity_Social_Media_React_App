@@ -72,8 +72,7 @@ return(<div className="container-fetchData">
                     </div>    
                             <div className="post-footer b jc-sb p">
                             <span>
-                            <AiOutlineLike size="1.8em" color={likes.likedBy.some((likedBy)=>likedBy.username
- === user.name) ? "red" :"white"} onClick={()=>postLikeHandler(_id)}/>{likes?.likeCount}</span>
+                            <AiOutlineLike size="1.8em" color={likes?.likedBy?.some((postLikedBy)=>postLikedBy.username === user.name) ? "red" :"white"}  onClick={()=>postLikeHandler(_id)}/>{likes?.likeCount}</span>
                             <span>
                             <GoComment size="1.8em" onClick={()=>infinityUsersDispacher({type:"ENABLE_COMMENT",payload : infinityUsers.isCommentEnabled})}/>{infinityUsers.comments.filter(({postId})=>_id === postId).length}
                             </span>

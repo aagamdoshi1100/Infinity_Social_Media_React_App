@@ -23,7 +23,15 @@ export default function UserFeedReducer(state,action){
         case "SELECTED_POST":
             return {...state, selectedPostData: [action.payload.data], fetchValue:action.payload.value}        
         case "BOOKMARK_POST_HANDLER":
-            return {...state, bookMarkView: [...action.payload.data]}
+            const modifiedData = [...action.payload.data].map((post)=>{
+                return {
+                    ...post,
+                    image: state.postsData.find((item)=>item._id === post._id).image,
+                    likes : state.postsData.find((item)=>item._id === post._id).likes
+                }
+            })
+            console.log(modifiedData,"modifiedData")
+            return {...state, bookMarkView: modifiedData}
         case "BOOKMARK_PAGE":
         case "HOME_PAGE":
         case "EXPLORE_PAGE":
