@@ -18,7 +18,7 @@ export default function IconContextProvider({children}){
     }    
     const goToHome =()=>{
         userFeedDispacher({type:"HOME_PAGE",payload:"followedUserPosts"})
-        navigate("/")
+        navigate("/pages/UserFeed/UserFeed")
     }
     const goToExplore =()=>{
         userFeedDispacher({type:"EXPLORE_PAGE",payload:"postsData"})

@@ -23,8 +23,8 @@ root.render(
         <FollowContextProvider>
           <AuthContextProvider>
             <IconContextProvider>
-              <UserProfileContextProvider>
-                <App />
+              <UserProfileContextProvider> 
+                <App /> 
               </UserProfileContextProvider>
             </IconContextProvider>
           </AuthContextProvider>

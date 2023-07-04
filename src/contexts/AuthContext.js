@@ -1,23 +1,56 @@
-import { createContext, useContext, useState } from "react";
-import useFollowContext from "./FollowContext";
+import { createContext, useContext, useState } from "react"; 
 import useUserFeedContext from "./UserFeedContext";
-
 
 const AuthContext = createContext();
 
 export const AuthContextProvider =({children})=>{
-    const [user,setUser] = useState({name:""})
+    const [user,setUser] = useState({name:"", 
+    auth:{
+        email:"",
+        password:"",
+        username:"",
+        firstname:"",
+        lastname:""
+    },
+    isLoggedIn:false,
+    errorMessage:""
+})
+    const {navigate} = useUserFeedContext();
+    const signUphandler = async()=>{
+        try{
+            const response = await fetch(`/api/auth/signup`,{
+                method:"POST",
+                body:JSON.stringify({
+                    email:user.auth.email, password:user.auth.password, username:user.auth.username, firstname:user.auth.firstname
+                  })
+            })
+            if(response.status === 201){
+                const {encodedToken,createdUser} = await response.json();
+                localStorage.setItem("encodedToken",encodedToken);
+                localStorage.setItem("Username",createdUser.username);
+                setUser({...user,name:createdUser.username,isLoggedIn:true,errorMessage:""});
+                navigate("/pages/UserFeed/UserFeed");
+            }
+        }catch(e){
+        console.log("🚀 ~ file: AuthContext.js:20 ~ signUphandler ~ e:", e);
+        }
+    }
 
-    const loginHandler = async(username,password)=>{
+    const loginHandler = async()=>{
         try{
             const response = await fetch("/api/auth/login",{
                 method:"POST",
-                body : JSON.stringify({username,password})
+                body : JSON.stringify({username:user.auth.username,password:user.auth.password})
             })
-            const {encodedToken} = await response.json();
-            localStorage.setItem("encodedToken",encodedToken);
-            localStorage.setItem("Username",username);
-            setUser({...user,name:username});
+            if(response.status === 404){
+                setUser({...user, errorMessage:"User not found"});
+            }else if(response.status === 200){
+                const {encodedToken} = await response.json();
+                localStorage.setItem("encodedToken",encodedToken);
+                localStorage.setItem("Username",user.auth.username);
+                setUser({...user,name:user.auth.username,isLoggedIn:true,errorMessage:""});
+                navigate("/pages/UserFeed/UserFeed")
+            }  
         }catch(e){
             console.log("🚀 ~ file: AuthContext.js:13 ~ loginHandler ~ e:", e);
             
@@ -27,9 +60,10 @@ export const AuthContextProvider =({children})=>{
         localStorage.removeItem("encodedToken");
         localStorage.removeItem("Username");
         localStorage.removeItem("Followings");
-        setUser({...user,name:""});
+        setUser({...user,name:"",isLoggedIn:false});
+        navigate("/")
     }
-    return(<AuthContext.Provider value={{loginHandler,user,logOutHandler}}>{children}</AuthContext.Provider>)
+    return(<AuthContext.Provider value={{loginHandler,user,logOutHandler,setUser,signUphandler}}>{children}</AuthContext.Provider>)
 }
 
 const useAuthContext =()=> useContext(AuthContext);

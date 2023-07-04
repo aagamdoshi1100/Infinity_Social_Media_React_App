@@ -5,6 +5,9 @@ import SinglePostView from './pages/SinglePostView/SinglePostView';
 import UserProfile from './pages/profile/UserProfile';
 import Explore from './pages/explore/Explore';
 import BookMark from './pages/bookmark/BookMark';
+import Login from './pages/Authentication/Login';
+import SignUp from './pages/Authentication/SignUp';
+import RequiresAuth from './components/RequiresAuth';
 
 function App() {
   return (
@@ -12,11 +15,13 @@ function App() {
       <header className="App-header">
       </header>
       <Routes>
-        <Route path="/" element={<UserFeed />}/>
-        <Route path="/pages/SinglePostView/" element={<SinglePostView />}/>
-        <Route path="/pages/profile/UserProfile" element={<UserProfile />} />
-        <Route path="/pages/explore/Explore" element={<Explore />} />
-        <Route path="/pages/bookmark/BookMark" element={<BookMark />} />
+        <Route path="/" element={<Login />} />
+        <Route path="/pages/Authentication/SignUp" element={<SignUp />} />
+        <Route path="/pages/UserFeed/UserFeed" element={<RequiresAuth><UserFeed /></RequiresAuth>}/>
+        <Route path="/pages/SinglePostView/" element={<RequiresAuth><SinglePostView /></RequiresAuth>}/>
+        <Route path="/pages/profile/UserProfile" element={<RequiresAuth><UserProfile /></RequiresAuth>} />
+        <Route path="/pages/explore/Explore" element={<RequiresAuth><Explore /></RequiresAuth>} />
+        <Route path="/pages/bookmark/BookMark" element={<RequiresAuth><BookMark /></RequiresAuth>} />
       </Routes>
     </div>
   );
