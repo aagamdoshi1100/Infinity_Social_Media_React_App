@@ -19,7 +19,7 @@ export default function UserProfile(){
         navigate("/")
     }
     return(<div>
-             <h3 class="profile-arrow"><span><BiArrowBack size="1.7em" onClick={goToHome}/></span>User Profile Page</h3>
+             <h3 className="profile-arrow"><span><BiArrowBack size="1.7em" onClick={goToHome}/></span>User Profile Page</h3>
 {   
     profile?.userProfileData?.map((details)=>{
         const {following,followers,username,profileIcon,lastName,firstName,_id,bio,portfolio} = details;
