@@ -12,14 +12,24 @@ export default function Comment(){
         {
             infinityUsers.comments.filter(({postId})=>postId === userFeed.selectedPostData[0]._id).map((details)=>{
                 const {postId,comment,commentBy} = details;
-                return(<div className="comment-box b" key={comment}> 
+                return(<div className="comment-container b" key={comment}> 
+                <div className="comment-header">
+                  <div className="commentBy">
                     <span className="circle">
-                    <img src={ infinityUsers.allUsers.find(({username})=>username === commentBy).profileIcon} width="100%" height="100%"/></span><p>{commentBy}</p>
-                        {commentBy === user.name ?
-                        <AiOutlineDelete size="1.8em" onClick={()=>infinityUsersDispacher({type:"DELETE_COMMENT",payload:comment})}/>
-                        : null}
-                    <p>{comment}</p>  
-                </div>)
+                      <img src={infinityUsers?.allUsers?.find(({username}) => username === commentBy)?.profileIcon} width="100%" height="100%" alt="Profile Icon" />
+                    </span>
+                    <div className="name">
+                      <p>{infinityUsers?.allUsers?.find(({username}) => username === commentBy)?.firstName} {infinityUsers?.allUsers?.find(({username}) => username === commentBy)?.lastName}</p>
+                      <p className="username">@{commentBy}</p>
+                    </div>
+                  </div>
+                  {commentBy === user.name &&
+                    <AiOutlineDelete size="2em" onClick={() => infinityUsersDispacher({type: "DELETE_COMMENT", payload: comment})} />
+                  }
+                </div>
+                <p className="comment">{comment}</p>  
+              </div>
+              )
             })
         }
     </div>)
