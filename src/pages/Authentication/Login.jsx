@@ -5,7 +5,6 @@ import { useIconContext } from "../../contexts/IconContext";
 
 export default function Login(){
     const {user,setUser,loginHandler} =useAuthContext(); 
-    console.log("🚀 ~ file: Login.jsx:8 ~ Login ~ user:", user)
     const {GiInfinity} = useIconContext();
     const handleGuestLogin=()=>{
         setUser({
