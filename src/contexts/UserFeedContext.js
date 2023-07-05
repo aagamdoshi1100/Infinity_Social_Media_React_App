@@ -58,7 +58,7 @@ const getSelectedPost= async(postId)=>{
             headers:{authorization:token},
         })
         const responseData = await response.json();
-        userFeedDispacher({type : "ALL_POSTS",payload : {data:responseData.posts,value:"postsData"}})
+        userFeedDispacher({type : "ALL_POSTS",payload : {data:responseData.posts,value:userFeed.fetchValue}})
     }catch(e){
     console.log("🚀 ~ file: UserFeedContext.js:32 ~ editHandler ~ e:", e)
     }

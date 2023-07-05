@@ -22,7 +22,7 @@ export const FollowContextProvider =({children})=>{
             if(response.status===200){
                 const followingUsers = [...userFeed.followedUsers,responseData.followUser.username]  
                 localStorage.setItem("Followings",followingUsers)
-                userFeedDispacher({type:"FOLLOW_USER",payload:{allFollowingUsers:followingUsers,value :userFeed.fetchValue === "postsData"?"postsData":"followedUserPosts"}})
+                userFeedDispacher({type:"FOLLOW_USER",payload:{allFollowingUsers:followingUsers,value :userFeed.fetchValue}})
             } 
             if(response.status ===400){
                 try{
@@ -32,7 +32,7 @@ export const FollowContextProvider =({children})=>{
                     })   
                     const responseErrorData = await responseError.json();
                     const unfollowingUserRemoved = userFeed.followedUsers.filter((user)=> user !== responseErrorData.followUser.username)
-                    userFeedDispacher({type:"FOLLOW_USER",payload:{allFollowingUsers:unfollowingUserRemoved,value :userFeed.fetchValue === "postsData"?"postsData":"followedUserPosts"}})
+                    userFeedDispacher({type:"FOLLOW_USER",payload:{allFollowingUsers:unfollowingUserRemoved,value :userFeed.fetchValue}})
                 }catch(e){
                     console.log("🚀 ~ file: FollowContext.js:27 ~ followUser ~ e:", e)
                 }
