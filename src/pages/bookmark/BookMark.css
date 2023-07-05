@@ -15,4 +15,10 @@
       .bookMark-header h2 {
         margin: 10px;
       }
+      .parent-container-bookmark{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 80vh;
+      }
 }
