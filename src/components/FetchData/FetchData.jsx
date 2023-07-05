@@ -21,7 +21,7 @@ return(<div className="container-fetchData">
     return(<div key={_id} className="FeedBox wd b">
         <div className="post-header">
             <span className="circle" onClick={()=>getUserProfile(infinityUsers?.allUsers?.find((item)=>item.username === username)._id,username)}>
-            <img src={username === user.name && profile.userProfileData >1 ? profile.userProfileData[0].profileIcon :
+            <img src={username === user.name && profile.userProfileData.length > 0 ? profile.userProfileData[0].profileIcon :
                 infinityUsers?.allUsers?.find((item)=>item.username === username).profileIcon} width="100%" height="100%"/></span>
             <div className="fullName">
                 <span>{`${infinityUsers?.allUsers?.find((item)=>item.username === username).firstName} ${infinityUsers?.allUsers?.find((item)=>item.username === username).lastName}`}</span>
