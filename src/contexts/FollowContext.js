@@ -1,31 +1,29 @@
 import { createContext, useContext, useEffect, useReducer } from "react";
 import {InitialValueFollowContext,UserFollowReducer} from "../reducer/UserFollowReducer"
 import useUserFeedContext from "./UserFeedContext";
+import useAuthContext from "./AuthContext";
+ 
 const FollowContext = createContext();
 
 export const FollowContextProvider =({children})=>{
     const [infinityUsers,infinityUsersDispacher] = useReducer(UserFollowReducer, InitialValueFollowContext)
     const {userFeed,userFeedDispacher} = useUserFeedContext();
-    const token = localStorage.getItem("encodedToken")
-    // const postCommentHandler =()=>{
-    //     infinityUsersDispacher({type:"COMMENT",payload : isCommentEnabled})
-    // }
-    const followUser =async(followUserId)=>{
-        console.log("foolooowow",followUserId)
+    const {user} = useAuthContext();
+    const token = localStorage.getItem("encodedToken");
+
+    const followUser =async(followUserId)=>{ 
         try{
             const response = await fetch(`/api/users/follow/${followUserId}`,{
                 method:"POST",
                 headers: {authorization: token}
             })
             const responseData = await response.json();
-            console.log("🚀 ~ file: FollowContext.js:18 ~ followUser ~ responseData:", responseData)
- 
+            
             if(response.status===200){
-                const followingUsers = [...infinityUsers.followUsers,responseData.followUser.username]
+                const followingUsers = [...userFeed.followedUsers,responseData.followUser.username]  
                 localStorage.setItem("Followings",followingUsers)
-                infinityUsersDispacher({type:"FOLLOW_USER",payload:{userData: responseData.user.following, usernames:followingUsers}})
                 userFeedDispacher({type:"FOLLOW_USER",payload:{allFollowingUsers:followingUsers,value :userFeed.fetchValue === "postsData"?"postsData":"followedUserPosts"}})
-            }
+            } 
             if(response.status ===400){
                 try{
                     const responseError = await fetch(`/api/users/unfollow/${followUserId}`,{
@@ -33,9 +31,7 @@ export const FollowContextProvider =({children})=>{
                         headers: {authorization: token}
                     })   
                     const responseErrorData = await responseError.json();
-                    console.log("🚀 ~ file: FollowContext.js:31 ~ followUser ~ responseErrorData:", responseErrorData)
-                    const unfollowingUserRemoved = infinityUsers.followUsers.filter((user)=> user !== responseErrorData.followUser.username)
-                    infinityUsersDispacher({type:"FOLLOW_USER",payload:{userData: responseErrorData.user.following,usernames: unfollowingUserRemoved}})
+                    const unfollowingUserRemoved = userFeed.followedUsers.filter((user)=> user !== responseErrorData.followUser.username)
                     userFeedDispacher({type:"FOLLOW_USER",payload:{allFollowingUsers:unfollowingUserRemoved,value :userFeed.fetchValue === "postsData"?"postsData":"followedUserPosts"}})
                 }catch(e){
                     console.log("🚀 ~ file: FollowContext.js:27 ~ followUser ~ e:", e)
@@ -50,11 +46,15 @@ export const FollowContextProvider =({children})=>{
         try{
             const response = await fetch(`/api/users`)
             const responseData = await response.json();
-            infinityUsersDispacher({type:"ALL_USERS",payload:responseData.users})            
+            infinityUsersDispacher({type:"ALL_USERS",payload:responseData.users}) 
         }catch(e){
             console.log("🚀 ~ file: FollowContext.js:13 ~ fetchInfinityUsers ~ e:", e)
         }
     }
+useEffect(() => { 
+    userFeedDispacher({type:"LOGGED_IN_USERNAME_AND_POSTS",payload:{username:user.name,value:"followedUserPosts"}})
+    // console.log("Updated user state to show user posts:", user);
+}, [user]);
 useEffect(()=>{
     fetchInfinityUsers()
 },[])

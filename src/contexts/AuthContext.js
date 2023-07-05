@@ -1,5 +1,5 @@
 import { createContext, useContext, useState } from "react"; 
-import useUserFeedContext from "./UserFeedContext";
+import { useNavigate } from "react-router-dom";
 
 const AuthContext = createContext();
 
@@ -15,7 +15,8 @@ export const AuthContextProvider =({children})=>{
     isLoggedIn:false,
     errorMessage:""
 })
-    const {navigate} = useUserFeedContext();
+    const navigate = useNavigate();
+    
     const signUphandler = async()=>{
         try{
             const response = await fetch(`/api/auth/signup`,{
@@ -63,7 +64,7 @@ export const AuthContextProvider =({children})=>{
         setUser({...user,name:"",auth:{...user.auth,username:"",password:""},isLoggedIn:false});
         navigate("/")
     }
-    return(<AuthContext.Provider value={{loginHandler,user,logOutHandler,setUser,signUphandler}}>{children}</AuthContext.Provider>)
+    return(<AuthContext.Provider value={{navigate,loginHandler,user,logOutHandler,setUser,signUphandler}}>{children}</AuthContext.Provider>)
 }
 
 const useAuthContext =()=> useContext(AuthContext);

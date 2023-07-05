@@ -1,7 +1,5 @@
 export const InitialValueFollowContext={
     allUsers :[],
-    followedByLoggedInUser:[],
-    followUsers:[],
     isCommentEnabled: false,
     commentValue: "",
     PostcommentId:"",
@@ -12,9 +10,7 @@ export const InitialValueFollowContext={
 export const UserFollowReducer =(state,action)=>{
     switch(action.type){
         case "ALL_USERS":
-            return {...state, allUsers:action.payload}         
-        case "FOLLOW_USER":
-            return {...state, followedByLoggedInUser : action.payload.userData , followUsers :[...action.payload.usernames] }
+            return {...state, allUsers:action.payload}
         case "ENABLE_COMMENT":
             return {...state, isCommentEnabled : !action.payload }
         case "CREATE_COMMENT":

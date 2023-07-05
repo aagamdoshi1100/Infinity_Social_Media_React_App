@@ -3,6 +3,7 @@ export const InitialValueFeedContext ={
     selectedPostData :[],
     userProfileView:[],
     bookMarkView:[],
+    followedUsers:[],
     followedUserPosts : [],
     fetchValue:"",
     showFiltersUserFeed: false,
@@ -19,7 +20,7 @@ export default function UserFeedReducer(state,action){
     switch(action.type){
         case "ALL_POSTS":
             return {...state, postsData: action.payload.data, fetchValue:action.payload.value,previewUploadedImage:false,    createPostContent :null,
-                createPostImage:null, }
+                createPostImage:null, followedUserPosts: [...action.payload.data].filter(item=> state.followedUsers.includes(item.username))}
         case "SELECTED_POST":
             return {...state, selectedPostData: [action.payload.data], fetchValue:action.payload.value}        
         case "BOOKMARK_POST_HANDLER":
@@ -62,9 +63,10 @@ export default function UserFeedReducer(state,action){
             return {...state, userProfileView:action.payload.data, fetchValue:action.payload.value}
         case "FOLLOW_USER":
             const userFollowedDetails = state.postsData.filter((item)=>  [...action.payload.allFollowingUsers].includes(item.username))
-            return {...state ,followedUserPosts : userFollowedDetails,fetchValue:action.payload.value}
-        // case "LOGGED_IN_USER_POST":
-        //     return {...state, followedUserPosts: state.postsData.filter(item=>item.username===action.payload)}
+            return {...state ,followedUserPosts : userFollowedDetails,followedUsers:action.payload.allFollowingUsers ,fetchValue:action.payload.value}
+        case "LOGGED_IN_USERNAME_AND_POSTS":
+            const userFollowedDetails1 = state.postsData.filter((item)=>  [action.payload.username].includes(item.username))
+            return {...state ,followedUserPosts : userFollowedDetails1,fetchValue:action.payload.value, followedUsers:[action.payload.username]}
     }
        
 }

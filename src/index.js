@@ -19,17 +19,17 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <UserFeedContextProvider>
-        <FollowContextProvider>
-          <AuthContextProvider>
-            <IconContextProvider>
-              <UserProfileContextProvider> 
-                <App /> 
-              </UserProfileContextProvider>
-            </IconContextProvider>
-          </AuthContextProvider>
-        </FollowContextProvider>
-      </UserFeedContextProvider>
+      <AuthContextProvider>
+        <UserFeedContextProvider>
+          <FollowContextProvider>
+              <IconContextProvider>
+                <UserProfileContextProvider> 
+                  <App /> 
+                </UserProfileContextProvider>
+              </IconContextProvider>
+            </FollowContextProvider>
+          </UserFeedContextProvider>
+        </AuthContextProvider>
     </BrowserRouter>
   </React.StrictMode>
 );

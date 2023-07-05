@@ -1,14 +1,14 @@
 import { createContext, useContext, useEffect, useReducer } from "react";
 import UserFeedReducer,{InitialValueFeedContext} from "../reducer/UserFeedReducer";
-import { useNavigate } from "react-router-dom";
+import useAuthContext from "./AuthContext";
+
 const UserFeedContext = createContext()
 
 export const UserFeedContextProvider=({children})=>{
     const [userFeed,userFeedDispacher] = useReducer(UserFeedReducer,InitialValueFeedContext)  
-     
+    const {navigate} = useAuthContext();
 const token = localStorage.getItem("encodedToken")
-
-const navigate = useNavigate()
+ 
 const postBookMarkHandler =async(postId)=>{
     try{
         const response = await fetch(`/api/users/bookmark/${postId}`,{
@@ -120,8 +120,8 @@ const postLikeHandler =async(postId)=>{
                 body: JSON.stringify({postData:post})
             })
             const responseData = await response.json()
-            userFeedDispacher({type : "ALL_POSTS",payload : {data: responseData.posts,value:userFeed.fetchValue === "followedUserPosts" ? "followedUserPosts" : "postsData"}})
-            userFeedDispacher({type:"AUTO_LOGGED_IN_USER",payload:localStorage.getItem("Username")})
+            console.log("🚀 ~ file: UserFeedContext.js:123 ~ createPost ~ responseData:", responseData)
+            userFeedDispacher({type : "ALL_POSTS",payload : {data: responseData.posts,value:userFeed.fetchValue}})
         }catch(e){
             console.log("🚀 ~ file: UserFeedContext.js:17 ~ createPost ~ e:", e)
         }

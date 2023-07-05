@@ -29,12 +29,12 @@ export default function UserFeed(){
         <div className="allUsers-div">
             <AllUsers />       
         </div>
-        {infinityUsers.followUsers.length > 0 ?  
+        {/* {userFeed.followUsers.length > 0 ?   */}
         <div className="all-posts-div"> 
             <Filters />
             <FetchData /> 
         </div>
-         : <p style={{fontSize:"20px"}}><span><SlUserFollow /></span>Please follow users to see posts</p>}    
+         {/* : <p style={{fontSize:"20px"}}><span><SlUserFollow /></span>Please follow users to see posts</p>}     */}
         </div>
     <div className="footer-div">
         <Footer />

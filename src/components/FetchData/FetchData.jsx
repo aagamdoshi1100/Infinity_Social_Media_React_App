@@ -42,7 +42,7 @@ return(<div className="container-fetchData">
                             null}
                             {userFeed.showToggleUserFeed ? details.username !== user.name && userFeed.indexOfPost===_id ?
                         <div className="heading-menu-item">
-                            {infinityUsers?.followUsers?.includes(details.username) ? 
+                            {userFeed?.followUsers?.includes(details.username) ? 
                             
                             <li onClick={()=>followUser(infinityUsers?.allUsers?.find((item)=>item.username === username)._id)}>Unfollow</li> :
 
