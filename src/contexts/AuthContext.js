@@ -60,7 +60,7 @@ export const AuthContextProvider =({children})=>{
         localStorage.removeItem("encodedToken");
         localStorage.removeItem("Username");
         localStorage.removeItem("Followings");
-        setUser({...user,name:"",isLoggedIn:false});
+        setUser({...user,name:"",auth:{...user.auth,username:"",password:""},isLoggedIn:false});
         navigate("/")
     }
     return(<AuthContext.Provider value={{loginHandler,user,logOutHandler,setUser,signUphandler}}>{children}</AuthContext.Provider>)
