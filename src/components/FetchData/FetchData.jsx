@@ -29,7 +29,7 @@ return(<div className="container-fetchData">
             </div>
             <span style={{color:"rgb(184, 179, 179)"}}>{createdAt}</span>
             <div className="post-edit-btn">
-                <BiDotsVertical size="1.8em"  onClick={()=>userFeedDispacher({type:"THREE_DOT_CONTROLLER",payload:{data:userFeed.showToggleUserFeed, indexOfPost :_id}})} className="three-dots b"/>
+                <BiDotsVertical size="1.8em"  onClick={()=>userFeedDispacher({type:"THREE_DOT_CONTROLLER",payload:{ indexOfPost :_id}})} className="three-dots b"/>
  
                     { userFeed.indexOfPost === _id & username === user.name ? 
                         <div className="heading-menu-item">
@@ -70,10 +70,10 @@ return(<div className="container-fetchData">
                             <span>
                             <AiOutlineLike size="1.8em" color={likes?.likedBy?.some((postLikedBy)=>postLikedBy.username === user.name) ? "red" :"white"}  onClick={()=>postLikeHandler(_id)}/>{likes?.likeCount}</span>
                             <span>
-                            <GoComment size="1.8em" onClick={()=>infinityUsersDispacher({type:"ENABLE_COMMENT",payload : infinityUsers.isCommentEnabled})}/>{infinityUsers.comments.filter(({postId})=>_id === postId).length}
+                            <GoComment size="1.8em" onClick={()=>infinityUsersDispacher({type:"ENABLE_COMMENT",payload : {indexOfPost:_id,status:infinityUsers.isCommentEnabled}})}/>{infinityUsers.comments.filter(({postId})=>_id === postId).length}
                             </span>
                             {
-                                infinityUsers.isCommentEnabled ? 
+                                infinityUsers.indexOfPost === _id &&  infinityUsers.isCommentEnabled ? 
                                     <div className="comment-box">
                                         <textarea className="myText" onChange={(e)=>infinityUsersDispacher({type:"CREATE_COMMENT",payload:{comment:e.target.value,Id:_id,username:user.name}})} placeholder="Write something..." ></textarea>
                                         <button onClick={()=>infinityUsersDispacher({type:"DISCARD_COMMENT"})}>Discard</button>
