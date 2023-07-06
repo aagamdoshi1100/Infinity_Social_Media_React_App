@@ -74,7 +74,7 @@ return(<div className="container-fetchData">
                             </span>
                             {
                                 infinityUsers.indexOfPost === _id &&  infinityUsers.isCommentEnabled ? 
-                                    <div className="comment-box">
+                                    <div className="comment-box b">
                                         <textarea className="myText" onChange={(e)=>infinityUsersDispacher({type:"CREATE_COMMENT",payload:{comment:e.target.value,Id:_id,username:user.name}})} placeholder="Write something..." ></textarea>
                                         <button onClick={()=>infinityUsersDispacher({type:"DISCARD_COMMENT"})}>Discard</button>
                                         <button onClick={()=>infinityUsersDispacher({type:"SAVE_COMMENT"})}>Post</button>
