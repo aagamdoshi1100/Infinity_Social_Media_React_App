@@ -30,32 +30,28 @@ return(<div className="container-fetchData">
             <span style={{color:"rgb(184, 179, 179)"}}>{createdAt}</span>
             <div className="post-edit-btn">
                 <BiDotsVertical size="1.8em"  onClick={()=>userFeedDispacher({type:"THREE_DOT_CONTROLLER",payload:{data:userFeed.showToggleUserFeed, indexOfPost :_id}})} className="three-dots b"/>
-                       
-                {userFeed.showToggleUserFeed ? details.username === user.name && userFeed.indexOfPost===_id ?
-                    <div className="heading-menu-item">
-                        <li onClick={()=>userFeedDispacher({type:"EDIT_CONTROLLER",payload:userFeed.showEditUserFeed})} >Edit</li>
-                        <li onClick={()=>deletePostHandler(_id)}>Delete</li>
-                    </div>  : 
-                        <div>
-                        </div>
-                            : 
-                            null}
-                            {userFeed.showToggleUserFeed ? details.username !== user.name && userFeed.indexOfPost===_id ?
+ 
+                    { userFeed.indexOfPost === _id & username === user.name ? 
                         <div className="heading-menu-item">
-                            {userFeed?.followUsers?.includes(details.username) ? 
-                            
-                            <li onClick={()=>followUser(infinityUsers?.allUsers?.find((item)=>item.username === username)._id)}>Unfollow</li> :
-
-
-                            <li onClick={()=>followUser(infinityUsers?.allUsers?.find((item)=>item.username === username)._id)}>Follow</li>
-                            
-                            }
-                        </div>  : 
-                        <div>
-                        </div>
-                            : 
-                            null}
-                        </div>
+                            <li onClick={()=>userFeedDispacher({type:"EDIT_CONTROLLER",payload:userFeed.showEditUserFeed})} >Edit</li>
+                            <li onClick={()=>deletePostHandler(_id)}>Delete</li>
+                        </div> :                   
+                        null
+                    }
+ 
+                    {userFeed?.followedUsers?.find(item=>item === username) ? 
+                       (
+                        userFeed.indexOfPost === _id && username !== user.name && userFeed?.followedUsers?.find(item=>item === username) ?   
+                            <li className="heading-menu-item" onClick={()=>followUser(infinityUsers?.allUsers?.find((item)=>item.username === username)._id)}>Unfollow</li>  : 
+                        null
+                       )  :
+                        (
+                        userFeed.indexOfPost === _id && username !== user.name && userFeed?.followedUsers?.find(item=>item !== username) ?
+                            <li className="heading-menu-item" onClick={()=>followUser(infinityUsers?.allUsers?.find((item)=>item.username === username)._id)}>Follow</li> :
+                        null
+                        )
+                    }
+            </div>
         </div>
                     <div contentEditable={userFeed.showEditUserFeed ? userFeed.indexOfPost===_id : false}  onClick={()=>getSelectedPost(_id)}>
                         {userFeed.showEditUserFeed && userFeed.indexOfPost===_id ?
