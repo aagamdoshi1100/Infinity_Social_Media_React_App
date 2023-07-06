@@ -1,3 +1,4 @@
+import { toast } from 'react-toastify';
 export const InitialValueFollowContext={
     allUsers :[],
     isCommentEnabled: false,
@@ -17,10 +18,12 @@ export const UserFollowReducer =(state,action)=>{
         case "CREATE_COMMENT":
             return {...state, commentValue: action.payload.comment, PostcommentId: action.payload.Id, commentBy: action.payload.username }
         case "SAVE_COMMENT":
+            toast.success("Comment has been posted");
             return {...state, comments: [...state.comments, {postId: state.PostcommentId, comment:state.commentValue, commentBy:state.commentBy}],isCommentEnabled : !state.isCommentEnabled}
         case "DISCARD_COMMENT":
             return {...state, isCommentEnabled : !state.isCommentEnabled, commentValue: "", PostcommentId:""}
         case "DELETE_COMMENT":
+            toast.error('Comment has been deleted')
             return {...state, comments: [...state.comments.filter((item)=>item.comment !== action.payload)]}
     }
 }

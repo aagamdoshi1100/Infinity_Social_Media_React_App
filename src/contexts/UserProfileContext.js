@@ -1,7 +1,7 @@
 import { createContext, useContext, useReducer } from "react";
 import { InitialValueUserProfile, UserProfileReducer } from "../reducer/UserProfileReducer";
 import useUserFeedContext from "./UserFeedContext";
- 
+import { toast } from 'react-toastify';
 
 const UserProfileContext = createContext();
 
@@ -24,6 +24,7 @@ export default function UserProfileContextProvider({children}){
             const responseData = await response.json();
             console.log("editres",responseData)
             profileDispacher({type:"UPDATE_USER_PROFILE",payload:{userData:responseData.user, status: profile.isEditProfile}})
+            toast.success("Profile updated successfully");
         }catch(e){
             console.log("🚀 ~ file: UserFeedContext.js:48 ~ editUserProfile ~ e:", e)
         }

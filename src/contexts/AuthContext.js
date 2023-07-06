@@ -1,5 +1,6 @@
 import { createContext, useContext, useState } from "react"; 
 import { useNavigate } from "react-router-dom";
+import { toast } from 'react-toastify';
 
 const AuthContext = createContext();
 
@@ -31,6 +32,7 @@ export const AuthContextProvider =({children})=>{
                 localStorage.setItem("Username",createdUser.username);
                 localStorage.setItem("Followings",createdUser.username);
                 setUser({...user,name:createdUser.username,isLoggedIn:true,errorMessage:""});
+                toast.success("User created");
                 navigate("/pages/UserFeed/UserFeed");
             }
         }catch(e){
@@ -44,8 +46,8 @@ export const AuthContextProvider =({children})=>{
                 method:"POST",
                 body : JSON.stringify({username:user.auth.username,password:user.auth.password})
             })
-            if(response.status === 404){
-                setUser({...user, errorMessage:"User not found"});
+            if(response.status === 404){ 
+                toast.error('User not found');
             }else if(response.status === 200){
                 const {encodedToken} = await response.json();
                 localStorage.setItem("encodedToken",encodedToken);
@@ -64,6 +66,7 @@ export const AuthContextProvider =({children})=>{
         localStorage.removeItem("Username");
         localStorage.removeItem("Followings");
         setUser({...user,name:"",auth:{...user.auth,username:"",password:""},isLoggedIn:false});
+        toast.success("Logged out successfully");
         navigate("/")
     }
     return(<AuthContext.Provider value={{navigate,loginHandler,user,logOutHandler,setUser,signUphandler}}>{children}</AuthContext.Provider>)

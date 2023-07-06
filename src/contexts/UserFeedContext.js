@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useReducer } from "react";
 import UserFeedReducer,{InitialValueFeedContext} from "../reducer/UserFeedReducer";
 import useAuthContext from "./AuthContext";
+import { toast } from 'react-toastify';
 
 const UserFeedContext = createContext()
 
@@ -20,6 +21,7 @@ const postBookMarkHandler =async(postId)=>{
         
         if(response.status === 200){
             userFeedDispacher({type:"BOOKMARK_POST_HANDLER",payload:{data:responseData.bookmarks}})
+            toast.success("Post added to bookmark");
         }
         if(response.status === 400){
             try{
@@ -30,6 +32,7 @@ const postBookMarkHandler =async(postId)=>{
             const responseErrorData = await responseError.json();
             console.log("🚀 ~ file: UserFeedContext.js:31 ~ postBookMarkHandler ~ responseErrorData:", responseErrorData)
             userFeedDispacher({type:"BOOKMARK_POST_HANDLER",payload:{data:responseErrorData.bookmarks}})
+            toast.success("Post removed from bookmark");
             }catch(e){
                 console.log("🚀 ~ file: UserFeedContext.js:32 ~ postBookMarkHandler ~ e:", e)
             }
@@ -59,6 +62,7 @@ const getSelectedPost= async(postId)=>{
         })
         const responseData = await response.json();
         userFeedDispacher({type : "ALL_POSTS",payload : {data:responseData.posts,value:userFeed.fetchValue}})
+        toast.success("Post deleted");
     }catch(e){
     console.log("🚀 ~ file: UserFeedContext.js:32 ~ editHandler ~ e:", e)
     }
@@ -76,6 +80,7 @@ const editHandler = async(postId)=>{
         })
         const responseData = await response.json();
         userFeedDispacher({type : "EDIT_POST_HANDLER",payload :{data: responseData.posts,showEditUserFeed : userFeed.showEditUserFeed,value:"postsData"}})
+        // toast.success("Post has been edited");
     }catch(e){
     console.log("🚀 ~ file: UserFeedContext.js:32 ~ editHandler ~ e:", e)
     }
@@ -122,6 +127,7 @@ const postLikeHandler =async(postId)=>{
             const responseData = await response.json()
             console.log("🚀 ~ file: UserFeedContext.js:123 ~ createPost ~ responseData:", responseData)
             userFeedDispacher({type : "ALL_POSTS",payload : {data: responseData.posts,value:userFeed.fetchValue}})
+            toast.success("Post uploaded successfully");
         }catch(e){
             console.log("🚀 ~ file: UserFeedContext.js:17 ~ createPost ~ e:", e)
         }

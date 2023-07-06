@@ -2,7 +2,7 @@ import { createContext, useContext, useEffect, useReducer } from "react";
 import {InitialValueFollowContext,UserFollowReducer} from "../reducer/UserFollowReducer"
 import useUserFeedContext from "./UserFeedContext";
 import useAuthContext from "./AuthContext";
- 
+import { toast } from 'react-toastify';
 const FollowContext = createContext();
 
 export const FollowContextProvider =({children})=>{
@@ -23,6 +23,7 @@ export const FollowContextProvider =({children})=>{
                 const followingUsers = [...userFeed.followedUsers,responseData.followUser.username]  
                 localStorage.setItem("Followings",followingUsers)
                 userFeedDispacher({type:"FOLLOW_USER",payload:{allFollowingUsers:followingUsers,value :userFeed.fetchValue}})
+                toast.success(`User started following to ${responseData.followUser.username}`);
             } 
             if(response.status ===400){
                 try{
@@ -33,6 +34,7 @@ export const FollowContextProvider =({children})=>{
                     const responseErrorData = await responseError.json();
                     const unfollowingUserRemoved = userFeed.followedUsers.filter((user)=> user !== responseErrorData.followUser.username)
                     userFeedDispacher({type:"FOLLOW_USER",payload:{allFollowingUsers:unfollowingUserRemoved,value :userFeed.fetchValue}})
+                    toast.error(`User ${responseErrorData.followUser.username} unfollowed`);
                 }catch(e){
                     console.log("🚀 ~ file: FollowContext.js:27 ~ followUser ~ e:", e)
                 }
