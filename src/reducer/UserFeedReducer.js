@@ -9,8 +9,7 @@ export const InitialValueFeedContext ={
     showFiltersUserFeed: false,
     createPostContent :null,
     createPostImage:null,
-    filterBy: "",
-    showToggleUserFeed:false,
+    filterBy: "", 
     showEditUserFeed:false,
     indexOfPost:"",
     previewUploadedImage:false
@@ -42,7 +41,7 @@ export default function UserFeedReducer(state,action){
         case "SHOW_FILTERS":
             return {...state, showFiltersUserFeed: !action.payload}
         case "THREE_DOT_CONTROLLER":
-            return {...state, showToggleUserFeed: !action.payload.data,indexOfPost:action.payload.indexOfPost}
+            return {...state,indexOfPost:action.payload.indexOfPost}
         case "EDIT_CONTROLLER":
                 return {...state, showEditUserFeed: !action.payload}        
         case "EDIT_POST_HANDLER":
