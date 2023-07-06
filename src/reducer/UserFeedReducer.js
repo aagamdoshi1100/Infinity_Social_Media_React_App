@@ -29,15 +29,22 @@ export default function UserFeedReducer(state,action){
                     image: state.postsData.find((item)=>item._id === post._id).image,
                     likes : state.postsData.find((item)=>item._id === post._id).likes
                 }
-            })
+            }) 
             console.log(modifiedData,"modifiedData")
             return {...state, bookMarkView: modifiedData}
         case "BOOKMARK_PAGE":
         case "HOME_PAGE":
         case "EXPLORE_PAGE":
             return {...state, fetchValue: action.payload}        
-        case "LIKE_STATUS":
-            return { ...state, postsData: [...action.payload.data], followedUserPosts: [...action.payload.data].filter(item=> localStorage.getItem("Followings").split(",").includes(item.username)) };
+        case "LIKE_STATUS": 
+            const getBooMarkedPostsId = state.bookMarkView.map(item=>{
+                return item._id
+            });
+            return { ...state,
+                 postsData: [...action.payload.data],
+                 followedUserPosts: [...action.payload.data].filter(item=> localStorage.getItem("Followings").split(",").includes(item.username)),
+                 bookMarkView : [...action.payload.data]?.filter(item => getBooMarkedPostsId?.includes(item._id))
+                };
         case "SHOW_FILTERS":
             return {...state, showFiltersUserFeed: !action.payload}
         case "THREE_DOT_CONTROLLER":

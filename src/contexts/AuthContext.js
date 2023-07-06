@@ -29,6 +29,7 @@ export const AuthContextProvider =({children})=>{
                 const {encodedToken,createdUser} = await response.json();
                 localStorage.setItem("encodedToken",encodedToken);
                 localStorage.setItem("Username",createdUser.username);
+                localStorage.setItem("Followings",createdUser.username);
                 setUser({...user,name:createdUser.username,isLoggedIn:true,errorMessage:""});
                 navigate("/pages/UserFeed/UserFeed");
             }
@@ -49,6 +50,7 @@ export const AuthContextProvider =({children})=>{
                 const {encodedToken} = await response.json();
                 localStorage.setItem("encodedToken",encodedToken);
                 localStorage.setItem("Username",user.auth.username);
+                localStorage.setItem("Followings",user.auth.username);
                 setUser({...user,name:user.auth.username,isLoggedIn:true,errorMessage:""});
                 navigate("/pages/UserFeed/UserFeed")
             }  
