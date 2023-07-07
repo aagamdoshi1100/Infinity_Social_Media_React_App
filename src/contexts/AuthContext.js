@@ -14,6 +14,8 @@ export const AuthContextProvider =({children})=>{
         lastname:""
     },
     isLoggedIn:false,
+    isNewUser:false,
+    newUser:null,
     errorMessage:""
 })
     const navigate = useNavigate();
@@ -23,15 +25,15 @@ export const AuthContextProvider =({children})=>{
             const response = await fetch(`/api/auth/signup`,{
                 method:"POST",
                 body:JSON.stringify({
-                    email:user.auth.email, password:user.auth.password, username:user.auth.username, firstname:user.auth.firstname
+                    email:user.auth.email, password:user.auth.password, username:user.auth.username, firstName:user.auth.firstname,lastName:user.auth.lastname,profileIcon:"https://shorturl.at/tyEJ9"
                   })
-            })
+            }) 
             if(response.status === 201){
-                const {encodedToken,createdUser} = await response.json();
+                const {encodedToken,createdUser} = await response.json(); 
                 localStorage.setItem("encodedToken",encodedToken);
                 localStorage.setItem("Username",createdUser.username);
                 localStorage.setItem("Followings",createdUser.username);
-                setUser({...user,name:createdUser.username,isLoggedIn:true,errorMessage:""});
+                setUser({...user,name:createdUser.username,isLoggedIn:true,errorMessage:"",isNewUser:true,newUser:createdUser});
                 toast.success("User created");
                 navigate("/pages/UserFeed/UserFeed");
             }
@@ -69,7 +71,7 @@ export const AuthContextProvider =({children})=>{
         toast.success("Logged out successfully");
         navigate("/")
     }
-    return(<AuthContext.Provider value={{navigate,loginHandler,user,logOutHandler,setUser,signUphandler}}>{children}</AuthContext.Provider>)
+    return(<AuthContext.Provider value={{navigate,loginHandler,user,setUser,logOutHandler,setUser,signUphandler}}>{children}</AuthContext.Provider>)
 }
 
 const useAuthContext =()=> useContext(AuthContext);

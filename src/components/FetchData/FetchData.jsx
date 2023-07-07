@@ -7,10 +7,10 @@ import { useUserProfileContext } from "../../contexts/UserProfileContext"
 import { useIconContext } from "../../contexts/IconContext"
 export default function FetchData(){
     const {userFeed,userFeedDispacher,postLikeHandler,deletePostHandler,getSelectedPost,postBookMarkHandler} = useUserFeedContext()
-    console.log("🚀 ~ file: FetchData.jsx:10 ~ FetchData ~ userFeed:", userFeed)
+    
     const {user} = useAuthContext();
     const {infinityUsers,followUser,infinityUsersDispacher,handleComment} =useFollowContext();
-   // console.log("infinityUsers:", infinityUsers)
+    console.log("infinityUsers:", infinityUsers)
     const {GoComment,FiBookmark,BiDotsVertical,MdInsertPhoto,AiOutlineLike} = useIconContext();
     const {getUserProfile,editHandler,profile} = useUserProfileContext();
      
@@ -18,14 +18,14 @@ export default function FetchData(){
 return(<div className="container-fetchData">
     {
     userFeed?.[fetchValue]?.map((details)=>{
-    const {_id,username,content,image,createdAt,likes,isLiked} = details;
+    const {_id,username,content,image,createdAt,likes} = details;
     return(<div key={_id} className="FeedBox wd b">
         <div className="post-header">
             <span className="circle" onClick={()=>getUserProfile(infinityUsers?.allUsers?.find((item)=>item.username === username)._id,username)}>
-            <img src={username === user.name && profile.userProfileData.length > 0 ? profile.userProfileData[0].profileIcon :
-                infinityUsers?.allUsers?.find((item)=>item.username === username).profileIcon} width="100%" height="100%"/></span>
+            <img src={username === user.name && profile.userProfileData.length > 0 ? profile.userProfileData[0]?.profileIcon :
+                infinityUsers?.allUsers?.find((item)=>item.username === username)?.profileIcon} width="100%" height="100%"/></span>
             <div className="fullName">
-                <span>{`${infinityUsers?.allUsers?.find((item)=>item.username === username).firstName} ${infinityUsers?.allUsers?.find((item)=>item.username === username).lastName}`}</span>
+                <span>{`${infinityUsers?.allUsers?.find((item)=>item.username === username)?.firstName} ${infinityUsers?.allUsers?.find((item)=>item.username === username)?.lastName}`}</span>
                 <span style={{color:"grey"}}>@{username}</span>
             </div>
             <span style={{color:"rgb(184, 179, 179)"}}>{createdAt}</span>

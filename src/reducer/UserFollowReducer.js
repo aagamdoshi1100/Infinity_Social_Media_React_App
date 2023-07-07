@@ -12,6 +12,8 @@ export const UserFollowReducer =(state,action)=>{
     switch(action.type){
         case "ALL_USERS":
             return {...state, allUsers:action.payload}
+        case "ADD_NEW_USER":
+            return {...state,allUsers:[...state.allUsers, action.payload]}
         case "ENABLE_COMMENT":
             return {...state,indexOfPost: action.payload.indexOfPost, isCommentEnabled : !action.payload.status }
         case "CREATE_COMMENT":
