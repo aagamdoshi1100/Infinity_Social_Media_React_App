@@ -18,8 +18,15 @@ export const InitialValueFeedContext ={
 export default function UserFeedReducer(state,action){
     switch(action.type){
         case "ALL_POSTS":
-            return {...state, postsData: action.payload.data, fetchValue:action.payload.value,previewUploadedImage:false,    createPostContent :null,
-                createPostImage:null, followedUserPosts: [...action.payload.data].filter(item=> state.followedUsers.includes(item.username))}
+            return {...state, 
+                postsData: action.payload.data, 
+                fetchValue:action.payload.value,
+                previewUploadedImage:false,    
+                createPostContent :null,
+                createPostImage:null, 
+                followedUserPosts: [...action.payload.data].filter(item=> state.followedUsers.includes(item.username)),
+                userProfileView: state.userProfileView.filter(item=>item._id !== action.payload.postId)
+            }
         case "SELECTED_POST":
             return {...state, selectedPostData: [action.payload.data], fetchValue:action.payload.value}        
         case "BOOKMARK_POST_HANDLER":

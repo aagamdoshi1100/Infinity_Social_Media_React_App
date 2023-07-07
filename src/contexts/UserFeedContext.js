@@ -61,7 +61,7 @@ const getSelectedPost= async(postId)=>{
             headers:{authorization:token},
         })
         const responseData = await response.json();
-        userFeedDispacher({type : "ALL_POSTS",payload : {data:responseData.posts,value:userFeed.fetchValue}})
+        userFeedDispacher({type : "ALL_POSTS",payload : {data:responseData.posts,value:userFeed.fetchValue,postId}})
         toast.success("Post deleted");
     }catch(e){
     console.log("🚀 ~ file: UserFeedContext.js:32 ~ editHandler ~ e:", e)
