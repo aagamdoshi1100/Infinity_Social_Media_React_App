@@ -4,7 +4,7 @@ import { useIconContext } from "../../contexts/IconContext";
 import useUserFeedContext from "../../contexts/UserFeedContext";
 import "./Comment.css"
 export default function Comment(){
-    const {infinityUsers,infinityUsersDispacher} = useFollowContext();
+    const {infinityUsers,infinityUsersDispacher,deleteComment} = useFollowContext();
     const {userFeed} = useUserFeedContext();
     const {user} = useAuthContext();
     const {AiOutlineDelete}  =useIconContext();
@@ -24,7 +24,7 @@ export default function Comment(){
                     </div>
                   </div>
                   {commentBy === user.name &&
-                    <AiOutlineDelete size="2em" onClick={() => infinityUsersDispacher({type: "DELETE_COMMENT", payload: comment})} />
+                    <AiOutlineDelete size="2em" onClick={()=>deleteComment(comment)} />
                   }
                 </div>
                 <p className="comment">{comment}</p>  

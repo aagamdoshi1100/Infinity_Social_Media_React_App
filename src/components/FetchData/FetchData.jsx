@@ -7,12 +7,13 @@ import { useUserProfileContext } from "../../contexts/UserProfileContext"
 import { useIconContext } from "../../contexts/IconContext"
 export default function FetchData(){
     const {userFeed,userFeedDispacher,postLikeHandler,deletePostHandler,getSelectedPost,postBookMarkHandler} = useUserFeedContext()
+    console.log("🚀 ~ file: FetchData.jsx:10 ~ FetchData ~ userFeed:", userFeed)
     const {user} = useAuthContext();
-    const {infinityUsers,followUser,infinityUsersDispacher} =useFollowContext();
-    console.log("infinityUsers:", infinityUsers)
+    const {infinityUsers,followUser,infinityUsersDispacher,handleComment} =useFollowContext();
+   // console.log("infinityUsers:", infinityUsers)
     const {GoComment,FiBookmark,BiDotsVertical,MdInsertPhoto,AiOutlineLike} = useIconContext();
     const {getUserProfile,editHandler,profile} = useUserProfileContext();
-   
+     
     const fetchValue = userFeed?.fetchValue;
 return(<div className="container-fetchData">
     {
@@ -77,7 +78,7 @@ return(<div className="container-fetchData">
                                     <div className="comment-box b">
                                         <textarea className="myText" onChange={(e)=>infinityUsersDispacher({type:"CREATE_COMMENT",payload:{comment:e.target.value,Id:_id,username:user.name}})} placeholder="Write something..." ></textarea>
                                         <button onClick={()=>infinityUsersDispacher({type:"DISCARD_COMMENT"})}>Discard</button>
-                                        <button onClick={()=>infinityUsersDispacher({type:"SAVE_COMMENT"})}>Post</button>
+                                        <button onClick={handleComment}>Post</button>
                                     </div>
                                 : null
                             }

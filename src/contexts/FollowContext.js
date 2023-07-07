@@ -11,6 +11,15 @@ export const FollowContextProvider =({children})=>{
     const {user} = useAuthContext();
     const token = localStorage.getItem("encodedToken");
 
+    const handleComment =()=>{
+        toast.success("Comment has been posted"); 
+        infinityUsersDispacher({type:"SAVE_COMMENT"});
+    }
+    const deleteComment =(comment)=>{
+        toast.error('Comment has been deleted');
+        infinityUsersDispacher({type: "DELETE_COMMENT",payload:comment});
+    }
+
     const followUser =async(followUserId)=>{ 
         try{
             const response = await fetch(`/api/users/follow/${followUserId}`,{
@@ -60,7 +69,7 @@ useEffect(() => {
 useEffect(()=>{
     fetchInfinityUsers()
 },[])
-    return(<FollowContext.Provider value={{infinityUsers,followUser,infinityUsersDispacher}}>{children}</FollowContext.Provider>)
+    return(<FollowContext.Provider value={{infinityUsers,followUser,infinityUsersDispacher,handleComment,deleteComment}}>{children}</FollowContext.Provider>)
 }
 
 const useFollowContext =()=> useContext(FollowContext)
