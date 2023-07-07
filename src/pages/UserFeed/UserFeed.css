@@ -65,6 +65,18 @@ button {
     .container-body{
         margin-top: 65px;
     }
+    .no-post-box{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      font-size: 18px;
+      width: 80%;
+      margin: 30px auto;
+    }
+    .no-post-message{
+      text-align: center;
+    }
 }
 
 @media screen and (min-width:1024px){

@@ -34,7 +34,10 @@ export default function UserFeed(){
             <Filters />
             <FetchData /> 
         </div>
-           : <p style={{fontSize:"20px"}}><span><SlUserFollow /></span>Please follow users or upload to see posts</p>}   
+           : <div className="no-post-box">
+                <SlUserFollow size="2em"/> 
+                <p className="no-post-message">Please follow users or upload to see posts</p>
+           </div>}   
         </div>
     <div className="footer-div">
         <Footer />
