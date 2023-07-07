@@ -24,5 +24,7 @@ export const UserFollowReducer =(state,action)=>{
             return {...state, isCommentEnabled : !state.isCommentEnabled, commentValue: "", PostcommentId:""}
         case "DELETE_COMMENT":
             return {...state, comments: [...state.comments.filter((item)=>item.comment !== action.payload)]}
+        default:
+            {state}
     }
 }
