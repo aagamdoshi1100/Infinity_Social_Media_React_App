@@ -28,7 +28,9 @@ export const AuthContextProvider =({children})=>{
                     email:user.auth.email, password:user.auth.password, username:user.auth.username, firstName:user.auth.firstname,lastName:user.auth.lastname,profileIcon:"https://shorturl.at/tyEJ9"
                   })
             }) 
-            if(response.status === 201){
+            if(response.status === 422){
+                toast.error("Username Already Exists")
+            }else if(response.status === 201){
                 const {encodedToken,createdUser} = await response.json(); 
                 localStorage.setItem("encodedToken",encodedToken);
                 localStorage.setItem("Username",createdUser.username);
