@@ -37,7 +37,7 @@ export const AuthContextProvider =({children})=>{
                 localStorage.setItem("Followings",createdUser.username);
                 setUser({...user,name:createdUser.username,isLoggedIn:true,errorMessage:"",isNewUser:true,newUser:createdUser});
                 toast.success("User created");
-                navigate("/pages/UserFeed/UserFeed");
+                navigate("/pages/Avtar/Avtar");
             }
         }catch(e){
         console.log("🚀 ~ file: AuthContext.js:20 ~ signUphandler ~ e:", e);

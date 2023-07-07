@@ -10,6 +10,7 @@ import SignUp from './pages/Authentication/SignUp';
 import RequiresAuth from './components/RequiresAuth';
 import { ToastContainer } from "react-toastify"; 
 import "react-toastify/dist/ReactToastify.css";
+import Avtar from './pages/Avtar/Avtar';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/pages/Authentication/SignUp" element={<SignUp />} />
+        <Route path="/pages/Avtar/Avtar" element={<Avtar />} />
         <Route path="/pages/UserFeed/UserFeed" element={<RequiresAuth><UserFeed /></RequiresAuth>}/>
         <Route path="/pages/SinglePostView/" element={<SinglePostView />}/>
         <Route path="/pages/profile/UserProfile" element={<UserProfile />} />

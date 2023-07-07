@@ -19,13 +19,6 @@ export const FollowContextProvider =({children})=>{
         toast.error('Comment has been deleted');
         infinityUsersDispacher({type: "DELETE_COMMENT",payload:comment});
     }
-    const addNewUser =()=>{
-        if(user.isNewUser){
-        infinityUsersDispacher({type:"ADD_NEW_USER",payload:user.newUser});
-        setUser({...user,isNewUser: !user.isNewUser});
-        }
-    }
-
     const followUser =async(followUserId)=>{ 
         try{
             const response = await fetch(`/api/users/follow/${followUserId}`,{
@@ -71,7 +64,6 @@ export const FollowContextProvider =({children})=>{
 useEffect(() => { 
     userFeedDispacher({type:"LOGGED_IN_USERNAME_AND_POSTS",payload:{username:user.name,value:"followedUserPosts"}})
     // console.log("Updated user state to show user posts:", user);
-    addNewUser()
 }, [user]);
 useEffect(()=>{
     fetchInfinityUsers()
