@@ -25,7 +25,8 @@ export default function UserFeedReducer(state,action){
                 createPostContent :null,
                 createPostImage:null, 
                 followedUserPosts: [...action.payload.data].filter(item=> state.followedUsers.includes(item.username)),
-                userProfileView: state.userProfileView.filter(item=>item._id !== action.payload.postId)
+                userProfileView: state.userProfileView.filter(item=>item._id !== action.payload.postId),
+                bookMarkView: state.bookMarkView.filter(item=>item._id !== action.payload.postId)
             }
         case "SELECTED_POST":
             return {...state, selectedPostData: [action.payload.data], fetchValue:action.payload.value}        
