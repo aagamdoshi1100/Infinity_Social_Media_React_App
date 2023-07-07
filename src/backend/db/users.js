@@ -69,7 +69,7 @@ export const users = [
   {
     _id: uuid(),
     firstName: "Akshay",
-    lastName: "Zangrukiya",
+    lastName: "Z",
     profileIcon: "https://shorturl.at/tyEJ9",
     username: "Ak",
     password: "Ak123",
