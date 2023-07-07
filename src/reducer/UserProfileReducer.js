@@ -21,6 +21,6 @@ export const UserProfileReducer =(state,action)=>{
         case "UPDATE_USER_PROFILE":
             return {...state, userProfileData:[action.payload.userData], isEditProfile:!action.payload.status}
         default:
-            {state}
+            return {state}
     }
 }

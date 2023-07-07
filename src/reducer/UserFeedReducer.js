@@ -81,7 +81,7 @@ export default function UserFeedReducer(state,action){
             const userFollowedDetails1 = state.postsData.filter((item)=>  [action.payload.username].includes(item.username))
             return {...state ,followedUserPosts : userFollowedDetails1,fetchValue:action.payload.value, followedUsers:[action.payload.username]}
         default:
-            {state}
+            return {state}
     }
        
 }
