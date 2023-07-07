@@ -9,7 +9,7 @@ export default function NewPost(){
                <textarea className="myText" onChange={(e)=>userFeedDispacher({type:"CREATE_POST_CONTENT",payload:e.target.value})} placeholder="Write something..." ></textarea>
         <div className="create-post-controls">
             <div className="image-box">
-                <img src={userFeed.createPostImage === null || userFeed.createPostImage === undefined  ? "" : `${URL.createObjectURL(userFeed.createPostImage)}` } onClick={()=>userFeedDispacher({type:"PREVIEW",payload: userFeed.previewUploadedImage})}/>
+                <img src={userFeed.createPostImage === null || userFeed.createPostImage === undefined  ? "" : `${URL.createObjectURL(userFeed.createPostImage)}` } onClick={()=>userFeedDispacher({type:"PREVIEW",payload: userFeed.previewUploadedImage})} alt="Post Image"/>
             </div>
             <div className="btn-imgpicker">
                 <label htmlFor="image">
@@ -22,7 +22,7 @@ export default function NewPost(){
             <div className="preview-post b br">
                 <h3>Post preview</h3>
                 <p>{userFeed?.createPostContent}</p>
-                <img src={userFeed.createPostImage === null || userFeed.createPostImage === undefined  ? "" : `${URL.createObjectURL(userFeed.createPostImage)}` } />
+                <img src={userFeed.createPostImage === null || userFeed.createPostImage === undefined  ? "" : `${URL.createObjectURL(userFeed.createPostImage)}` } alt="Post Image"/>
                 <button onClick={createPost}>Post</button>
                 <button onClick={()=>userFeedDispacher({type:"PREVIEW",payload: userFeed.previewUploadedImage})}>Discard</button>
             </div> : null 

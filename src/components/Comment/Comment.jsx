@@ -4,14 +4,14 @@ import { useIconContext } from "../../contexts/IconContext";
 import useUserFeedContext from "../../contexts/UserFeedContext";
 import "./Comment.css"
 export default function Comment(){
-    const {infinityUsers,infinityUsersDispacher,deleteComment} = useFollowContext();
+    const {infinityUsers,deleteComment} = useFollowContext();
     const {userFeed} = useUserFeedContext();
     const {user} = useAuthContext();
     const {AiOutlineDelete}  =useIconContext();
     return(<div className="">
         {
             infinityUsers.comments.filter(({postId})=>postId === userFeed.selectedPostData[0]._id).map((details)=>{
-                const {postId,comment,commentBy} = details;
+                const {comment,commentBy} = details;
                 return(<div className="comment-container b" key={comment}> 
                 <div className="comment-header">
                   <div className="commentBy">

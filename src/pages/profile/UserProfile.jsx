@@ -26,7 +26,7 @@ export default function UserProfile(){
         return(<div key={_id} className="container">
         <div className="profile-header">
             <div className="profile-circle" >
-                    <img src={`${profileIcon}`}  />
+                    <img src={`${profileIcon}`} alt="Profile Icon" />
             </div>
             <div className="following">
                 <p>{following.length}</p>
@@ -56,13 +56,13 @@ export default function UserProfile(){
                 <input className="edit-profile-inputs" type="text" placeholder="Enter your bio" onChange={(e)=>profileDispacher({type:"BIO_VALUE",payload:e.target.value})} />
                 <input className="edit-profile-inputs" type="text" placeholder="Enter your portfolio URL" onChange={(e)=>profileDispacher({type:"PORTFOLIO_VALUE",payload:e.target.value})}/>
                     <div className="avtars">
-                        <img className="selectAvtar" src="https://shorturl.at/ctGQZ" onClick={(e)=>profileDispacher({type:"AVTAR_VALUE",payload:e.target.src})}/>
-                        <img className="selectAvtar" src="https://shorturl.at/dkyER" onClick={(e)=>profileDispacher({type:"AVTAR_VALUE",payload:e.target.src})}/>
-                        <img className="selectAvtar" src="https://shorturl.at/hpsuR" onClick={(e)=>profileDispacher({type:"AVTAR_VALUE",payload:e.target.src})}/>
-                        <img className="selectAvtar" src="https://shorturl.at/bpvC9" onClick={(e)=>profileDispacher({type:"AVTAR_VALUE",payload:e.target.src})}/>
-                        <img className="selectAvtar" src="https://shorturl.at/jpX57" onClick={(e)=>profileDispacher({type:"AVTAR_VALUE",payload:e.target.src})}/>
-                        <img className="selectAvtar" src="https://shorturl.at/qENP1" onClick={(e)=>profileDispacher({type:"AVTAR_VALUE",payload:e.target.src})}/>
-                        <img className="selectAvtar" src="https://shorturl.at/hjGK4" onClick={(e)=>profileDispacher({type:"AVTAR_VALUE",payload:e.target.src})}/>
+                        <img className="selectAvtar" src="https://shorturl.at/ctGQZ" onClick={(e)=>profileDispacher({type:"AVTAR_VALUE",payload:e.target.src})} alt="Select Profile Icon"/>
+                        <img className="selectAvtar" src="https://shorturl.at/dkyER" onClick={(e)=>profileDispacher({type:"AVTAR_VALUE",payload:e.target.src})} alt="Select Profile Icon"/>
+                        <img className="selectAvtar" src="https://shorturl.at/hpsuR" onClick={(e)=>profileDispacher({type:"AVTAR_VALUE",payload:e.target.src})} alt="Select Profile Icon"/>
+                        <img className="selectAvtar" src="https://shorturl.at/bpvC9" onClick={(e)=>profileDispacher({type:"AVTAR_VALUE",payload:e.target.src})} alt="Select Profile Icon"/>
+                        <img className="selectAvtar" src="https://shorturl.at/jpX57" onClick={(e)=>profileDispacher({type:"AVTAR_VALUE",payload:e.target.src})} alt="Select Profile Icon"/>
+                        <img className="selectAvtar" src="https://shorturl.at/qENP1" onClick={(e)=>profileDispacher({type:"AVTAR_VALUE",payload:e.target.src})} alt="Select Profile Icon"/>
+                        <img className="selectAvtar" src="https://shorturl.at/hjGK4" onClick={(e)=>profileDispacher({type:"AVTAR_VALUE",payload:e.target.src})} alt="Select Profile Icon"/>
                     </div>
                         <button className="edit-profile-btn" onClick={editUserProfile}>Save</button>
                         <button className="edit-profile-btn" onClick={()=>profileDispacher({type:"EDIT_PROFILE",payload: profile.isEditProfile})}>Cancel</button>
