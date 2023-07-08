@@ -1,5 +1,4 @@
-@media only screen and (max-width: 768px) {
-    .parent-container {
+.parent-container {
         display: flex;
         justify-content: center;
         align-items: center;
@@ -51,4 +50,3 @@
         color: blueviolet;
         font-size: 16px;
     }
-  }
