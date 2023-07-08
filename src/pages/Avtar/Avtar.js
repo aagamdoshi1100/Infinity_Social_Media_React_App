@@ -15,6 +15,7 @@ export default function Avtar(){
         }
     }
     return(<div className="avtar-container">
+        <div className="child-container">
             <div className="avtar-header">
                 <h1>Select Avtar</h1>
                     <div className="avtar-circle" >
@@ -31,6 +32,6 @@ export default function Avtar(){
                 <img className="selectAvtar" src="https://shorturl.at/qENP1" onClick={(e)=>setUser({...user, newUser : {...user.newUser , profileIcon: e.target.src}})} alt="Select Profile Icon"/>
                 <img className="selectAvtar" src="https://shorturl.at/hjGK4" onClick={(e)=>setUser({...user, newUser : {...user.newUser , profileIcon: e.target.src}})} alt="Select Profile Icon"/>
             </div>
-        <button className="homebtn" onClick={addNewUser}>Go To Home</button>
+        <button className="homebtn" onClick={addNewUser}>Go To Home</button></div>
     </div>)
 }
