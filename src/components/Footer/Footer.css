@@ -1,32 +1,38 @@
 @media only screen and (max-width: 768px) {
-    .footer > *:hover {
-        color: rgb(150, 223, 41);
-      }
-    .footer{
-        position: fixed;
-        left: 0;
-        bottom: 0;
-        width: 100%;
-        background-color: rgb(0, 0, 0);
-        padding: 12px;
-        box-sizing: border-box;
-        display: flex;
-        justify-content: space-between;
-    
-    }
-    .icon-name{
-        display: none;
-    }
+  .footer > *:hover {
+    color: rgb(150, 223, 41);
+  }
+  .footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: rgb(0, 0, 0);
+    padding: 12px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+  }
+  .icon-name {
+    display: none;
+  }
+  .fil {
+    display: none;
+  }
 }
 
-@media screen and (min-width:1024px){ 
-    .icon-details{
-        display: flex;
-        align-items: center;
-        margin: 15px;
-        cursor: pointer;
-    }
-    .icon-name{
-        margin-left: 5px;
-    } 
+@media screen and (min-width: 1024px) {
+  .icon-details {
+    display: flex;
+    align-items: center;
+    margin: 15px;
+    cursor: pointer;
+  }
+  .fil {
+    padding: 0 8px;
+  }
+  .icon-name {
+    margin-left: 5px;
+    font-size: 20px;
+  }
 }

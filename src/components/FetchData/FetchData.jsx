@@ -36,41 +36,43 @@ export default function FetchData() {
         return (
           <div key={_id} className="FeedBox b">
             <div className="post-header">
-              <span
-                className="circle"
-                onClick={() =>
-                  getUserProfile(
-                    infinityUsers?.allUsers?.find(
-                      (item) => item.username === username
-                    )._id,
-                    username
-                  )
-                }
-              >
-                <img
-                  src={
-                    username === user.name && profile.userProfileData.length > 0
-                      ? profile.userProfileData[0]?.profileIcon
-                      : infinityUsers?.allUsers?.find(
+              <div className="user-identity">
+                <span
+                  className="circle"
+                  onClick={() =>
+                    getUserProfile(
+                      infinityUsers?.allUsers?.find(
                         (item) => item.username === username
-                      )?.profileIcon
+                      )._id,
+                      username
+                    )
                   }
-                  width="100%"
-                  height="100%"
-                  alt="Profile Icon"
-                />
-              </span>
-              <div className="fullName">
-                <span>{`${infinityUsers?.allUsers?.find(
-                  (item) => item.username === username
-                )?.firstName
-                  } ${infinityUsers?.allUsers?.find(
+                >
+                  <img
+                    src={
+                      username === user.name && profile.userProfileData.length > 0
+                        ? profile.userProfileData[0]?.profileIcon
+                        : infinityUsers?.allUsers?.find(
+                          (item) => item.username === username
+                        )?.profileIcon
+                    }
+                    width="100%"
+                    height="100%"
+                    alt="Profile Icon"
+                  />
+                </span>
+                <div className="fullName">
+                  <span>{`${infinityUsers?.allUsers?.find(
                     (item) => item.username === username
-                  )?.lastName
-                  }`}</span>
-                <span style={{ color: "grey" }}>@{username}</span>
+                  )?.firstName
+                    } ${infinityUsers?.allUsers?.find(
+                      (item) => item.username === username
+                    )?.lastName
+                    }`}</span>
+                  <span style={{ color: "grey" }}>@{username}</span>
+                </div>
+                <span style={{ color: "rgb(184, 179, 179)" }}>{createdAt}</span>
               </div>
-              <span style={{ color: "rgb(184, 179, 179)" }}>{createdAt}</span>
               <div className="post-edit-btn">
                 <BiDotsVertical
                   size="1.8em"
@@ -150,7 +152,7 @@ export default function FetchData() {
                   }
                 />
               ) : (
-                <p>{content}</p>
+                <p style={{ margin: "10px" }}>{content}</p>
               )}
               {!image ? null : (
                 <div className="fetchdata-image">
@@ -181,10 +183,10 @@ export default function FetchData() {
                 ""
               )}
             </div>
-            <div className="post-footer b jc-sb p">
-              <span>
+            <div className="post-footer">
+              <div className="footer-icon">
                 <AiOutlineLike
-                  size="1.8em"
+                  size="1em"
                   color={
                     likes?.likedBy?.some(
                       (postLikedBy) => postLikedBy.username === user.name
@@ -194,11 +196,12 @@ export default function FetchData() {
                   }
                   onClick={() => postLikeHandler(_id)}
                 />
-                {likes?.likeCount}
-              </span>
-              <span>
+                <span>{likes?.likeCount}
+                </span>
+              </div>
+              <div className="footer-icon">
                 <GoComment
-                  size="1.8em"
+                  size="1em"
                   onClick={() =>
                     infinityUsersDispacher({
                       type: "ENABLE_COMMENT",
@@ -209,11 +212,13 @@ export default function FetchData() {
                     })
                   }
                 />
-                {
-                  infinityUsers.comments.filter(({ postId }) => _id === postId)
-                    .length
-                }
-              </span>
+                <span>
+                  {
+                    infinityUsers.comments.filter(({ postId }) => _id === postId)
+                      .length
+                  }
+                </span>
+              </div>
               {infinityUsers.indexOfPost === _id &&
                 infinityUsers.isCommentEnabled ? (
                 <div className="comment-box b">
@@ -241,9 +246,9 @@ export default function FetchData() {
                   <button onClick={handleComment}>Post</button>
                 </div>
               ) : null}
-              <span>
+              <div className="footer-icon">
                 <FiBookmark
-                  size="1.8em"
+                  size="1em"
                   color={
                     userFeed.bookMarkView.some(
                       (item) => item.username === username
@@ -253,7 +258,7 @@ export default function FetchData() {
                   }
                   onClick={() => postBookMarkHandler(_id)}
                 />
-              </span>
+              </div>
             </div>
           </div>
         );

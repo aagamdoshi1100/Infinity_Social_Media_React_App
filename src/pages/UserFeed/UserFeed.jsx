@@ -31,7 +31,9 @@ export default function UserFeed() {
             </div>
             {userFeed.followedUserPosts.length > 0 ?
                 <div className="all-posts-div">
-                    <Filters />
+                    <div className="filter-icon">
+                        <Filters />
+                    </div>
                     <FetchData />
                 </div>
                 : <div className="no-post-box">

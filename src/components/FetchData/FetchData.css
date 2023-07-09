@@ -14,6 +14,7 @@
   }
   .container-fetchData {
     margin-bottom: 60px;
+    cursor: pointer;
   }
 
   /* comment box */
@@ -29,11 +30,38 @@
   .comment-box > * {
     padding: 10px;
   }
+
+  /* header */
+  .user-identity {
+    display: flex;
+  }
+  .fullName {
+    display: flex;
+    flex-direction: column;
+    margin: 0px 10px;
+    cursor: pointer;
+  }
+  /* post-footer */
+  .post-footer {
+    display: flex;
+    justify-content: space-around;
+  }
+  /* comment - bookmark - like */
+  .footer-icon {
+    display: flex;
+    cursor: pointer;
+    align-items: center;
+    font-size: 26px;
+  }
+  .footer-icon span {
+    padding-left: 5px;
+  }
 }
 
 @media only screen and (min-width: 1024px) {
   .FeedBox {
     padding: 5px;
+    cursor: pointer;
   }
   .fetchdata-image {
     width: 300px;
@@ -47,5 +75,33 @@
   .post-header {
     display: flex;
     align-items: center;
+    justify-content: space-between;
+  }
+  .user-identity {
+    display: flex;
+  }
+  .fullName {
+    display: flex;
+    flex-direction: column;
+    margin: 0px 10px;
+    cursor: pointer;
+  }
+  .post-footer {
+    display: flex;
+    justify-content: space-around;
+  }
+
+  /* comment - bookmark - like */
+  .footer-icon {
+    display: flex;
+    cursor: pointer;
+    align-items: center;
+    font-size: 26px;
+  }
+  .footer-icon span {
+    padding-left: 5px;
+  }
+  .filter-icon {
+    display: none;
   }
 }

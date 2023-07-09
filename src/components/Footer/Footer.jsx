@@ -1,29 +1,37 @@
 import "./Footer.css"
 import { useIconContext } from "../../contexts/IconContext"
 import useAuthContext from "../../contexts/AuthContext";
-export default function Footer(){
-    const {goToBookMark,goToHome,goToExplore,BiLogOut,BiBookBookmark,MdOutlineExplore,AiOutlineHome} = useIconContext();
-    const {logOutHandler} = useAuthContext();
+import Filters from "../Filters/Filters";
+import useUserFeedContext from "../../contexts/UserFeedContext";
+export default function Footer() {
+    const { goToBookMark, goToHome, goToExplore, BiLogOut, BiBookBookmark, MdOutlineExplore, AiOutlineHome } = useIconContext();
+    const { logOutHandler } = useAuthContext();
+    const { userFeed } = useUserFeedContext()
 
-    return(<div className="footer">
-        <div className="icon-details">
-            <AiOutlineHome size= "1.8em" onClick={goToHome} />
+    return (<div className="footer">
+        <div className="icon-details" onClick={goToHome}>
+            <AiOutlineHome size="2em" />
             <span className="icon-name">Home</span>
         </div>
 
-        <div className="icon-details">
-            <MdOutlineExplore size= "1.8em" onClick={goToExplore}/>
+        <div className="icon-details" onClick={goToExplore}>
+            <MdOutlineExplore size="2em" />
             <span className="icon-name">Explore</span>
         </div>
 
-        <div className="icon-details">
-            <BiBookBookmark size= "1.8em" onClick={goToBookMark}/>
+        <div className="icon-details" onClick={goToBookMark}>
+            <BiBookBookmark size="2em" />
             <span className="icon-name">Bookmark</span>
         </div>
 
-        <div className="icon-details">
-            <BiLogOut size= "1.8em" onClick={logOutHandler}/>
+        <div className="icon-details fil">
+            <Filters />
+            <span className="Filter-icon-name icon-name" style={{ display: userFeed.showFiltersUserFeed ? "none" : "block" }}>Filter</span>
+        </div>
+
+        <div className="icon-details" onClick={logOutHandler}>
+            <BiLogOut size="2em" />
             <span className="icon-name">Log out</span>
-        </div> 
+        </div>
     </div>)
 }
