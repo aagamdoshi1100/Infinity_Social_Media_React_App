@@ -6,9 +6,24 @@ export default function Footer(){
     const {logOutHandler} = useAuthContext();
 
     return(<div className="footer">
-        <AiOutlineHome size= "1.8em" onClick={goToHome} />
-        <MdOutlineExplore size= "1.8em" onClick={goToExplore}/>
-        <BiBookBookmark size= "1.8em" onClick={goToBookMark}/>
-        <BiLogOut size= "1.8em" onClick={logOutHandler}/>
+        <div className="icon-details">
+            <AiOutlineHome size= "1.8em" onClick={goToHome} />
+            <span className="icon-name">Home</span>
+        </div>
+
+        <div className="icon-details">
+            <MdOutlineExplore size= "1.8em" onClick={goToExplore}/>
+            <span className="icon-name">Explore</span>
+        </div>
+
+        <div className="icon-details">
+            <BiBookBookmark size= "1.8em" onClick={goToBookMark}/>
+            <span className="icon-name">Bookmark</span>
+        </div>
+
+        <div className="icon-details">
+            <BiLogOut size= "1.8em" onClick={logOutHandler}/>
+            <span className="icon-name">Log out</span>
+        </div> 
     </div>)
 }

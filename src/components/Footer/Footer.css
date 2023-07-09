@@ -12,5 +12,21 @@
         box-sizing: border-box;
         display: flex;
         justify-content: space-between;
+    
     }
+    .icon-name{
+        display: none;
+    }
+}
+
+@media screen and (min-width:1024px){ 
+    .icon-details{
+        display: flex;
+        align-items: center;
+        margin: 15px;
+        cursor: pointer;
+    }
+    .icon-name{
+        margin-left: 5px;
+    } 
 }

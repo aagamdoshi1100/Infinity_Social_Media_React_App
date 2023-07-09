@@ -1,164 +1,136 @@
-body{
-    background-color: black;
-    color: white;
+* {
+  margin: 0px;
+  padding: 0px;
+}
+body {
+  background-color: black;
+  color: white;
 }
 button {
-    color: white;
-    background-color: blueviolet;
-    padding: 5px 14px;
-    border-radius: 5px;
-   }
-
-@media only screen and (max-width: 768px) {
-    /* Post header*/
-    .post-header{
-        display: flex;
-        place-items: center;
-        justify-content: space-between;
-        padding:0px 10px 0px 10px;
-        margin: 5px;
-    }
-    .fullName{
-        display: flex;
-        flex-direction: column;
-    }
-    .FeedBox{
-        box-sizing :border-box;
-    }
-    img{
-        width: 100%;
-    }
-    .show-user{
-        flex-shrink: 0;
-    }
-
-    /* Filter */
-    .filterBox {
-        display: flex;
-        justify-content: space-between;
-        padding: 8px;
-        font-size: 18px;
-    }
-    .filterBox-icon{
-          position: relative;
-          display: inline-block;
-      }
-      .filterBox-types{
-        position: absolute;
-        left: 100%;
-        transform: translateX(-120px);
-        background-color: black;
-        border: 1px solid violet;
-        padding: 10px;
-      }
-    .filterBox-types >*{
-        font-size: 16px;
-       
-    }
-    .heading-filterbox{
-        margin: 0%;
-    }
-    /* Post Footer */
-    .post-footer{
-        display: flex;
-    }
-    .container-body{
-        margin-top: 65px;
-    }
-    .no-post-box{
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      font-size: 18px;
-      width: 80%;
-      margin: 30px auto;
-    }
-    .no-post-message{
-      text-align: center;
-    }
+  color: white;
+  background-color: blueviolet;
+  padding: 5px 14px;
+  border-radius: 5px;
 }
 
-@media screen and (min-width:1024px){
-    /* .container {
-        display: grid;
-        grid-template-rows: auto auto;
-        grid-template-columns: auto auto auto;
-        gap: 10px;
-      }
-      .header-div{
-        border:3px solid red;
-        grid-row: 1;
-        grid-column: 1 / -1;
-        position: fixed;
-        background-color: black;
-        width: 100%;
-      }
-      .footer-div {
-        grid-row: 2;
-        grid-column: 1;
-        border:3px solid red;
-      }
-      .container-body{
-        display: grid;
-        grid-template-rows: auto auto;
-        grid-template-columns: auto auto;
+@media only screen and (max-width: 768px) {
+  /* Post header*/
+  .post-header {
+    display: flex;
+    place-items: center;
+    justify-content: space-between;
+    padding: 0px 10px 0px 10px;
+    margin: 0px;
+  }
+  .fullName {
+    display: flex;
+    flex-direction: column;
+  }
+  .FeedBox {
+    box-sizing: border-box;
+  }
+  img {
+    width: 100%;
+  }
+  .show-user {
+    flex-shrink: 0;
+  }
 
-      }
-      .container-body .create-post-div {
-        grid-row: 1;
-        grid-column: 1 ;
-        border:3px solid red;
-      }
-      .container-body .allUsers-div {
-        grid-row: 1;
-        grid-column: 2;
-        border:3px solid red;
-         
-        background-color: black;
-      }
-      .container-body .posts-div {
-        grid-row: 1;
-        grid-column: 1;
-        border:3px solid red;
-      }
-      
+  /* Filter */
+  .filterBox {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px;
+    font-size: 18px;
+  }
+  .filterBox-icon {
+    position: relative;
+    display: inline-block;
+  }
+  .filterBox-types {
+    position: absolute;
+    left: 100%;
+    transform: translateX(-120px);
+    background-color: black;
+    border: 1px solid violet;
+    padding: 10px;
+  }
+  .filterBox-types > * {
+    font-size: 16px;
+  }
+  .heading-filterbox {
+    margin: 0%;
+  }
+  /* Post Footer */
+  .post-footer {
+    display: flex;
+  }
+  .container-body {
+    margin-top: 65px;
+  }
+  .no-post-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    width: 80%;
+    margin: 30px auto;
+  }
+  .no-post-message {
+    text-align: center;
+  }
+}
 
-       */
-       .container{
-        grid-template-columns: repeat(3,auto);
-        grid-template-rows: repeat(3,auto);
-        grid-template-areas: 
-        "header header header"
-        "footer new users"
-        "p p p";
-        row-gap: 20px;
-        column-gap: 20px;
-       }
-       .header-div{
-        grid-area: header;
-        border:3px solid red;
-      
-       }
-       .footer-div{
-        grid-area: footer;
-        border:3px solid red;
-       
-       }
-       .create-post-div{
-        grid-area: new;
-        border:3px solid red;
-        
-       }
-       .allUsers-div{
-        grid-area: users;
-        border:3px solid red;
-       
-       }
-       .all-posts-div{
-        grid-area: p;
-        border:3px solid red;
-        
-    }
+@media screen and (min-width: 1024px) {
+  .container > * {
+  }
 
+  body {
+    /* background-color: rgb(47, 16, 82); */
+    color: white;
+  }
+  .container {
+    display: flex;
+  }
+  .header-div {
+    position: fixed;
+    top: 0px;
+    z-index: 99;
+    width: 100vw;
+
+    background-color: black;
+  }
+  .container-body {
+    position: absolute;
+    top: 65px;
+    left: 15%;
+    width: 60%;
+  }
+  .footer-div {
+    position: fixed;
+    left: 0px;
+    top: 65px;
+    margin: 0px;
+    /* background-color: green; */
+    height: 90vh;
+    width: 15%;
+    display: flex;
+    flex-direction: column;
+    /* padding: 15px; */
+    align-items: center;
+  }
+
+  .create-post-div {
+  }
+  .allUsers-div {
+    position: fixed;
+    right: 0px;
+    top: 65px;
+    height: 90vh;
+
+    width: 25%;
+  }
+  .all-posts-div {
+  }
 }

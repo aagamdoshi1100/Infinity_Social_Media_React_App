@@ -21,7 +21,7 @@ function App() {
         <Route path="/" element={<Login />} />
         <Route path="/pages/Authentication/SignUp" element={<SignUp />} />
         <Route path="/pages/Avtar/Avtar" element={<Avtar />} />
-        <Route path="/pages/UserFeed/UserFeed" element={<RequiresAuth><UserFeed /></RequiresAuth>}/>
+        <Route path="/pages/UserFeed/UserFeed" element={ <UserFeed /> }/>
         <Route path="/pages/SinglePostView/" element={<SinglePostView />}/>
         <Route path="/pages/profile/UserProfile" element={<UserProfile />} />
         <Route path="/pages/explore/Explore" element={<Explore />} />

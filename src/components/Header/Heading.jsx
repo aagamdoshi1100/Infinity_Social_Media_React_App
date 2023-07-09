@@ -7,8 +7,8 @@ export default function Heading(){
     return(<div className="header">
         <h3>INFINITY</h3>
         <div className="login">
-        {user.name === "" ? <BiLogIn onClick={()=>loginHandler("AD","AD123")} size="1.8em" />: `Welcome, ${user.name}` 
+        {user.name === "" ? <BiLogIn onClick={()=>loginHandler("AD","AD123")} size="1.8em" />: <p className="login-username">{`Welcome, ${user.name}`}</p>
        }
        </div>
     </div>)
-}
+} 
