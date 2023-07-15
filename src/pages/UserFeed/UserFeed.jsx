@@ -19,7 +19,7 @@ export default function UserFeed() {
     // console.log(" infinityUsers:", infinityUsers)
 
     return (<div className="container">
-        <div className="header-div">
+        <div className="header-div" style={{ display: "block" }}>
             <Heading />
         </div>
         <div className="container-body">

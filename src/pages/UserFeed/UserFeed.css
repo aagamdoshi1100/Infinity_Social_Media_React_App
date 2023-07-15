@@ -83,11 +83,7 @@ button {
 }
 
 @media screen and (min-width: 1024px) {
-  .container > * {
-  }
-
   body {
-    /* background-color: rgb(47, 16, 82); */
     color: white;
   }
   .container {
@@ -112,17 +108,13 @@ button {
     left: 0px;
     top: 65px;
     margin: 0px;
-    background-color: green;
     height: 90vh;
     width: 20%;
     display: flex;
     flex-direction: column;
-    /* padding: 15px; */
     align-items: center;
   }
 
-  .create-post-div {
-  }
   .allUsers-div {
     position: fixed;
     right: 0px;
@@ -131,8 +123,7 @@ button {
     margin-right: 4%;
     width: 26%;
   }
-  .all-posts-div {
-  }
+
   .heading-filterbox {
     display: none;
   }

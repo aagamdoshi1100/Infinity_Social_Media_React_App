@@ -15,20 +15,13 @@
   .explore-header h2 {
     margin: 10px;
   }
+  .header-div {
+    display: none;
+  }
 }
 
-/* @media screen and (min-width: 1024px) {
-  .container-explore {
-    position: fixed;
-    left: 0px;
-    top: 65px;
-    margin: 0px;
-    background-color: green;
-    height: 90vh;
-    width: 20%;
-    display: flex;
-    flex-direction: column; */
-/* padding: 15px; */
-/* align-items: center; */
-/* }
-} */
+@media screen and (min-width: 1024px) {
+  .explore-header {
+    display: none;
+  }
+}
