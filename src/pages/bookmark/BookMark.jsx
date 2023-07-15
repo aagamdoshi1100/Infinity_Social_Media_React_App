@@ -1,22 +1,23 @@
 import FetchData from "../../components/FetchData/FetchData";
 import Footer from "../../components/Footer/Footer";
 import { useIconContext } from "../../contexts/IconContext";
-import {BiArrowBack} from "react-icons/bi"
+import { BiArrowBack } from "react-icons/bi"
 import "./BookMark.css"
 import useUserFeedContext from "../../contexts/UserFeedContext";
 
-export default function BookMark(){
-    const {goToHome} = useIconContext();
-    const {userFeed} = useUserFeedContext();
-    return(<div>
-        <div className="bookMark-header"><BiArrowBack size="1.7em" onClick={goToHome}/><h2>BookMark</h2></div>
-        <div className="container">
-        {userFeed.bookMarkView.length > 0 ?
-        <FetchData />
-        : <div className="parent-container-bookmark">
+export default function BookMark() {
+    const { goToHome } = useIconContext();
+    const { userFeed } = useUserFeedContext();
+    return (<div>
+        <div className="bookMark-header"><BiArrowBack size="1.7em" onClick={goToHome} /><h2>BookMark</h2></div>
+        <div className="container-body">        {userFeed.bookMarkView.length > 0 ?
+            <FetchData />
+            : <div className="parent-container-bookmark">
                 <p>There are no posts currently bookmarked.</p>
-          </div>}
+            </div>}
         </div>
-        <Footer />
-    </div>)
+        <div className="footer-div">
+            <Footer />
+        </div>
+    </div >)
 }

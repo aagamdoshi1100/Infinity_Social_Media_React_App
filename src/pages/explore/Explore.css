@@ -6,13 +6,29 @@
     top: 0px;
     background-color: black;
     width: 100%;
-}
-  
+  }
+
   .explore-header div {
     margin-right: 10px;
   }
-  
+
   .explore-header h2 {
     margin: 10px;
   }
 }
+
+/* @media screen and (min-width: 1024px) {
+  .container-explore {
+    position: fixed;
+    left: 0px;
+    top: 65px;
+    margin: 0px;
+    background-color: green;
+    height: 90vh;
+    width: 20%;
+    display: flex;
+    flex-direction: column; */
+/* padding: 15px; */
+/* align-items: center; */
+/* }
+} */
