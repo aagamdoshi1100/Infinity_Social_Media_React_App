@@ -1,7 +1,4 @@
 @media only screen and (max-width: 768px) {
-  .footer > *:hover {
-    color: rgb(150, 223, 41);
-  }
   .footer {
     position: fixed;
     left: 0;
@@ -16,6 +13,13 @@
   .icon-name {
     display: none;
   }
+  .icon-details {
+    cursor: pointer;
+  }
+  .icon-details-selected {
+    color: blueviolet;
+    cursor: pointer;
+  }
   .fil {
     display: none;
   }
@@ -27,6 +31,13 @@
     align-items: center;
     margin: 15px;
     cursor: pointer;
+  }
+  .icon-details-selected {
+    display: flex;
+    align-items: center;
+    margin: 15px;
+    cursor: pointer;
+    color: blueviolet;
   }
   .fil {
     padding: 0 8px;

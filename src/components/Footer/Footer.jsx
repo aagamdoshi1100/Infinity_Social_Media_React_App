@@ -9,17 +9,17 @@ export default function Footer() {
     const { userFeed } = useUserFeedContext()
 
     return (<div className="footer">
-        <div className="icon-details" onClick={goToHome}>
+        <div className={userFeed.fetchValue === "followedUserPosts" ? "icon-details-selected" : "icon-details"} onClick={goToHome}>
             <AiOutlineHome size="2em" />
-            <span className="icon-name">Home</span>
+            <span className="icon-name" >Home</span>
         </div>
 
-        <div className="icon-details" onClick={goToExplore}>
+        <div className={userFeed.fetchValue === "postsData" ? "icon-details-selected" : "icon-details"} onClick={goToExplore}>
             <MdOutlineExplore size="2em" />
             <span className="icon-name">Explore</span>
         </div>
 
-        <div className="icon-details" onClick={goToBookMark}>
+        <div className={userFeed.fetchValue === "bookMarkView" ? "icon-details-selected" : "icon-details"} onClick={goToBookMark}>
             <BiBookBookmark size="2em" />
             <span className="icon-name">Bookmark</span>
         </div>
