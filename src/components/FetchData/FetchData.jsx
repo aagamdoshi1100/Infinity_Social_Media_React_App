@@ -12,13 +12,14 @@ export default function FetchData() {
     postLikeHandler,
     deletePostHandler,
     getSelectedPost,
+    editHandler,
     postBookMarkHandler,
   } = useUserFeedContext();
 
   const { user } = useAuthContext();
   const { infinityUsers, followUser, infinityUsersDispacher, handleComment } =
     useFollowContext();
-  console.log("infinityUsers:", infinityUsers);
+  // console.log("infinityUsers:", infinityUsers);
   const {
     GoComment,
     FiBookmark,
@@ -26,7 +27,7 @@ export default function FetchData() {
     MdInsertPhoto,
     AiOutlineLike,
   } = useIconContext();
-  const { getUserProfile, editHandler, profile } = useUserProfileContext();
+  const { getUserProfile, profile } = useUserProfileContext();
 
   const fetchValue = userFeed?.fetchValue;
   return (
@@ -136,13 +137,12 @@ export default function FetchData() {
                 ) : null}
               </div>
             </div>
-            <div
-              contentEditable={
-                userFeed.showEditUserFeed ? userFeed.indexOfPost === _id : false
-              }
-              onClick={() => getSelectedPost(_id)}
-            >
-              {userFeed.showEditUserFeed && userFeed.indexOfPost === _id ? (
+
+
+            {/*  */}
+
+            <div>{userFeed.showEditUserFeed && userFeed.indexOfPost === _id && user.name === username ?
+              <div className="post-editBox">
                 <input
                   onChange={(e) =>
                     userFeedDispacher({
@@ -151,40 +151,44 @@ export default function FetchData() {
                     })
                   }
                 />
-              ) : (
-                <p style={{ margin: "10px" }}>{content}</p>
-              )}
+                <label htmlFor="image">
+                  <MdInsertPhoto size="1.4em" />
+                </label>
+                <input
+                  type="file"
+                  id="image"
+                  style={{ display: "none", visibility: "none" }}
+                  onChange={(e) =>
+                    userFeedDispacher({
+                      type: "CREATE_POST_IMAGE",
+                      payload: e.target.files[0],
+                    })
+                  }
+                />
+                <button onClick={() => editHandler(_id)} className="btn">
+                  Save
+                </button>
+                <button onClick={() =>
+                  userFeedDispacher({
+                    type: "EDIT_CONTROLLER",
+                    payload: userFeed.showEditUserFeed,
+                  })
+                } className="btn">
+                  Discard
+                </button>
+              </div> : null
+            }
+              <p style={{ margin: "10px" }}>{content}</p>
               {!image ? null : (
-                <div className="fetchdata-image">
+                <div className="fetchdata-image" onClick={() => getSelectedPost(_id)}>
                   <img src={`${image}`} width="100%" height="100%" alt="post" />
                 </div>
               )}
-              {userFeed.showEditUserFeed ? (
-                <div className="btn-imagePicker-filterBox">
-                  <label htmlFor="image">
-                    <MdInsertPhoto size="1.4em" />
-                  </label>
-                  <input
-                    type="file"
-                    id="image"
-                    style={{ display: "none", visibility: "none" }}
-                    onChange={(e) =>
-                      userFeedDispacher({
-                        type: "CREATE_POST_IMAGE",
-                        payload: e.target.files[0],
-                      })
-                    }
-                  />
-                  <button onClick={() => editHandler(_id)} className="btn">
-                    Save
-                  </button>
-                </div>
-              ) : (
-                ""
-              )}
             </div>
+
+
             <div className="post-footer">
-              <div className="footer-icon">
+              <div className="footer-icon" onClick={() => postLikeHandler(_id)}>
                 <AiOutlineLike
                   size="1em"
                   color={
@@ -194,23 +198,23 @@ export default function FetchData() {
                       ? "red"
                       : "white"
                   }
-                  onClick={() => postLikeHandler(_id)}
+
                 />
                 <span>{likes?.likeCount}
                 </span>
               </div>
-              <div className="footer-icon">
+              <div className="footer-icon" onClick={() =>
+                infinityUsersDispacher({
+                  type: "ENABLE_COMMENT",
+                  payload: {
+                    indexOfPost: _id,
+                    status: infinityUsers.isCommentEnabled,
+                  },
+                })
+              }>
                 <GoComment
                   size="1em"
-                  onClick={() =>
-                    infinityUsersDispacher({
-                      type: "ENABLE_COMMENT",
-                      payload: {
-                        indexOfPost: _id,
-                        status: infinityUsers.isCommentEnabled,
-                      },
-                    })
-                  }
+
                 />
                 <span>
                   {
