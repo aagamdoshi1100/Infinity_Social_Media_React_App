@@ -1,80 +1,206 @@
-import { createContext, useContext, useState } from "react"; 
+import { createContext, useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { toast } from 'react-toastify';
+import { toast } from "react-toastify";
 
 const AuthContext = createContext();
 
-export const AuthContextProvider =({children})=>{
-    const [user,setUser] = useState({name:"", 
-    auth:{
-        email:"",
-        password:"",
-        username:"",
-        firstname:"",
-        lastname:""
+export const AuthContextProvider = ({ children }) => {
+  const [user, setUser] = useState({
+    name: "",
+    auth: {
+      email: "",
+      password: "",
+      username: "",
+      firstname: "",
+      lastname: "",
     },
-    isLoggedIn:false,
-    isNewUser:false,
-    newUser:null,
-    errorMessage:""
-})
-    const navigate = useNavigate();
-    
-    const signUphandler = async()=>{
-        try{
-            const response = await fetch(`/api/auth/signup`,{
-                method:"POST",
-                body:JSON.stringify({
-                    email:user.auth.email, password:user.auth.password, username:user.auth.username, firstName:user.auth.firstname,lastName:user.auth.lastname,profileIcon:"https://shorturl.at/tyEJ9"
-                  })
-            }) 
-            if(response.status === 422){
-                toast.error("Username Already Exists")
-            }else if(response.status === 201){
-                const {encodedToken,createdUser} = await response.json(); 
-                localStorage.setItem("encodedToken",encodedToken);
-                localStorage.setItem("Username",createdUser.username);
-                localStorage.setItem("Followings",createdUser.username);
-                setUser({...user,name:createdUser.username,isLoggedIn:true,errorMessage:"",isNewUser:true,newUser:createdUser});
-                toast.success("User created");
-                navigate("/pages/Avtar/Avtar");
-            }
-        }catch(e){
-        console.log("🚀 ~ file: AuthContext.js:20 ~ signUphandler ~ e:", e);
-        }
-    }
+    isLoggedIn: false,
+    isNewUser: false,
+    newUser: null,
+    isValid: false,
+    errors: {
+      errorEmail: "",
+      firstname: "",
+      lastname: "",
+      username: "",
+      password: "",
+      confirm_passowrd: "",
+    },
+  });
+  const navigate = useNavigate();
 
-    const loginHandler = async()=>{
-        try{
-            const response = await fetch("/api/auth/login",{
-                method:"POST",
-                body : JSON.stringify({username:user.auth.username,password:user.auth.password})
+  const signUphandler = async () => {
+    try {
+      const response = await fetch(`/api/auth/signup`, {
+        method: "POST",
+        body: JSON.stringify({
+          email: user.auth.email,
+          password: user.auth.password,
+          username: user.auth.username,
+          firstName: user.auth.firstname,
+          lastName: user.auth.lastname,
+          profileIcon: "https://shorturl.at/tyEJ9",
+        }),
+      });
+      if (response.status === 422) {
+        toast.error("Username Already Exists");
+      } else if (response.status === 201) {
+        const { encodedToken, createdUser } = await response.json();
+        localStorage.setItem("encodedToken", encodedToken);
+        localStorage.setItem("Username", createdUser.username);
+        localStorage.setItem("Followings", createdUser.username);
+        setUser({
+          ...user,
+          name: createdUser.username,
+          isLoggedIn: true,
+          errorMessage: "",
+          isNewUser: true,
+          newUser: createdUser,
+        });
+        toast.success("User created");
+        navigate("/pages/Avtar/Avtar");
+      }
+    } catch (e) {
+      console.log("🚀 ~ file: AuthContext.js:20 ~ signUphandler ~ e:", e);
+    }
+  };
+  const validate = (val, type) => {
+    switch (type) {
+      case "Email":
+        /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(val)
+          ? setUser({
+              ...user,
+              errors: { ...user.errors, errorEmail: "" },
+              auth: { ...user.auth, email: val },
             })
-            if(response.status === 404){ 
-                toast.error('User not found');
-            }else if(response.status === 200){
-                const {encodedToken} = await response.json();
-                localStorage.setItem("encodedToken",encodedToken);
-                localStorage.setItem("Username",user.auth.username);
-                localStorage.setItem("Followings",user.auth.username);
-                setUser({...user,name:user.auth.username,isLoggedIn:true,errorMessage:""});
-                navigate("/pages/UserFeed/UserFeed")
-            }  
-        }catch(e){
-            console.log("🚀 ~ file: AuthContext.js:13 ~ loginHandler ~ e:", e);
-            
+          : setUser({
+              ...user,
+              errors: {
+                ...user.errors,
+                errorEmail: "Please enter valid email id",
+              },
+            });
+        break;
+      case "username":
+      case "lastname":
+      case "firstname":
+        val.length > 2
+          ? setUser({
+              ...user,
+              errors: { ...user.errors, [type]: "" },
+              auth: { ...user.auth, [type]: val },
+            })
+          : setUser({
+              ...user,
+              errors: {
+                ...user.errors,
+                [type]: "Minimum 3 characters required",
+              },
+            });
+        break;
+      case "password":
+        /^[A-Za-z]\w{7,14}$/.test(val)
+          ? setUser({
+              ...user,
+              errors: { ...user.errors, password: "" },
+              auth: { ...user.auth, password: val },
+            })
+          : setUser({
+              ...user,
+              errors: {
+                ...user.errors,
+                password: "Min 8 chars with lower and upper case char req",
+              },
+            });
+        break;
+      case "confirm_password":
+        user.auth.password == val
+          ? setUser({
+              ...user,
+              errors: { ...user.errors, confirm_passowrd: "" },
+              auth: { ...user.auth, password: val },
+            })
+          : setUser({
+              ...user,
+              errors: {
+                ...user.errors,
+                confirm_passowrd: "Password not matching",
+              },
+            });
+        break;
+      case "call":
+        if (
+          user.errors.errorEmail === "" &&
+          user.errors.firstname === "" &&
+          user.errors.lastname === "" &&
+          user.errors.username === "" &&
+          user.errors.confirm_passowrd === ""
+        ) {
+          signUphandler();
         }
+        break;
+      default:
+        setUser(user);
     }
-    const logOutHandler =()=>{
-        localStorage.removeItem("encodedToken");
-        localStorage.removeItem("Username");
-        localStorage.removeItem("Followings");
-        setUser({...user,name:"",auth:{...user.auth,username:"",password:""},isLoggedIn:false});
-        toast.success("Logged out successfully");
-        navigate("/")
+  };
+  const loginHandler = async () => {
+    try {
+      const response = await fetch("/api/auth/login", {
+        method: "POST",
+        body: JSON.stringify({
+          username: user.auth.username,
+          password: user.auth.password,
+        }),
+      });
+      if (response.status === 404) {
+        toast.error("User not found");
+      } else if (response.status === 200) {
+        const { encodedToken } = await response.json();
+        localStorage.setItem("encodedToken", encodedToken);
+        localStorage.setItem("Username", user.auth.username);
+        localStorage.setItem("Followings", user.auth.username);
+        setUser({
+          ...user,
+          name: user.auth.username,
+          isLoggedIn: true,
+          errorMessage: "",
+        });
+        navigate("/pages/UserFeed/UserFeed");
+      }
+    } catch (e) {
+      console.log("🚀 ~ file: AuthContext.js:13 ~ loginHandler ~ e:", e);
     }
-    return(<AuthContext.Provider value={{navigate,loginHandler,user,setUser,logOutHandler,setUser,signUphandler}}>{children}</AuthContext.Provider>)
-}
+  };
+  const logOutHandler = () => {
+    localStorage.removeItem("encodedToken");
+    localStorage.removeItem("Username");
+    localStorage.removeItem("Followings");
+    setUser({
+      ...user,
+      name: "",
+      auth: { ...user.auth, username: "", password: "" },
+      isLoggedIn: false,
+    });
+    toast.success("Logged out successfully");
+    navigate("/");
+  };
+  return (
+    <AuthContext.Provider
+      value={{
+        navigate,
+        loginHandler,
+        user,
+        setUser,
+        logOutHandler,
+        setUser,
+        signUphandler,
+        validate,
+      }}
+    >
+      {children}
+    </AuthContext.Provider>
+  );
+};
 
-const useAuthContext =()=> useContext(AuthContext);
+const useAuthContext = () => useContext(AuthContext);
 export default useAuthContext;
