@@ -24,10 +24,10 @@ export default function Footer() {
             <span className="icon-name">Bookmark</span>
         </div>
 
-        <div className="icon-details fil">
+        {/* <div className="icon-details fil">
             <Filters />
             <span className="Filter-icon-name icon-name" style={{ display: userFeed.showFiltersUserFeed ? "none" : "block" }}>Filter</span>
-        </div>
+        </div> */}
 
         <div className="icon-details" onClick={logOutHandler}>
             <BiLogOut size="2em" />
