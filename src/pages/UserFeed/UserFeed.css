@@ -80,6 +80,9 @@ button {
   .no-post-message {
     text-align: center;
   }
+  .container-body {
+    margin-bottom: 60px;
+  }
 }
 
 @media screen and (min-width: 1024px) {

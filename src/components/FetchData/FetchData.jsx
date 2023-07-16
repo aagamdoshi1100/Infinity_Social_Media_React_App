@@ -30,7 +30,7 @@ export default function FetchData() {
   const { getUserProfile, profile } = useUserProfileContext();
 
   const fetchValue = userFeed?.fetchValue;
-  return (
+  return (<div>
     <div className="container-fetchData">
       {userFeed?.[fetchValue]?.map((details) => {
         const { _id, username, content, image, createdAt, likes } = details;
@@ -268,5 +268,5 @@ export default function FetchData() {
         );
       })}
     </div>
-  );
+  </div>);
 }

@@ -18,9 +18,9 @@ export default function SinglePostView() {
         </div>
         <div className="container-body">
             <div className="post-view-container">
-                <FetchData style={{ marginBottom: "0px" }} />
+                <FetchData />
             </div>
-            <div style={{ marginTop: "0px", marginBottom: "80px" }}>
+            <div style={{ marginBottom: "80px" }}>
                 <Comment />
             </div>
         </div>
