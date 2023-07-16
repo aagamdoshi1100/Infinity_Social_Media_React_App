@@ -64,7 +64,37 @@ export const AuthContextProvider = ({ children }) => {
       console.log("🚀 ~ file: AuthContext.js:20 ~ signUphandler ~ e:", e);
     }
   };
+  const loginHandler = async () => {
+    try {
+      const response = await fetch("/api/auth/login", {
+        method: "POST",
+        body: JSON.stringify({
+          username: user.auth.username,
+          password: user.auth.password,
+        }),
+      });
+      if (response.status === 404) {
+        toast.error("User not found");
+      } else if (response.status === 200) {
+        const { encodedToken } = await response.json();
+        localStorage.setItem("encodedToken", encodedToken);
+        localStorage.setItem("Username", user.auth.username);
+        localStorage.setItem("Followings", user.auth.username);
+        setUser({
+          ...user,
+          name: user.auth.username,
+          isLoggedIn: true,
+          errorMessage: "",
+        });
+        navigate("/pages/UserFeed/UserFeed");
+      }
+    } catch (e) {
+      console.log("🚀 ~ file: AuthContext.js:13 ~ loginHandler ~ e:", e);
+    }
+  };
+
   const validate = (val, type) => {
+    console.log(val, "val");
     switch (type) {
       case "Email":
         /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(val)
@@ -99,7 +129,7 @@ export const AuthContextProvider = ({ children }) => {
             });
         break;
       case "password":
-        /^[A-Za-z]\w{7,14}$/.test(val)
+        /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@#$%^&+=!])(?!.*\s).{8,}$/.test(val)
           ? setUser({
               ...user,
               errors: { ...user.errors, password: "" },
@@ -109,7 +139,7 @@ export const AuthContextProvider = ({ children }) => {
               ...user,
               errors: {
                 ...user.errors,
-                password: "Min 8 chars with lower and upper case char req",
+                password: "Req 8 chars with lower,upper,number & special char",
               },
             });
         break;
@@ -139,38 +169,20 @@ export const AuthContextProvider = ({ children }) => {
           signUphandler();
         }
         break;
+      case "signInCall":
+        console.log("1");
+        if (user.errors.username === "" && user.errors.password === "") {
+          console.log("2");
+          loginHandler();
+        } else {
+          console.log("3");
+        }
+        break;
       default:
         setUser(user);
     }
   };
-  const loginHandler = async () => {
-    try {
-      const response = await fetch("/api/auth/login", {
-        method: "POST",
-        body: JSON.stringify({
-          username: user.auth.username,
-          password: user.auth.password,
-        }),
-      });
-      if (response.status === 404) {
-        toast.error("User not found");
-      } else if (response.status === 200) {
-        const { encodedToken } = await response.json();
-        localStorage.setItem("encodedToken", encodedToken);
-        localStorage.setItem("Username", user.auth.username);
-        localStorage.setItem("Followings", user.auth.username);
-        setUser({
-          ...user,
-          name: user.auth.username,
-          isLoggedIn: true,
-          errorMessage: "",
-        });
-        navigate("/pages/UserFeed/UserFeed");
-      }
-    } catch (e) {
-      console.log("🚀 ~ file: AuthContext.js:13 ~ loginHandler ~ e:", e);
-    }
-  };
+
   const logOutHandler = () => {
     localStorage.removeItem("encodedToken");
     localStorage.removeItem("Username");
