@@ -143,7 +143,7 @@ export default function FetchData() {
 
             <div>{userFeed.showEditUserFeed && userFeed.indexOfPost === _id && user.name === username ?
               <div className="post-editBox">
-                <input
+                <textarea className="myText"
                   onChange={(e) =>
                     userFeedDispacher({
                       type: "CREATE_POST_CONTENT",
@@ -152,7 +152,7 @@ export default function FetchData() {
                   }
                 />
                 <label htmlFor="image">
-                  <MdInsertPhoto size="1.4em" />
+                  <MdInsertPhoto size="2em" />
                 </label>
                 <input
                   type="file"
@@ -165,17 +165,19 @@ export default function FetchData() {
                     })
                   }
                 />
-                <button onClick={() => editHandler(_id)} className="btn">
-                  Save
-                </button>
-                <button onClick={() =>
-                  userFeedDispacher({
-                    type: "EDIT_CONTROLLER",
-                    payload: userFeed.showEditUserFeed,
-                  })
-                } className="btn">
-                  Discard
-                </button>
+                <div>
+                  <button onClick={() => editHandler(_id)} className="btn-post">
+                    Save
+                  </button>
+                  <button onClick={() =>
+                    userFeedDispacher({
+                      type: "EDIT_CONTROLLER",
+                      payload: userFeed.showEditUserFeed,
+                    })
+                  } className="btn-post ml-2">
+                    Discard
+                  </button>
+                </div>
               </div> : null
             }
               <p style={{ margin: "10px" }}>{content}</p>
