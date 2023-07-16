@@ -19,7 +19,7 @@ export default function FetchData() {
   const { user } = useAuthContext();
   const { infinityUsers, followUser, infinityUsersDispacher, handleComment } =
     useFollowContext();
-  // console.log("infinityUsers:", infinityUsers);
+  console.log("infinityUsers:", infinityUsers);
   const {
     GoComment,
     FiBookmark,
@@ -138,11 +138,9 @@ export default function FetchData() {
               </div>
             </div>
 
-
-            {/*  */}
-
             <div>{userFeed.showEditUserFeed && userFeed.indexOfPost === _id && user.name === username ?
               <div className="post-editBox">
+                <h3 >Edit Post</h3>
                 <textarea className="myText"
                   onChange={(e) =>
                     userFeedDispacher({
