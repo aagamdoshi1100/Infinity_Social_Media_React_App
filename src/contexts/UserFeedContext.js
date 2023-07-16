@@ -100,11 +100,16 @@ export const UserFeedContextProvider = ({ children }) => {
   };
   const editHandler = async (postId) => {
     const post = {
-      content: userFeed.createPostContent,
+      content:
+        userFeed.createPostContent === null ||
+        userFeed.createPostContent === undefined
+          ? userFeed?.followedUserPosts?.find((obj) => obj._id === postId)
+              .content
+          : userFeed.createPostContent,
       image:
         userFeed.createPostImage === null ||
         userFeed.createPostImage === undefined
-          ? ""
+          ? userFeed?.followedUserPosts?.find((obj) => obj._id === postId).image
           : URL.createObjectURL(userFeed.createPostImage),
     };
     try {
